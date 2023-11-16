@@ -1,4 +1,4 @@
-package com.example.laboratorio8;
+package com.example.laboratorio8.Servlets;
 
 import java.io.*;
 
