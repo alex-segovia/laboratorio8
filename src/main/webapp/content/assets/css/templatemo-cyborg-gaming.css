@@ -123,7 +123,7 @@ Global Styles
 */
 html,
 body {
-  background: #1f2122;
+  background: #1f001f;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -460,19 +460,19 @@ Header Style
   letter-spacing: .3px;
 }
 
-.header-area .main-nav .nav li:last-child a {
+.header-area .main-nav .nav li a {
   background-color: #27292a;
   padding: 8px 10px 8px 20px;
   border-radius: 23px;
 }
 
-.header-area .main-nav .nav li:last-child a img {
+.header-area .main-nav .nav li a img {
   max-width: 30px;
   border-radius: 50%;
   margin-left: 5px;
 }
 
-.header-area .main-nav .nav li.has-sub ul.sub-menu li:last-child a:hover,
+.header-area .main-nav .nav li.has-sub ul.sub-menu li a:hover,
 .background-header .main-nav .nav li.has-sub ul.sub-menu li:last-child a:hover {
   padding-left: 25px !important;
 }
@@ -482,8 +482,8 @@ Header Style
   color: #e75e8d !important;
 }
 
-.header-area .main-nav .nav li:last-child:hover a,
-.header-area .main-nav .nav li:last-child a.active {
+.header-area .main-nav .nav li:hover a,
+.header-area .main-nav .nav li a.active {
   color: #fff !important;
   background-color: #e75e8d !important;
 }
