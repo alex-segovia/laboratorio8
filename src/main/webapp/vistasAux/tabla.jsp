@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="vistasAux/css/style.css">
@@ -11,58 +10,82 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="table-wrap">
+                <div class="table-wrap" style="border-radius: 15px">
                     <table class="table">
-                        <thead class="thead-primary">
+                        <thead class="thead-primary text-center" style="background-color: #5e125e">
                         <tr>
-                            <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email Address</th>
-                            <th></th>
-                            <th></th>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Género</th>
+                            <th>Consumo</th>
+                            <th>Moral</th>
+                            <th>Tiempo</th>
+                            <th>Fuerza</th>
+                            <th>Producción</th>
+                            <th>Edición</th>
+                            <th>Exhilio</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-center" style="background-color: darkmagenta; color:white">
                         <tr>
                             <th scope="row">1</th>
                             <td>Mark</td>
                             <td>Otto</td>
-                            <td>markotto@email.com</td>
-                            <td><button class="btn btn-primary">Editar</button></td>
-                            <td><button class="btn btn-warning">Exiliar</button></td>
+                            <td>100</td>
+                            <td>Otto</td>
+                            <td>Otto</td>
+                            <td>Otto</td>
+                            <td>Otto</td>
+                            <td><button class="btn btn-dark">Editar</button></td>
+                            <td><button class="btn btn-dark">Exiliar</button></td>
                         </tr>
                         <tr>
                             <th scope="row">2</th>
                             <td>Jacob</td>
                             <td>Thornton</td>
-                            <td>jacobthornton@email.com</td>
-                            <td><button class="btn btn-primary">Editar</button></td>
-                            <td><button class="btn btn-warning">Exiliar</button></td>
+                            <td>100</td>
+                            <td>Otto</td>
+                            <td>Otto</td>
+                            <td>Otto</td>
+                            <td>Otto</td>
+                            <td><button class="btn btn-dark">Editar</button></td>
+                            <td><button class="btn btn-dark">Exiliar</button></td>
                         </tr>
                         <tr>
                             <th scope="row">3</th>
                             <td>Larry</td>
                             <td>the Bird</td>
-                            <td>larrybird@email.com</td>
-                            <td><button class="btn btn-primary">Editar</button></td>
-                            <td><button class="btn btn-warning">Exiliar</button></td>
+                            <td>100</td>
+                            <td>Otto</td>
+                            <td>Otto</td>
+                            <td>Otto</td>
+                            <td>Otto</td>
+                            <td><button class="btn btn-dark">Editar</button></td>
+                            <td><button class="btn btn-dark">Exiliar</button></td>
                         </tr>
                         <tr>
                             <th scope="row">4</th>
                             <td>John</td>
                             <td>Doe</td>
-                            <td>johndoe@email.com</td>
-                            <td><button class="btn btn-primary">Editar</button></td>
-                            <td><button class="btn btn-warning">Exiliar</button></td>
+                            <td>100</td>
+                            <td>Otto</td>
+                            <td>Otto</td>
+                            <td>Otto</td>
+                            <td>Otto</td>
+                            <td><button class="btn btn-dark">Editar</button></td>
+                            <td><button class="btn btn-dark">Exiliar</button></td>
                         </tr>
                         <tr>
                             <th scope="row">5</th>
                             <td>Gary</td>
                             <td>Bird</td>
-                            <td>garybird@email.com</td>
-                            <td><button class="btn btn-primary">Editar</button></td>
-                            <td><button class="btn btn-warning">Exiliar</button></td>
+                            <td>100</td>
+                            <td>Otto</td>
+                            <td>Otto</td>
+                            <td>Otto</td>
+                            <td>Otto</td>
+                            <td><button class="btn btn-dark">Editar</button></td>
+                            <td><button class="btn btn-dark">Exiliar</button></td>
                         </tr>
                         </tbody>
                     </table>
