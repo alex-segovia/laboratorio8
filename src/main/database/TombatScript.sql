@@ -11,4 +11,3 @@ insert into jugador(nombre,edad,correo,usuario,contrasena,horasDelDia,diasDesdeC
 insert into jugador(nombre,edad,correo,usuario,contrasena,horasDelDia,diasDesdeCreacion,estado,alimentoTotal) values("Alvaro",29,"correo8@gmail.com","Eevee","olA23$",20,7,"En paz",67.0);
 insert into jugador(nombre,edad,correo,usuario,contrasena,horasDelDia,diasDesdeCreacion,estado,alimentoTotal) values("Stuardo",32,"correo9@gmail.com","Snorlax","olA23$",3,2,"En guerra",55.0);
 insert into jugador(nombre,edad,correo,usuario,contrasena,horasDelDia,diasDesdeCreacion,estado,alimentoTotal) values("Minaya",28,"correo10@gmail.com","Dragonite","olA23$",14,10,"En guerra",105.0);
-

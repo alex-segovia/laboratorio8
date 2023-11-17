@@ -23,7 +23,7 @@ public class HabitantesServlet extends HttpServlet {
         switch (action){
             case "listar":
                 request.setAttribute("listaHabitantes",daoHabitante.listarHabitantes(jugadorActual.getIdJugador()));
-                request.getSession().setAttribute("jugadorActual",daoJugador.getJugadorPorId(jugadorActual.getIdJugador()));
+                request.getSession().setAttribute("jugadorActual",1);
                 request.getRequestDispatcher("habitantes.jsp").forward(request,response);
                 break;
             case "exiliar":

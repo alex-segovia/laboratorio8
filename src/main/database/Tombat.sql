@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `Tombat`.`jugador` (
   `alimentoTotal` FLOAT NOT NULL,
   PRIMARY KEY (`idJugador`),
   UNIQUE INDEX `idjugador_UNIQUE` (`idJugador` ASC) VISIBLE,
-  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) VISIBLE)
+  UNIQUE INDEX `usuario_UNIQUE` (`usuario` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
