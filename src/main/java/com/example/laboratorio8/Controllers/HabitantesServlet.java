@@ -20,7 +20,7 @@ public class HabitantesServlet extends HttpServlet {
             case "listar":
                 ArrayList<Habitante> listaHabitantes = new ArrayList<>();
                 request.setAttribute("listaHabitantes",listaHabitantes);
-                request.getRequestDispatcher("riseAndRevolt/habitantes.jsp").forward(request,response);
+                request.getRequestDispatcher("habitantes.jsp").forward(request,response);
                 break;
             case "exiliar":
                 break;
