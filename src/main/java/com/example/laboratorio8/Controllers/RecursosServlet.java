@@ -79,7 +79,7 @@ public class RecursosServlet extends HttpServlet {
 
                 // Alimentar a la población: MUERTES POR HAMBRE
 
-                ArrayList<Habitante> listaHabitantes = daoHabitante.getListaHabitantes(jugador.getIdJugador());
+                ArrayList<Habitante> listaHabitantes = daoHabitante.getListaHabitantes(jugador.getIdJugador(),2);
                 Float alimentoProducido = daoHabitante.getAlimentoProduccionVsConsumo(jugador.getIdJugador()).get(1);
 
                 ArrayList<Integer> indicesHabitantes = new ArrayList<>();

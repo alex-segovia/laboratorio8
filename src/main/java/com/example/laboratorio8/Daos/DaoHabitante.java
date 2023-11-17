@@ -172,8 +172,15 @@ public class DaoHabitante extends DaoBase{
         }
     }
 
-    public ArrayList<Habitante> getListaHabitantes(int idJugador){
-        String sql = "SELECT * FROM habitante WHERE idJugador = ? AND (estaExiliado = false AND estaMuerto = false);";
+    public ArrayList<Habitante> getListaHabitantes(int idJugador,int tipo){
+        String sql = "";
+
+        if(tipo == 1){ // Listado completo
+            sql = "SELECT * FROM habitante WHERE idJugador = ?;";
+        }else{ // Listado filtrado
+            sql = "SELECT * FROM habitante WHERE idJugador = ? AND (estaExiliado = false AND estaMuerto = false);";
+        }
+
         ArrayList<Habitante> listaHabitantes = new ArrayList<>();
 
         try (Connection conn = this.getConection();

@@ -34,6 +34,7 @@ public class DaoJugador extends DaoBase{
     }
 
     public void terminarDia(int idJugador){
+
         String sql = "UPDATE jugador SET horasDelDia = 0, diasDesdeCreacion = diasDesdeCreacion + 1 WHERE idJugador = ?";
 
         try (Connection conn = this.getConection();
