@@ -78,67 +78,8 @@ public class RecursosServlet extends HttpServlet {
             case "terminarDia":
                 httpSession.setAttribute("validacionPasarHoras",true);
                 httpSession.setAttribute("validacionTerminarDia",false);
-                // Por ver si el codigo se ejecuta aqui o no
 
-                // Alimentar a la población: MUERTES POR HAMBRE
-
-                ArrayList<Habitante> listaHabitantes = daoHabitante.getListaHabitantes(jugador.getIdJugador(),2);
-                Float alimentoProducido = daoHabitante.getAlimentoProduccionVsConsumo(jugador.getIdJugador()).get(1);
-
-                if(!listaHabitantes.isEmpty()){
-                    ArrayList<Integer> indicesHabitantes = new ArrayList<>();
-
-                    for(int i = 0; i<listaHabitantes.size(); i++){
-                        indicesHabitantes.add(i);
-                    }
-
-                    Collections.shuffle(indicesHabitantes);
-
-                    Float alimentoAConsumir = 0.0f;
-                    float moralPerdida = 0.0f;
-
-                    for(Integer j: indicesHabitantes){
-
-                        Habitante habitante = listaHabitantes.get(j);
-
-                        alimentoAConsumir = habitante.getAlimentacionDiaria();
-
-                        if(alimentoProducido>=0.0f){
-                            if((alimentoProducido-alimentoAConsumir)>0.0f){
-                                alimentoProducido = alimentoProducido - alimentoAConsumir;
-                            }else{
-                                moralPerdida = habitante.getMoral() - (alimentoAConsumir - alimentoProducido);
-                                if(moralPerdida <= 0.0f){
-                                    daoHabitante.updateMoral(jugador.getIdJugador(), habitante.getIdHabitante(), 0.0f);
-                                    daoHabitante.killHabitante(jugador.getIdJugador(), habitante.getIdHabitante(),"Hambre",jugador.getDiasDesdeCreacion()); // Añadir dia muerte
-                                }
-                                daoHabitante.updateMoral(jugador.getIdJugador(), habitante.getIdHabitante(), moralPerdida);
-                            }
-                        }else{
-                            alimentoProducido = 0.0f;
-                        }
-                    }
-
-                    // Crecimiento de la población: MUERTES POR DESESPERACIÓN
-
-                    int cantidadPoblacion = listaHabitantes.size();
-                    int diasPasados = jugador.getDiasDesdeCreacion();
-
-                    if(cantidadPoblacion>4*diasPasados){
-                        System.out.println("Aiuda");
-                    }else{
-                        // Se puede hacer de otra manera pero noseeeee
-                        daoHabitante.updateMoralMultiple(jugador.getIdJugador(), "Desesperación",jugador.getDiasDesdeCreacion()); // Añadir dia muerte
-                    }
-
-                    // Subir moral:
-
-                    daoHabitante.updateMoralMultiple(jugador.getIdJugador());
-                }
-
-                // Se termina el día:
-
-                daoJugador.endDia(jugador.getIdJugador());
+                daoJugador.proceedEndDia(jugador, daoHabitante);
 
                 break;
 
