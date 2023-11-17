@@ -76,9 +76,8 @@ public class DaoJugador extends DaoBase{
         jugador.setContrasena(rs.getString(6));
         jugador.setHorasDia(rs.getInt(7));
         jugador.setDiasDesdeCreacion(rs.getInt(8));
-        jugador.setAldeaEnDesesperacion(rs.getBoolean(9));
-        jugador.setEstado(rs.getString(10));
-
+        jugador.setEstado(rs.getString(9));
+        jugador.setAlimentoTotal(rs.getFloat(10));
         return jugador;
     }
 
