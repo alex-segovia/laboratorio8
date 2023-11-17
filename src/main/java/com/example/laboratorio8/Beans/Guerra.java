@@ -2,8 +2,8 @@ package com.example.laboratorio8.Beans;
 
 public class Guerra {
     int idGuerra;
-    Jugador jugadorAtacante;
-    Jugador jugadorDefensor;
+    Jugador jugadorAtacante=new Jugador();
+    Jugador jugadorDefensor=new Jugador();
     String resultado;
     int diasRelativosJugadorAtacante;
     int diasRelativosJugadorDefensor;
