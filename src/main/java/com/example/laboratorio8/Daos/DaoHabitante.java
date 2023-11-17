@@ -263,4 +263,22 @@ public class DaoHabitante extends DaoBase{
             throw new RuntimeException(e);
         }
     }
+
+    public float getSumaFuerzaPorProfesion(int idJugador,String profesion){
+        String sql = "select sum(h.fuerza) from habitante h inner join jugador j on j.idJugador=h.idJugador where j.idJugador=? and h.profesion=? group by h.profesion";
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setInt(1, idJugador);
+            pstmt.setString(2,profesion);
+            try(ResultSet rs = pstmt.executeQuery()){
+                if (rs.next()){
+                    return rs.getFloat(1);
+                }else {
+                    return 0;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
