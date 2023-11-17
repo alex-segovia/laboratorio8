@@ -106,7 +106,7 @@ public class RecursosServlet extends HttpServlet {
                             moralPerdida = habitante.getMoral() - (alimentoAConsumir - alimentoProducido);
                             if(moralPerdida <= 0.0f){
                                 daoHabitante.updateMoral(jugador.getIdJugador(), habitante.getIdHabitante(), 0.0f);
-                                daoHabitante.killHabitante(jugador.getIdJugador(), habitante.getIdHabitante(),"Hambre"); // Añadir dia muerte
+                                daoHabitante.killHabitante(jugador.getIdJugador(), habitante.getIdHabitante(),"Hambre",jugador.getDiasDesdeCreacion()); // Añadir dia muerte
                             }
                             daoHabitante.updateMoral(jugador.getIdJugador(), habitante.getIdHabitante(), moralPerdida);
                         }
