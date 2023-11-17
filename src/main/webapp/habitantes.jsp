@@ -239,37 +239,8 @@
                         <div class="heading-section">
                             <h4>Mis habitantes:</h4>
                         </div>
-                        <div class="item" style="border: solid 1px rgba(255,255,255,0.2) !important;">
-                            <table class="table">
-                                <thead style="background: rgba(243, 140, 210, 0.4) !important; ">
-                                    <tr>
-                                        <th style="padding: 20px 15px !important; font-weight: 700 !important; text-transform: uppercase !important;">ID</th>
-                                        <th style="padding: 20px 15px !important; font-weight: 700 !important; text-transform: uppercase !important;">Nombre</th>
-                                        <th style="padding: 20px 15px !important; font-weight: 700 !important; text-transform: uppercase !important;">Género</th>
-                                        <th style="padding: 20px 15px !important; font-weight: 700 !important; text-transform: uppercase !important;">Alimento</th>
-                                        <th style="padding: 20px 15px !important; font-weight: 700 !important; text-transform: uppercase !important;">Moral</th>
-                                        <th style="padding: 20px 15px !important; font-weight: 700 !important; text-transform: uppercase !important;">Tiempo</th>
-                                        <th style="padding: 20px 15px !important; font-weight: 700 !important; text-transform: uppercase !important;">Fuerza</th>
-                                        <th style="padding: 20px 15px !important; font-weight: 700 !important; text-transform: uppercase !important;">Producción</th>
-                                        <th style="padding: 20px 15px !important; font-weight: 700 !important; text-transform: uppercase !important;"></th>
-                                        <th style="padding: 20px 15px !important; font-weight: 700 !important; text-transform: uppercase !important;"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td style="padding: 15px !important; border-bottom: solid 1px rgba(255, 255, 255, 0.2) !important;" class="text-center">01</td>
-                                        <td style="padding: 15px !important; border-bottom: solid 1px rgba(255, 255, 255, 0.2) !important;" class="text-center">Carlos</td>
-                                        <td style="padding: 15px !important; border-bottom: solid 1px rgba(255, 255, 255, 0.2) !important;" class="text-center">Masculino</td>
-                                        <td style="padding: 15px !important; border-bottom: solid 1px rgba(255, 255, 255, 0.2) !important;" class="text-center">100</td>
-                                        <td style="padding: 15px !important; border-bottom: solid 1px rgba(255, 255, 255, 0.2) !important;" class="text-center">50</td>
-                                        <td style="padding: 15px !important; border-bottom: solid 1px rgba(255, 255, 255, 0.2) !important;" class="text-center">50</td>
-                                        <td style="padding: 15px !important; border-bottom: solid 1px rgba(255, 255, 255, 0.2) !important;" class="text-center">10 días</td>
-                                        <td style="padding: 15px !important; border-bottom: solid 1px rgba(255, 255, 255, 0.2) !important;" class="text-center">20</td>
-                                        <td style="padding: 15px !important; border-bottom: solid 1px rgba(255, 255, 255, 0.2) !important;"><button class="button button-primary button-xs" style="max-width: 10px !important">Editar</button></td>
-                                        <td style="padding: 15px !important; border-bottom: solid 1px rgba(255, 255, 255, 0.2) !important;"><button class="button button-secondary button-xs">Exiliar</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="item">
+                            <jsp:include page="vistasAux/tabla.jsp"></jsp:include>
                         </div>
 
                         <div class="item last-item">
