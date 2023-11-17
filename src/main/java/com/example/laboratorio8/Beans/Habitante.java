@@ -12,6 +12,8 @@ public class Habitante {
     float alimentacionDiaria;
     float moral;
 
+
+
     public int getIdHabitante() {
         return idHabitante;
     }
