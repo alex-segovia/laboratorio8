@@ -7,7 +7,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 @WebServlet(name = "InicioSesionServlet", value = "")
-public class InicioSesion extends HttpServlet {
+public class InicioSesionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
