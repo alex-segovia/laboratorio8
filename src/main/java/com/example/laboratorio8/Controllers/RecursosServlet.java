@@ -47,7 +47,7 @@ public class RecursosServlet extends HttpServlet {
                 break;
         }
         // Se actualiza la información del jugador por cada cambio de vista
-        httpSession.setAttribute("jugadorLogueado",daoJugador.obtenerJugadorPorId(jugador.getIdJugador()));
+        httpSession.setAttribute("jugadorLogueado",daoJugador.getJugadorPorId(jugador.getIdJugador()));
     }
 
     @Override
@@ -70,7 +70,7 @@ public class RecursosServlet extends HttpServlet {
         switch (action){
 
             case "pasarHoras":
-                daoJugador.pasarHoras(jugador.getIdJugador());
+                daoJugador.skipHoras(jugador.getIdJugador());
                 break;
 
             case "terminarDia":
@@ -133,11 +133,11 @@ public class RecursosServlet extends HttpServlet {
 
                 // Se termina el día:
 
-                daoJugador.terminarDia(jugador.getIdJugador());
+                daoJugador.endDia(jugador.getIdJugador());
         }
 
         response.sendRedirect("RecursosServlet");
-        httpSession.setAttribute("jugadorLogueado",daoJugador.obtenerJugadorPorId(jugador.getIdJugador()));
+        httpSession.setAttribute("jugadorLogueado",daoJugador.getJugadorPorId(jugador.getIdJugador()));
     }
 }
 

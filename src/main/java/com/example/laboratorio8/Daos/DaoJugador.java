@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class DaoJugador extends DaoBase{
 
-    public Jugador obtenerJugadorPorId(int idJugador){
+    public Jugador getJugadorPorId(int idJugador){
         String sql = "SELECT * FROM jugador WHERE idJugador = ?";
         Jugador jugador = null;
 
@@ -20,7 +20,7 @@ public class DaoJugador extends DaoBase{
             try(ResultSet rs = pstmt.executeQuery()){
 
                 if(rs.next()){
-                    jugador = llenarDatosJugador(jugador,rs);
+                    jugador = fillJugador(jugador,rs);
                 }
 
             }
@@ -33,7 +33,7 @@ public class DaoJugador extends DaoBase{
 
     }
 
-    public void terminarDia(int idJugador){
+    public void endDia(int idJugador){
 
         String sql = "UPDATE jugador SET horasDelDia = 0, diasDesdeCreacion = diasDesdeCreacion + 1 WHERE idJugador = ?";
 
@@ -46,7 +46,7 @@ public class DaoJugador extends DaoBase{
         }
     }
 
-    public void pasarHoras(int idJugador){
+    public void skipHoras(int idJugador){
 
         String sql = "UPDATE jugador SET horasDelDia = 24 WHERE idJugador = ?";
 
@@ -60,7 +60,7 @@ public class DaoJugador extends DaoBase{
 
     }
 
-    public Jugador llenarDatosJugador(Jugador jugador, ResultSet rs) throws SQLException {
+    public Jugador fillJugador(Jugador jugador, ResultSet rs) throws SQLException {
 
         jugador = new Jugador();
         jugador.setIdJugador(rs.getInt(1));

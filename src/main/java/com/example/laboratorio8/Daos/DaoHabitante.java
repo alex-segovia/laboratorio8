@@ -180,7 +180,7 @@ public class DaoHabitante extends DaoBase{
         }
 
         habitante.setIdHabitante(rs.getInt(1));
-        habitante.setJugador(new DaoJugador().obtenerJugadorPorId(rs.getInt(2)));
+        habitante.setJugador(new DaoJugador().getJugadorPorId(rs.getInt(2)));
         habitante.setNombre(rs.getString(3));
         habitante.setGenero(rs.getString(5));
         habitante.setHorasDia(rs.getInt(6));
