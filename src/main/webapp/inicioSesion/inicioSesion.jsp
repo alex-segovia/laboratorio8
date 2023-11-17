@@ -207,7 +207,7 @@
     </section>
 </div>
 <!-- Javascript-->
-<script src="js/core.min.js"></script>
-<script src="js/script.js"></script>
+<script src="inicioSesion/js/core.min.js"></script>
+<script src="inicioSesion/js/script.js"></script>
 </body>
 </html>

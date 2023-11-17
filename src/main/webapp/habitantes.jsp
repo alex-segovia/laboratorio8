@@ -6,27 +6,25 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<html lang="en">
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <title>Gestión de habitantes</title>
-    <link rel="icon" href="assets/images/logoarmas.ico" type="image/x-icon">
+    <link rel="icon" href="assets/images/logoarmas.ico">
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-cyborg-gaming.css">
+    <link rel="stylesheet" href="assets/css/templatemo-cyborg-gamingHabitante.css">
     <link rel="stylesheet" href="assets/css/owl.css">
     <link rel="stylesheet" href="assets/css/animate.css">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
-
 </head>
 <body>
 
@@ -91,15 +89,15 @@
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                    <a href="index.html" class="logo">
+                    <a href="" class="logo d-flex justify-content-center">
                         <img class="img-fluid" src="assets/images/textologo.png">
                     </a>
+
                     <ul class="nav">
-                        <li><a href="index.html" class="active">Habitantes<img src="assets/images/profile-header.jpg" alt=""></a></li>
-                        <li><a href="browse.html">Recursos<img src="assets/images/profile-header.jpg" alt=""></a></li>
-                        <li><a href="details.html">Guerra<img src="assets/images/profile-header.jpg" alt=""></a></li>
-                        <li><a href="streams.html">Leaderboard<img src="assets/images/profile-header.jpg" alt=""></a></li>
-                        <li><a href="profile.html">Profile <img src="assets/images/profile-header.jpg" alt=""></a></li>
+                        <li><a href="<%=request.getContextPath()%>/HabitantesServlet" class="active">Habitantes<img src="assets/images/profile-header.jpg" alt=""></a></li>
+                        <li><a href="<%=request.getContextPath()%>/RecursosServlet">Recursos<img src="assets/images/profile-header.jpg" alt=""></a></li>
+                        <li><a href="<%=request.getContextPath()%>/GuerraServlet">Guerra<img src="assets/images/profile-header.jpg" alt=""></a></li>
+                        <li><a href="<%=request.getContextPath()%>/LeaderboardServlet">Leaderboard<img src="assets/images/profile-header.jpg" alt=""></a></li>
                     </ul>
                     <a class='menu-trigger'>
                         <span>Menu</span>
@@ -122,18 +120,15 @@
                     <div class="row">
                         <div class="col-lg-7">
                             <div class="header-text">
-                                <h6>Welcome To Cyborg</h6>
-                                <h4><em>Browse</em> Our Popular Games Here</h4>
-                                <div class="main-button">
-                                    <a href="browse.html">Browse Now</a>
-                                </div>
+                                <h4>Gestión de Habitantes</h4>
+                                <p style="color: white !important; font-size: 100%">Mantén un registro de todos los habitantes. Cada uno tiene distintas habilidades que aportarán al éxito de tu civilización.</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- ***** Banner End ***** -->
 
-                <!-- ***** Most Popular Start ***** -->
+                <!-- ***** Most Popular Start *****
                 <div class="most-popular">
                     <div class="row">
                         <div class="col-lg-12">
@@ -236,48 +231,56 @@
                         </div>
                     </div>
                 </div>
-                <!-- ***** Most Popular End ***** -->
+                ***** Most Popular End ***** -->
 
                 <!-- ***** Gaming Library Start ***** -->
                 <div class="gaming-library">
                     <div class="col-lg-12">
                         <div class="heading-section">
-                            <h4><em>Your Gaming</em> Library</h4>
+                            <h4>Mis habitantes:</h4>
                         </div>
-                        <div class="item">
-                            <ul>
-                                <li><img src="assets/images/game-01.jpg" alt="" class="templatemo-item"></li>
-                                <li><h4>Dota 2</h4><span>Sandbox</span></li>
-                                <li><h4>Date Added</h4><span>24/08/2036</span></li>
-                                <li><h4>Hours Played</h4><span>634 H 22 Mins</span></li>
-                                <li><h4>Currently</h4><span>Downloaded</span></li>
-                                <li><div class="main-border-button border-no-active"><a href="#">Donwloaded</a></div></li>
-                            </ul>
+                        <div class="item" style="border: solid 1px rgba(255,255,255,0.2) !important;">
+                            <table class="table">
+                                <thead style="background: rgba(243, 140, 210, 0.4) !important; ">
+                                    <tr>
+                                        <th style="padding: 20px 15px !important; font-weight: 700 !important; text-transform: uppercase !important;">ID</th>
+                                        <th style="padding: 20px 15px !important; font-weight: 700 !important; text-transform: uppercase !important;">Nombre</th>
+                                        <th style="padding: 20px 15px !important; font-weight: 700 !important; text-transform: uppercase !important;">Género</th>
+                                        <th style="padding: 20px 15px !important; font-weight: 700 !important; text-transform: uppercase !important;">Alimento</th>
+                                        <th style="padding: 20px 15px !important; font-weight: 700 !important; text-transform: uppercase !important;">Moral</th>
+                                        <th style="padding: 20px 15px !important; font-weight: 700 !important; text-transform: uppercase !important;">Tiempo</th>
+                                        <th style="padding: 20px 15px !important; font-weight: 700 !important; text-transform: uppercase !important;">Fuerza</th>
+                                        <th style="padding: 20px 15px !important; font-weight: 700 !important; text-transform: uppercase !important;">Producción</th>
+                                        <th style="padding: 20px 15px !important; font-weight: 700 !important; text-transform: uppercase !important;"></th>
+                                        <th style="padding: 20px 15px !important; font-weight: 700 !important; text-transform: uppercase !important;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="padding: 15px !important; border-bottom: solid 1px rgba(255, 255, 255, 0.2) !important;" class="text-center">01</td>
+                                        <td style="padding: 15px !important; border-bottom: solid 1px rgba(255, 255, 255, 0.2) !important;" class="text-center">Carlos</td>
+                                        <td style="padding: 15px !important; border-bottom: solid 1px rgba(255, 255, 255, 0.2) !important;" class="text-center">Masculino</td>
+                                        <td style="padding: 15px !important; border-bottom: solid 1px rgba(255, 255, 255, 0.2) !important;" class="text-center">100</td>
+                                        <td style="padding: 15px !important; border-bottom: solid 1px rgba(255, 255, 255, 0.2) !important;" class="text-center">50</td>
+                                        <td style="padding: 15px !important; border-bottom: solid 1px rgba(255, 255, 255, 0.2) !important;" class="text-center">50</td>
+                                        <td style="padding: 15px !important; border-bottom: solid 1px rgba(255, 255, 255, 0.2) !important;" class="text-center">10 días</td>
+                                        <td style="padding: 15px !important; border-bottom: solid 1px rgba(255, 255, 255, 0.2) !important;" class="text-center">20</td>
+                                        <td style="padding: 15px !important; border-bottom: solid 1px rgba(255, 255, 255, 0.2) !important;"><button class="button button-primary button-xs" style="max-width: 10px !important">Editar</button></td>
+                                        <td style="padding: 15px !important; border-bottom: solid 1px rgba(255, 255, 255, 0.2) !important;"><button class="button button-secondary button-xs">Exiliar</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="item">
-                            <ul>
-                                <li><img src="assets/images/game-02.jpg" alt="" class="templatemo-item"></li>
-                                <li><h4>Fortnite</h4><span>Sandbox</span></li>
-                                <li><h4>Date Added</h4><span>22/06/2036</span></li>
-                                <li><h4>Hours Played</h4><span>740 H 52 Mins</span></li>
-                                <li><h4>Currently</h4><span>Downloaded</span></li>
-                                <li><div class="main-border-button"><a href="#">Donwload</a></div></li>
-                            </ul>
-                        </div>
+
                         <div class="item last-item">
                             <ul>
-                                <li><img src="assets/images/game-03.jpg" alt="" class="templatemo-item"></li>
                                 <li><h4>CS-GO</h4><span>Sandbox</span></li>
                                 <li><h4>Date Added</h4><span>21/04/2036</span></li>
                                 <li><h4>Hours Played</h4><span>892 H 14 Mins</span></li>
                                 <li><h4>Currently</h4><span>Downloaded</span></li>
-                                <li><div class="main-border-button border-no-active"><a href="#">Donwloaded</a></div></li>
+                                <li><div class="main-border-button border-active"><a href="#">Editar</a></div></li>
+                                <li><div class="main-border-button border-active"><a href="#">Exiliar</a></div></li>
                             </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="main-button">
-                            <a href="profile.html">View Your Library</a>
                         </div>
                     </div>
                 </div>
@@ -291,9 +294,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <p>Copyright © 2036 <a href="#">Cyborg Gaming</a> Company. All rights reserved.
-
-                    <br>Design: <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a></p>
+                <p>Copyright © 2023 | Tombat. Todos los derechos reservados.</p>
             </div>
         </div>
     </div>

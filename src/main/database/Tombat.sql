@@ -64,6 +64,8 @@ CREATE TABLE IF NOT EXISTS `Tombat`.`habitante` (
   `fuerza` FLOAT NULL,
   `produccionAlimento` FLOAT NULL,
   `produccionMoral` FLOAT NULL,
+  `motivoMuerte` VARCHAR(45) NULL,
+  `diaMuerte` INT NULL,
   PRIMARY KEY (`idHabitante`),
   UNIQUE INDEX `idhabitante_UNIQUE` (`idHabitante` ASC) VISIBLE,
   INDEX `fk_habitante_jugador1_idx` (`idjugador` ASC) VISIBLE,
