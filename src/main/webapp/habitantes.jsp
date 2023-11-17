@@ -123,7 +123,10 @@
                                 <h4><em style="color: darkmagenta !important;">Gestión</em> de Habitantes</h4>
                                 <p style="color: white !important; font-size: 100%">Mantén un registro de todos los habitantes. Cada uno tiene distintas habilidades que aportarán al éxito de tu civilización.</p>
                                 <div class="main-button mt-5">
-                                    <a href="">Crear habitante</a>
+                                    <a href="">Pasar horas</a>
+                                </div>
+                                <div class="main-button mt-5">
+                                    <a href="">Terminar día</a>
                                 </div>
                             </div>
                         </div>

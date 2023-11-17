@@ -13,12 +13,12 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <title>Gestión de habitantes</title>
+    <title>Gestión de recursos</title>
     <link rel="icon" href="assets/images/logoarmas.ico">
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="assets/css/style.css">
+
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="assets/css/fontawesome.css">
     <link rel="stylesheet" href="assets/css/templatemo-cyborg-gamingHabitante.css">
@@ -120,8 +120,11 @@
                     <div class="row">
                         <div class="col-lg-7">
                             <div class="header-text">
-                                <h4>Gestión de Habitantes</h4>
-                                <p style="color: white !important; font-size: 100%">Mantén un registro de todos los habitantes. Cada uno tiene distintas habilidades que aportarán al éxito de tu civilización.</p>
+                                <h4><em style="color: darkmagenta !important;">Gestión</em> de Recursos</h4>
+                                <p style="color: white !important; font-size: 100%">Organiza y gestiona tanto la producción como demanda de recursos de todos los habitantes. Visualiza el estado de los pobladores con moral criticamente baja y aquellos caídos el dia anterior para plantear una estrategia que lleve adelante tu civilización.</p>
+                                <div class="main-button mt-5">
+                                    <a href="">Crear habitante</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -240,7 +243,54 @@
                             <h4>Mis habitantes:</h4>
                         </div>
                         <div class="item">
-                            <jsp:include page="vistasAux/tabla.jsp"></jsp:include>
+                            <ul>
+                                <div class="row" >
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">ID</span></div>
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Nombre</span></div>
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Género</span></div>
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Consumo</span></div>
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Moral</span></div>
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Tiempo</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row" style="width: 99%">
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Profesión</span></div>
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Fuerza</span></div>
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Producción</span></div>
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Estado</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                        <div class="item">
+                            <ul>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="row">
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">01</span></div>
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">Ricardo</span></div>
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">Masculino</span></div>
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">100</span></div>
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">50</span></div>
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">10 días</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="row" style="width: 99%">
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">Soldado</span></div>
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">50</span></div>
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">200 (A)</span></div>
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">Vivo</span></div>
+                                            <div class="col-2"><button class="btn btn-dark" style="font-size: 10px; color: white"><a>Editar</a></button></div>
+                                            <div class="col-2"><button class="btn btn-dark" style="font-size: 10px; color: white"><a>Exhiliar</a></button></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ul>
                         </div>
 
                         <div class="item last-item">
