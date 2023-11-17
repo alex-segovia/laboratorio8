@@ -7,8 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
+
 
 public class DaoHabitante extends DaoBase{
 
@@ -44,47 +43,52 @@ public class DaoHabitante extends DaoBase{
 
             try(ResultSet rs = pstmt.executeQuery()){
                 while(rs.next()){
-                    String profesion = rs.getString(4);
-                    Habitante habitante = null;
-                    switch (profesion){
-                        case "Granjero":
-                            habitante = new Granjero();
-                            ((Granjero) habitante).setProduccionAlimento(rs.getFloat(13));
-                            break;
-                        case "Constructor":
-                            habitante = new Constructor();
-                            ((Constructor) habitante).setProduccionMoral(rs.getFloat(14));
-                            ((Constructor) habitante).setFuerza(rs.getFloat(12));
-                            break;
-                        case "Soldado":
-                            habitante = new Soldado();
-                            ((Soldado) habitante).setProduccionMoral(rs.getFloat(14));
-                            ((Soldado) habitante).setFuerza(rs.getFloat(12));
-                            break;
-                        default:
-                            habitante = new Habitante();
-                            System.out.println("Me olvidé polimorfismo xd");
-
-                    }
-
-                    habitante.setIdHabitante(rs.getInt(1));
-                    habitante.setJugador(new DaoJugador().obtenerJugadorPorId(rs.getInt(2)));
-                    habitante.setNombre(rs.getString(3));
-                    habitante.setGenero(rs.getString(5));
-                    habitante.setHorasDia(rs.getInt(6));
-                    habitante.setDiasVivo(rs.getInt(7));
-                    habitante.setEstaExiliado(rs.getBoolean(8));
-                    habitante.setEstaMuerto(rs.getBoolean(9));
-                    habitante.setAlimentacionDiaria(rs.getFloat(10));
-                    habitante.setMoral(rs.getFloat(11));
-
-                    habitantesMoralBaja.add(habitante);
+                    habitantesMoralBaja.add(fillHabitante(rs));
                 }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return habitantesMoralBaja;
+    }
+
+    public Habitante fillHabitante(ResultSet rs) throws SQLException {
+
+        String profesion = rs.getString(4);
+        Habitante habitante = null;
+        switch (profesion){
+            case "Granjero":
+                habitante = new Granjero();
+                ((Granjero) habitante).setProduccionAlimento(rs.getFloat(13));
+                break;
+            case "Constructor":
+                habitante = new Constructor();
+                ((Constructor) habitante).setProduccionMoral(rs.getFloat(14));
+                ((Constructor) habitante).setFuerza(rs.getFloat(12));
+                break;
+            case "Soldado":
+                habitante = new Soldado();
+                ((Soldado) habitante).setProduccionMoral(rs.getFloat(14));
+                ((Soldado) habitante).setFuerza(rs.getFloat(12));
+                break;
+            default:
+                habitante = new Habitante();
+                System.out.println("Me olvidé polimorfismo xd");
+
+        }
+
+        habitante.setIdHabitante(rs.getInt(1));
+        habitante.setJugador(new DaoJugador().obtenerJugadorPorId(rs.getInt(2)));
+        habitante.setNombre(rs.getString(3));
+        habitante.setGenero(rs.getString(5));
+        habitante.setHorasDia(rs.getInt(6));
+        habitante.setDiasVivo(rs.getInt(7));
+        habitante.setEstaExiliado(rs.getBoolean(8));
+        habitante.setEstaMuerto(rs.getBoolean(9));
+        habitante.setAlimentacionDiaria(rs.getFloat(10));
+        habitante.setMoral(rs.getFloat(11));
+
+        return habitante;
     }
 
     public ArrayList<Habitante> getHabitantesMuertos(int idJugador){
@@ -97,41 +101,7 @@ public class DaoHabitante extends DaoBase{
 
             try(ResultSet rs = pstmt.executeQuery()){
                 while(rs.next()){
-                    String profesion = rs.getString(4);
-                    Habitante habitante = null;
-                    switch (profesion){
-                        case "Granjero":
-                            habitante = new Granjero();
-                            ((Granjero) habitante).setProduccionAlimento(rs.getFloat(13));
-                            break;
-                        case "Constructor":
-                            habitante = new Constructor();
-                            ((Constructor) habitante).setProduccionMoral(rs.getFloat(14));
-                            ((Constructor) habitante).setFuerza(rs.getFloat(12));
-                            break;
-                        case "Soldado":
-                            habitante = new Soldado();
-                            ((Soldado) habitante).setProduccionMoral(rs.getFloat(14));
-                            ((Soldado) habitante).setFuerza(rs.getFloat(12));
-                            break;
-                        default:
-                            habitante = new Habitante();
-                            System.out.println("Me olvidé polimorfismo xd");
-
-                    }
-
-                    habitante.setIdHabitante(rs.getInt(1));
-                    habitante.setJugador(new DaoJugador().obtenerJugadorPorId(rs.getInt(2)));
-                    habitante.setNombre(rs.getString(3));
-                    habitante.setGenero(rs.getString(5));
-                    habitante.setHorasDia(rs.getInt(6));
-                    habitante.setDiasVivo(rs.getInt(7));
-                    habitante.setEstaExiliado(rs.getBoolean(8));
-                    habitante.setEstaMuerto(rs.getBoolean(9));
-                    habitante.setAlimentacionDiaria(rs.getFloat(10));
-                    habitante.setMoral(rs.getFloat(11));
-
-                    habitantesMuertos.add(habitante);
+                    habitantesMuertos.add(fillHabitante(rs));
                 }
             }
         } catch (SQLException e) {
@@ -189,41 +159,7 @@ public class DaoHabitante extends DaoBase{
 
             try(ResultSet rs = pstmt.executeQuery()){
                 while(rs.next()){
-                    String profesion = rs.getString(4);
-                    Habitante habitante = null;
-                    switch (profesion){
-                        case "Granjero":
-                            habitante = new Granjero();
-                            ((Granjero) habitante).setProduccionAlimento(rs.getFloat(13));
-                            break;
-                        case "Constructor":
-                            habitante = new Constructor();
-                            ((Constructor) habitante).setProduccionMoral(rs.getFloat(14));
-                            ((Constructor) habitante).setFuerza(rs.getFloat(12));
-                            break;
-                        case "Soldado":
-                            habitante = new Soldado();
-                            ((Soldado) habitante).setProduccionMoral(rs.getFloat(14));
-                            ((Soldado) habitante).setFuerza(rs.getFloat(12));
-                            break;
-                        default:
-                            habitante = new Habitante();
-                            System.out.println("Me olvidé polimorfismo xd");
-
-                    }
-
-                    habitante.setIdHabitante(rs.getInt(1));
-                    habitante.setJugador(new DaoJugador().obtenerJugadorPorId(rs.getInt(2)));
-                    habitante.setNombre(rs.getString(3));
-                    habitante.setGenero(rs.getString(5));
-                    habitante.setHorasDia(rs.getInt(6));
-                    habitante.setDiasVivo(rs.getInt(7));
-                    habitante.setEstaExiliado(rs.getBoolean(8));
-                    habitante.setEstaMuerto(rs.getBoolean(9));
-                    habitante.setAlimentacionDiaria(rs.getFloat(10));
-                    habitante.setMoral(rs.getFloat(11));
-
-                    listaHabitantes.add(habitante);
+                    listaHabitantes.add(fillHabitante(rs));
                 }
             }
         } catch (SQLException e) {
