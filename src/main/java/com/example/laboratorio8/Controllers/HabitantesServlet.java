@@ -22,8 +22,8 @@ public class HabitantesServlet extends HttpServlet {
         DaoJugador daoJugador = new DaoJugador();
         switch (action){
             case "listar":
-                request.setAttribute("listaHabitantes",daoHabitante.listarHabitantes(jugadorActual.getIdJugador()));
-                request.getSession().setAttribute("jugadorActual",1);
+                request.setAttribute("listaHabitantes",daoHabitante.listarHabitantes(1));
+                request.getSession().setAttribute("jugadorActual",daoJugador.getJugadorPorId(1));
                 request.getRequestDispatcher("habitantes.jsp").forward(request,response);
                 break;
             case "exiliar":

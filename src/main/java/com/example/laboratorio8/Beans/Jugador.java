@@ -9,8 +9,8 @@ public class Jugador {
     String contrasena;
     int horasDia = 0;
     int diasDesdeCreacion = 0;
-    boolean aldeaEnDesesperacion = false;
     String estado = "En paz";
+    float alimentoTotal;
 
     public int getIdJugador() {
         return idJugador;
@@ -76,19 +76,19 @@ public class Jugador {
         this.diasDesdeCreacion = diasDesdeCreacion;
     }
 
-    public boolean isAldeaEnDesesperacion() {
-        return aldeaEnDesesperacion;
-    }
-
-    public void setAldeaEnDesesperacion(boolean aldeaEnDesesperacion) {
-        this.aldeaEnDesesperacion = aldeaEnDesesperacion;
-    }
-
     public String getEstado() {
         return estado;
     }
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public float getAlimentoTotal() {
+        return alimentoTotal;
+    }
+
+    public void setAlimentoTotal(float alimentoTotal) {
+        this.alimentoTotal = alimentoTotal;
     }
 }

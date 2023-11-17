@@ -27,7 +27,45 @@
     <link rel="stylesheet" href="assets/css/templatemo-cyborg-gamingHabitante.css">
     <link rel="stylesheet" href="assets/css/owl.css">
     <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
+
+    <style>
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+        }
+
+        /* Estilo para el contenido del popup */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            border-radius: 12px;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            z-index: 10001;
+        }
+        /* Estilo para el botón de cerrar */
+        .cerrarPopup {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+        @media screen and (max-width: 777px) {
+            .contenedorCrear {
+                width: 80% !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -126,118 +164,13 @@
                                 <h4><em style="color: darkmagenta !important;">Gestión</em> de Habitantes</h4>
                                 <p style="color: white !important; font-size: 100%">Mantén un registro de todos los habitantes. Cada uno tiene distintas habilidades que aportarán al éxito de tu civilización.</p>
                                 <div class="main-button mt-5">
-                                    <a href="">Crear habitante</a>
+                                    <a style="cursor: pointer" id="mostrarPopupCrear">Crear habitante</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- ***** Banner End ***** -->
-
-                <!-- ***** Most Popular Start *****
-                <div class="most-popular">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="heading-section">
-                                <h4><em>Most Popular</em> Right Now</h4>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-3 col-sm-6">
-                                    <div class="item">
-                                        <img src="assets/images/popular-01.jpg" alt="">
-                                        <h4>Fortnite<br><span>Sandbox</span></h4>
-                                        <ul>
-                                            <li><i class="fa fa-star"></i> 4.8</li>
-                                            <li><i class="fa fa-download"></i> 2.3M</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6">
-                                    <div class="item">
-                                        <img src="assets/images/popular-02.jpg" alt="">
-                                        <h4>PubG<br><span>Battle S</span></h4>
-                                        <ul>
-                                            <li><i class="fa fa-star"></i> 4.8</li>
-                                            <li><i class="fa fa-download"></i> 2.3M</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6">
-                                    <div class="item">
-                                        <img src="assets/images/popular-03.jpg" alt="">
-                                        <h4>Dota2<br><span>Steam-X</span></h4>
-                                        <ul>
-                                            <li><i class="fa fa-star"></i> 4.8</li>
-                                            <li><i class="fa fa-download"></i> 2.3M</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6">
-                                    <div class="item">
-                                        <img src="assets/images/popular-04.jpg" alt="">
-                                        <h4>CS-GO<br><span>Legendary</span></h4>
-                                        <ul>
-                                            <li><i class="fa fa-star"></i> 4.8</li>
-                                            <li><i class="fa fa-download"></i> 2.3M</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="item">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-sm-6">
-                                                <div class="item inner-item">
-                                                    <img src="assets/images/popular-05.jpg" alt="">
-                                                    <h4>Mini Craft<br><span>Legendary</span></h4>
-                                                    <ul>
-                                                        <li><i class="fa fa-star"></i> 4.8</li>
-                                                        <li><i class="fa fa-download"></i> 2.3M</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-sm-6">
-                                                <div class="item">
-                                                    <img src="assets/images/popular-06.jpg" alt="">
-                                                    <h4>Eagles Fly<br><span>Matrix Games</span></h4>
-                                                    <ul>
-                                                        <li><i class="fa fa-star"></i> 4.8</li>
-                                                        <li><i class="fa fa-download"></i> 2.3M</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6">
-                                    <div class="item">
-                                        <img src="assets/images/popular-07.jpg" alt="">
-                                        <h4>Warface<br><span>Max 3D</span></h4>
-                                        <ul>
-                                            <li><i class="fa fa-star"></i> 4.8</li>
-                                            <li><i class="fa fa-download"></i> 2.3M</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6">
-                                    <div class="item">
-                                        <img src="assets/images/popular-08.jpg" alt="">
-                                        <h4>Warcraft<br><span>Legend</span></h4>
-                                        <ul>
-                                            <li><i class="fa fa-star"></i> 4.8</li>
-                                            <li><i class="fa fa-download"></i> 2.3M</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="main-button">
-                                        <a href="browse.html">Discover Popular</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                ***** Most Popular End ***** -->
 
                 <!-- ***** Gaming Library Start ***** -->
                 <div class="gaming-library">
@@ -315,6 +248,52 @@
     </div>
 </div>
 
+<!-- Popup para crear habitante -->
+<div class="overlay" id="overlayCrear"></div>
+<div class="popup contenedorCrear" style="width: 700px;" id="popupCrear">
+    <svg class="cerrarPopup" id="cerrarPopupCrear" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M11.4142 10L16.7071 4.70711C17.0976 4.31658 17.0976 3.68342 16.7071 3.29289C16.3166 2.90237 15.6834 2.90237 15.2929 3.29289L10 8.58579L4.70711 3.29289C4.31658 2.90237 3.68342 2.90237 3.29289 3.29289C2.90237 3.68342 2.90237 4.31658 3.29289 4.70711L8.58579 10L3.29289 15.2929C2.90237 15.6834 2.90237 16.3166 3.29289 16.7071C3.68342 17.0976 4.31658 17.0976 4.70711 16.7071L10 11.4142L15.2929 16.7071C15.6834 17.0976 16.3166 17.0976 16.7071 16.7071C17.0976 16.3166 17.0976 15.6834 16.7071 15.2929L11.4142 10Z" fill="black"/>
+    </svg>
+
+        <div class="container-fluid">
+            <div class="row"><div class="col"><h5 style="text-align: center;">Crear habitante</h5></div></div>
+            <div class="row">
+                <div class="col-sm-7">
+                    <br>
+                    <label for="nombreHabitante" style="margin-top: 25px;"><b>Nombre del habitante:</b></label>
+                    <input type="text" name="nombreHabitante" id="nombreHabitante" placeholder="Nombre" required>
+
+                    <label for="generoHabitante" style="margin-top: 25px;"><b>Género del habitante:</b></label>
+                    <select style="height: 55px;padding-left: 20px" name="generoHabitante" id="generoHabitante" required>
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                        <option value="O">Otro</option>
+                    </select>
+
+                    <label for="profesionHabitante" style="margin-top: 25px;"><b>Profesión del habitante:</b></label>
+                    <select style="height: 55px;padding-left: 20px" name="profesionHabitante" id="profesionHabitante" required>
+                        <option value="Ninguna">--Ninguna--</option>
+                        <option value="Granjero">Granjero</option>
+                        <option value="Constructor">Constructor</option>
+                        <option value="Soldado">Soldado</option>
+                    </select>
+
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6" style="margin-top: 5px;">
+                    <button type="submit" style="opacity: 0.5" class="button secondary" id="cerrarPopupCrear1" disabled>Crear</button>
+                </div>
+                <div class="col-sm-6" style="margin-top: 5px;">
+                    <button class="button secondary" id="cerrarPopupCrear2" style="background-color: grey;">Cancelar</button>
+                </div>
+            </div>
+        </div>
+</div>
+
 <footer>
     <div class="container">
         <div class="row">
@@ -325,6 +304,42 @@
     </div>
 </footer>
 
+<script>
+    function popupFunc(popupId,abrirId,cerrarClass,overlayId){
+        const showPopup=document.getElementById(abrirId);
+        const overlay=document.getElementById(overlayId);
+        const popup=document.getElementById(popupId);
+        const mostrarPopup = () => {
+            overlay.style.display = 'block';
+            popup.style.display = 'block';
+            // Desactivar el scroll
+            document.body.style.overflow = 'hidden';
+        };
+        showPopup.addEventListener('click', mostrarPopup);
+        const cerrarPopup = () => {
+            overlay.style.display = 'none';
+            popup.style.display = 'none';
+            document.body.style.overflow = 'auto';
+
+        };
+        for(let i=0;i<cerrarClass.length;i++){
+            document.getElementById(cerrarClass[i]).addEventListener('click', cerrarPopup);
+        }
+
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                cerrarPopup();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                cerrarPopup();
+            }
+        });
+    }
+    popupFunc('popupCrear','mostrarPopupCrear',['cerrarPopupCrear','cerrarPopupCrear1','cerrarPopupCrear2'],'overlayCrear');
+</script>
 
 <!-- Scripts -->
 <!-- Bootstrap core JavaScript -->
