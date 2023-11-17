@@ -26,11 +26,11 @@ CREATE TABLE IF NOT EXISTS `Tombat`.`jugador` (
   `contrasena` VARCHAR(45) NOT NULL,
   `horasDelDia` INT NOT NULL,
   `diasDesdeCreacion` INT NOT NULL,
-  `aldeaEnDesesperacion` TINYINT NOT NULL DEFAULT 0,
   `estado` VARCHAR(45) NOT NULL DEFAULT 'En paz',
+  `alimentoTotal` FLOAT NOT NULL,
   PRIMARY KEY (`idJugador`),
   UNIQUE INDEX `idjugador_UNIQUE` (`idJugador` ASC) VISIBLE,
-  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) VISIBLE)
+  UNIQUE INDEX `usuario_UNIQUE` (`usuario` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
