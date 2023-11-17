@@ -124,7 +124,7 @@ public class RecursosServlet extends HttpServlet {
                     System.out.println("Aiuda");
                 }else{
                     // Se puede hacer de otra manera pero noseeeee
-                    daoHabitante.updateMoralMultiple(jugador.getIdJugador(), "Desesperación"); // Añadir dia muerte
+                    daoHabitante.updateMoralMultiple(jugador.getIdJugador(), "Desesperación",jugador.getDiasDesdeCreacion()); // Añadir dia muerte
                 }
 
                 // Subir moral:

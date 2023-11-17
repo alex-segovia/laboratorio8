@@ -11,6 +11,8 @@ public class Habitante {
     boolean estaMuerto=false;
     float alimentacionDiaria;
     float moral;
+    String motivoMuerte;
+    int diaMuerte;
 
 
 
@@ -92,5 +94,21 @@ public class Habitante {
 
     public void setMoral(float moral) {
         this.moral = moral;
+    }
+
+    public String getMotivoMuerte() {
+        return motivoMuerte;
+    }
+
+    public void setMotivoMuerte(String motivoMuerte) {
+        this.motivoMuerte = motivoMuerte;
+    }
+
+    public int getDiaMuerte() {
+        return diaMuerte;
+    }
+
+    public void setDiaMuerte(int diaMuerte) {
+        this.diaMuerte = diaMuerte;
     }
 }
