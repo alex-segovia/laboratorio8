@@ -2,27 +2,20 @@ package com.example.laboratorio8.Controllers;
 
 import java.io.*;
 
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-@WebServlet(name = "helloServlet", value = "/hello-servlet")
+@WebServlet(name = "InicioSesionServlet", value = "")
 public class InicioSesion extends HttpServlet {
-    private String message;
-
-    public void init() {
-        message = "Hello World!";
-    }
-
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
-
-        // Hello
-        PrintWriter out = response.getWriter();
-        out.println("<html><body>");
-        out.println("<h1>" + message + "</h1>");
-        out.println("</body></html>");
+        request.getRequestDispatcher("inicioSesion/inicioSesion.jsp").forward(request,response);
     }
 
-    public void destroy() {
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 }
