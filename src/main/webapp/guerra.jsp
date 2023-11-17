@@ -6,11 +6,714 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <title>Title</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>Gestión de habitantes</title>
+    <link rel="icon" href="assets/images/logoarmas.ico" type="image/x-icon">
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-cyborg-gaming.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+
 </head>
+
 <body>
 
+<div class="page-loader">
+    <div class="page-loader-body">
+        <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue">
+                <div class="circle-clipper left">
+                    <div class="circle"> </div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"> </div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="spinner-layer spinner-red">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"> </div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="spinner-layer spinner-yellow">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"> </div>
+                </div>
+            </div>
+            <div class="spinner-layer spinner-green">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Preloader Start ***** -->
+
+<!-- ***** Preloader End ***** -->
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <img class="img-fluid" src="assets/images/textologo.png">
+                    </a>
+                    <ul class="nav">
+                        <li><a href="index.html" class="active">Habitantes<img src="assets/images/profile-header.jpg" alt=""></a></li>
+                        <li><a href="browse.html">Recursos<img src="assets/images/profile-header.jpg" alt=""></a></li>
+                        <li><a href="details.html">Guerra<img src="assets/images/profile-header.jpg" alt=""></a></li>
+                        <li><a href="streams.html">Leaderboard<img src="assets/images/profile-header.jpg" alt=""></a></li>
+                        <li><a href="profile.html">Profile <img src="assets/images/profile-header.jpg" alt=""></a></li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-content">
+
+                <!-- ***** Banner Start ***** -->
+                <div class="main-banner" style="background-image: url(fondoGuerra.png) !important;">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="header-text">
+                                <h6>Desafíate</h6>
+                                <h4><em>Guerras</em> de civilizaciones</h4>
+                                <h6>¡Declara la guerra a otro usuario y potencia tu civilización!</h6>
+                                <h6 style="font-size: 75%">Para poder ser victorioso en una guerra, tus soldados tienen que tener más fuerza que los soldados y constructores del defensor después de haber cumplido el ciclo de un día en consumo de recursos.</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ***** Banner End ***** -->
+
+                <!-- ***** Featured Games Start ***** -->
+                <div class="row" style="margin-top: 30px">
+
+                    <div class="col-lg-9">
+                        <div class="top-streamers">
+                            <div class="heading-section">
+                                <h4>Historial de <em>Guerras</em></h4>
+                            </div>
+                            <ul class="overflow-auto overflow-x-hidden" style="max-height: 410px">
+                                <li style="width: 95%">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <div class="col-6 d-flex justify-content-center">
+                                                    <span style="font-size: 14px;color: #ec6090;font-weight: 400;"><img src="iconoGuerra.png" style="width: 25px" alt=""> <img src="assets/images/avatar-01.jpg" alt="" style="max-width: 46px; border-radius: 50%;"> LahutaM</span>
+
+                                                </div>
+                                                <div class="col-6 d-flex justify-content-center">
+                                                    <span style="font-size: 14px;color: #ec6090;font-weight: 400;"><img src="iconoEscudo.png" style="width: 25px" alt=""> <img src="assets/images/avatar-01.jpg" alt="" style="max-width: 46px; border-radius: 50%;"> LahutaM</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="row text-center">
+                                                <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center" style="color: greenyellow">Victoria</span></div>
+                                                <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center">Hace 4 días</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li style="width: 95%">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <div class="col-6 d-flex justify-content-center">
+                                                    <span style="font-size: 14px;color: #ec6090;font-weight: 400;"><img src="iconoGuerra.png" style="width: 25px" alt=""> <img src="assets/images/avatar-01.jpg" alt="" style="max-width: 46px; border-radius: 50%;"> LahutaM</span>
+
+                                                </div>
+                                                <div class="col-6 d-flex justify-content-center">
+                                                    <span style="font-size: 14px;color: #ec6090;font-weight: 400;"><img src="iconoEscudo.png" style="width: 25px" alt=""> <img src="assets/images/avatar-01.jpg" alt="" style="max-width: 46px; border-radius: 50%;"> LahutaM</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="row text-center">
+                                                <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center" style="color: greenyellow">Victoria</span></div>
+                                                <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center">Hace 4 días</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li style="width: 95%">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <div class="col-6 d-flex justify-content-center">
+                                                    <span style="font-size: 14px;color: #ec6090;font-weight: 400;"><img src="iconoGuerra.png" style="width: 25px" alt=""> <img src="assets/images/avatar-01.jpg" alt="" style="max-width: 46px; border-radius: 50%;"> LahutaM</span>
+
+                                                </div>
+                                                <div class="col-6 d-flex justify-content-center">
+                                                    <span style="font-size: 14px;color: #ec6090;font-weight: 400;"><img src="iconoEscudo.png" style="width: 25px" alt=""> <img src="assets/images/avatar-01.jpg" alt="" style="max-width: 46px; border-radius: 50%;"> LahutaM</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="row text-center">
+                                                <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center" style="color: greenyellow">Victoria</span></div>
+                                                <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center">Hace 4 días</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li style="width: 95%">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <div class="col-6 d-flex justify-content-center">
+                                                    <span style="font-size: 14px;color: #ec6090;font-weight: 400;"><img src="iconoGuerra.png" style="width: 25px" alt=""> <img src="assets/images/avatar-01.jpg" alt="" style="max-width: 46px; border-radius: 50%;"> LahutaM</span>
+
+                                                </div>
+                                                <div class="col-6 d-flex justify-content-center">
+                                                    <span style="font-size: 14px;color: #ec6090;font-weight: 400;"><img src="iconoEscudo.png" style="width: 25px" alt=""> <img src="assets/images/avatar-01.jpg" alt="" style="max-width: 46px; border-radius: 50%;"> LahutaM</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="row text-center">
+                                                <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center" style="color: greenyellow">Victoria</span></div>
+                                                <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center">Hace 4 días</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li style="width: 95%">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <div class="col-6 d-flex justify-content-center">
+                                                    <span style="font-size: 14px;color: #ec6090;font-weight: 400;"><img src="iconoGuerra.png" style="width: 25px" alt=""> <img src="assets/images/avatar-01.jpg" alt="" style="max-width: 46px; border-radius: 50%;"> LahutaM</span>
+
+                                                </div>
+                                                <div class="col-6 d-flex justify-content-center">
+                                                    <span style="font-size: 14px;color: #ec6090;font-weight: 400;"><img src="iconoEscudo.png" style="width: 25px" alt=""> <img src="assets/images/avatar-01.jpg" alt="" style="max-width: 46px; border-radius: 50%;"> LahutaM</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="row text-center">
+                                                <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center" style="color: greenyellow">Victoria</span></div>
+                                                <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center">Hace 4 días</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li style="width: 95%">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <div class="col-6 d-flex justify-content-center">
+                                                    <span style="font-size: 14px;color: #ec6090;font-weight: 400;"><img src="iconoGuerra.png" style="width: 25px" alt=""> <img src="assets/images/avatar-01.jpg" alt="" style="max-width: 46px; border-radius: 50%;"> LahutaM</span>
+
+                                                </div>
+                                                <div class="col-6 d-flex justify-content-center">
+                                                    <span style="font-size: 14px;color: #ec6090;font-weight: 400;"><img src="iconoEscudo.png" style="width: 25px" alt=""> <img src="assets/images/avatar-01.jpg" alt="" style="max-width: 46px; border-radius: 50%;"> LahutaM</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="row text-center">
+                                                <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center" style="color: greenyellow">Victoria</span></div>
+                                                <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center">Hace 4 días</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li style="width: 95%">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <div class="col-6 d-flex justify-content-center">
+                                                    <span style="font-size: 14px;color: #ec6090;font-weight: 400;"><img src="iconoGuerra.png" style="width: 25px" alt=""> <img src="assets/images/avatar-01.jpg" alt="" style="max-width: 46px; border-radius: 50%;"> LahutaM</span>
+
+                                                </div>
+                                                <div class="col-6 d-flex justify-content-center">
+                                                    <span style="font-size: 14px;color: #ec6090;font-weight: 400;"><img src="iconoEscudo.png" style="width: 25px" alt=""> <img src="assets/images/avatar-01.jpg" alt="" style="max-width: 46px; border-radius: 50%;"> LahutaM</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="row text-center">
+                                                <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center" style="color: greenyellow">Victoria</span></div>
+                                                <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center">Hace 4 días</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="top-streamers">
+                            <div class="heading-section">
+                                <h4 class="text-center"><em>Reporte</em> Último día</h4>
+                            </div>
+                            <ul>
+                                <li>
+                                    <div class="row">
+                                        <img src="iconoPaz2.png" style="width: 100%" alt="">
+                                    </div>
+                                    <div class="row text-center" style="margin-top: 20px">
+                                        <h2 style="font-size: 300%">En paz</h2>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <h6>Durante el último día no se ha registrado ninguna guerra a nuestra civilización.</h6>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- ***** Featured Games End ***** -->
+
+                <!-- ***** Banner Start ***** -->
+                <div class="row" style="margin-top: 20px">
+                    <div class="col-lg-12">
+                        <div class="main-profile ">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="clips">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="heading-section">
+                                                    <h4>Elige una <em>Civilización</em> y ¡declara una <em>Guerra</em>!</h4>
+                                                </div>
+                                            </div>
+                                            <div class="row overflow-auto" style="max-height: 350px">
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <div class="item">
+                                                        <div class="thumb">
+                                                            <img src="fotoAlex.png" alt="" style="border-radius: 23px; height: 100%">
+                                                            <a href=""><img src="iconoAtacar.png" alt=""></a>
+                                                        </div>
+                                                        <div class="down-content text-center">
+                                                            <div class="row">
+                                                                <h4>AlexZ_19</h4>
+                                                            </div>
+                                                            <div class="row">
+                                                                <span style="font-size: 75%"><img src="iconoTiempo.png" style="width: 15px" alt=""> 250 días jugando</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <div class="item">
+                                                        <div class="thumb">
+                                                            <img src="fotoAlex.png" alt="" style="border-radius: 23px; height: 100%">
+                                                            <a href=""><img src="iconoAtacar.png" alt=""></a>
+                                                        </div>
+                                                        <div class="down-content text-center">
+                                                            <div class="row">
+                                                                <h4>AlexZ_19</h4>
+                                                            </div>
+                                                            <div class="row">
+                                                                <span style="font-size: 75%"><img src="iconoTiempo.png" style="width: 15px" alt=""> 250 días jugando</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <div class="item">
+                                                        <div class="thumb">
+                                                            <img src="fotoAlex.png" alt="" style="border-radius: 23px; height: 100%">
+                                                            <a href=""><img src="iconoAtacar.png" alt=""></a>
+                                                        </div>
+                                                        <div class="down-content text-center">
+                                                            <div class="row">
+                                                                <h4>AlexZ_19</h4>
+                                                            </div>
+                                                            <div class="row">
+                                                                <span style="font-size: 75%"><img src="iconoTiempo.png" style="width: 15px" alt=""> 250 días jugando</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <div class="item">
+                                                        <div class="thumb">
+                                                            <img src="fotoAlex.png" alt="" style="border-radius: 23px; height: 100%">
+                                                            <a href=""><img src="iconoAtacar.png" alt=""></a>
+                                                        </div>
+                                                        <div class="down-content text-center">
+                                                            <div class="row">
+                                                                <h4>AlexZ_19</h4>
+                                                            </div>
+                                                            <div class="row">
+                                                                <span style="font-size: 75%"><img src="iconoTiempo.png" style="width: 15px" alt=""> 250 días jugando</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <div class="item">
+                                                        <div class="thumb">
+                                                            <img src="fotoAlex.png" alt="" style="border-radius: 23px; height: 100%">
+                                                            <a href=""><img src="iconoAtacar.png" alt=""></a>
+                                                        </div>
+                                                        <div class="down-content text-center">
+                                                            <div class="row">
+                                                                <h4>AlexZ_19</h4>
+                                                            </div>
+                                                            <div class="row">
+                                                                <span style="font-size: 75%"><img src="iconoTiempo.png" style="width: 15px" alt=""> 250 días jugando</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <div class="item">
+                                                        <div class="thumb">
+                                                            <img src="fotoAlex.png" alt="" style="border-radius: 23px; height: 100%">
+                                                            <a href=""><img src="iconoAtacar.png" alt=""></a>
+                                                        </div>
+                                                        <div class="down-content text-center">
+                                                            <div class="row">
+                                                                <h4>AlexZ_19</h4>
+                                                            </div>
+                                                            <div class="row">
+                                                                <span style="font-size: 75%"><img src="iconoTiempo.png" style="width: 15px" alt=""> 250 días jugando</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <div class="item">
+                                                        <div class="thumb">
+                                                            <img src="fotoAlex.png" alt="" style="border-radius: 23px; height: 100%">
+                                                            <a href=""><img src="iconoAtacar.png" alt=""></a>
+                                                        </div>
+                                                        <div class="down-content text-center">
+                                                            <div class="row">
+                                                                <h4>AlexZ_19</h4>
+                                                            </div>
+                                                            <div class="row">
+                                                                <span style="font-size: 75%"><img src="iconoTiempo.png" style="width: 15px" alt=""> 250 días jugando</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <div class="item">
+                                                        <div class="thumb">
+                                                            <img src="fotoAlex.png" alt="" style="border-radius: 23px; height: 100%">
+                                                            <a href=""><img src="iconoAtacar.png" alt=""></a>
+                                                        </div>
+                                                        <div class="down-content text-center">
+                                                            <div class="row">
+                                                                <h4>AlexZ_19</h4>
+                                                            </div>
+                                                            <div class="row">
+                                                                <span style="font-size: 75%"><img src="iconoTiempo.png" style="width: 15px" alt=""> 250 días jugando</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <div class="item">
+                                                        <div class="thumb">
+                                                            <img src="fotoAlex.png" alt="" style="border-radius: 23px; height: 100%">
+                                                            <a href=""><img src="iconoAtacar.png" alt=""></a>
+                                                        </div>
+                                                        <div class="down-content text-center">
+                                                            <div class="row">
+                                                                <h4>AlexZ_19</h4>
+                                                            </div>
+                                                            <div class="row">
+                                                                <span style="font-size: 75%"><img src="iconoTiempo.png" style="width: 15px" alt=""> 250 días jugando</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <div class="item">
+                                                        <div class="thumb">
+                                                            <img src="fotoAlex.png" alt="" style="border-radius: 23px; height: 100%">
+                                                            <a href=""><img src="iconoAtacar.png" alt=""></a>
+                                                        </div>
+                                                        <div class="down-content text-center">
+                                                            <div class="row">
+                                                                <h4>AlexZ_19</h4>
+                                                            </div>
+                                                            <div class="row">
+                                                                <span style="font-size: 75%"><img src="iconoTiempo.png" style="width: 15px" alt=""> 250 días jugando</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <div class="item">
+                                                        <div class="thumb">
+                                                            <img src="fotoAlex.png" alt="" style="border-radius: 23px; height: 100%">
+                                                            <a href=""><img src="iconoAtacar.png" alt=""></a>
+                                                        </div>
+                                                        <div class="down-content text-center">
+                                                            <div class="row">
+                                                                <h4>AlexZ_19</h4>
+                                                            </div>
+                                                            <div class="row">
+                                                                <span style="font-size: 75%"><img src="iconoTiempo.png" style="width: 15px" alt=""> 250 días jugando</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <div class="item">
+                                                        <div class="thumb">
+                                                            <img src="fotoAlex.png" alt="" style="border-radius: 23px; height: 100%">
+                                                            <a href=""><img src="iconoAtacar.png" alt=""></a>
+                                                        </div>
+                                                        <div class="down-content text-center">
+                                                            <div class="row">
+                                                                <h4>AlexZ_19</h4>
+                                                            </div>
+                                                            <div class="row">
+                                                                <span style="font-size: 75%"><img src="iconoTiempo.png" style="width: 15px" alt=""> 250 días jugando</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ***** Banner End ***** -->
+
+                <!-- ***** Most Popular Start ***** -->
+                <div class="most-popular">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="heading-section">
+                                <h4><em>Most Popular</em> Right Now</h4>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="item">
+                                        <img src="assets/images/popular-01.jpg" alt="">
+                                        <h4>Fortnite<br><span>Sandbox</span></h4>
+                                        <ul>
+                                            <li><i class="fa fa-star"></i> 4.8</li>
+                                            <li><i class="fa fa-download"></i> 2.3M</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="item">
+                                        <img src="assets/images/popular-02.jpg" alt="">
+                                        <h4>PubG<br><span>Battle S</span></h4>
+                                        <ul>
+                                            <li><i class="fa fa-star"></i> 4.8</li>
+                                            <li><i class="fa fa-download"></i> 2.3M</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="item">
+                                        <img src="assets/images/popular-03.jpg" alt="">
+                                        <h4>Dota2<br><span>Steam-X</span></h4>
+                                        <ul>
+                                            <li><i class="fa fa-star"></i> 4.8</li>
+                                            <li><i class="fa fa-download"></i> 2.3M</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="item">
+                                        <img src="assets/images/popular-04.jpg" alt="">
+                                        <h4>CS-GO<br><span>Legendary</span></h4>
+                                        <ul>
+                                            <li><i class="fa fa-star"></i> 4.8</li>
+                                            <li><i class="fa fa-download"></i> 2.3M</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="item">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-sm-6">
+                                                <div class="item inner-item">
+                                                    <img src="assets/images/popular-05.jpg" alt="">
+                                                    <h4>Mini Craft<br><span>Legendary</span></h4>
+                                                    <ul>
+                                                        <li><i class="fa fa-star"></i> 4.8</li>
+                                                        <li><i class="fa fa-download"></i> 2.3M</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-sm-6">
+                                                <div class="item">
+                                                    <img src="assets/images/popular-06.jpg" alt="">
+                                                    <h4>Eagles Fly<br><span>Matrix Games</span></h4>
+                                                    <ul>
+                                                        <li><i class="fa fa-star"></i> 4.8</li>
+                                                        <li><i class="fa fa-download"></i> 2.3M</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="item">
+                                        <img src="assets/images/popular-07.jpg" alt="">
+                                        <h4>Warface<br><span>Max 3D</span></h4>
+                                        <ul>
+                                            <li><i class="fa fa-star"></i> 4.8</li>
+                                            <li><i class="fa fa-download"></i> 2.3M</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="item">
+                                        <img src="assets/images/popular-08.jpg" alt="">
+                                        <h4>Warcraft<br><span>Legend</span></h4>
+                                        <ul>
+                                            <li><i class="fa fa-star"></i> 4.8</li>
+                                            <li><i class="fa fa-download"></i> 2.3M</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="main-button">
+                                        <a href="browse.html">Discover Popular</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ***** Most Popular End ***** -->
+
+                <!-- ***** Gaming Library Start ***** -->
+                <div class="gaming-library">
+                    <div class="col-lg-12">
+                        <div class="heading-section">
+                            <h4><em>Your Gaming</em> Library</h4>
+                        </div>
+                        <div class="item">
+                            <ul>
+                                <li><img src="assets/images/game-01.jpg" alt="" class="templatemo-item"></li>
+                                <li><h4>Dota 2</h4><span>Sandbox</span></li>
+                                <li><h4>Date Added</h4><span>24/08/2036</span></li>
+                                <li><h4>Hours Played</h4><span>634 H 22 Mins</span></li>
+                                <li><h4>Currently</h4><span>Downloaded</span></li>
+                                <li><div class="main-border-button border-no-active"><a href="#">Donwloaded</a></div></li>
+                            </ul>
+                        </div>
+                        <div class="item">
+                            <ul>
+                                <li><img src="assets/images/game-02.jpg" alt="" class="templatemo-item"></li>
+                                <li><h4>Fortnite</h4><span>Sandbox</span></li>
+                                <li><h4>Date Added</h4><span>22/06/2036</span></li>
+                                <li><h4>Hours Played</h4><span>740 H 52 Mins</span></li>
+                                <li><h4>Currently</h4><span>Downloaded</span></li>
+                                <li><div class="main-border-button"><a href="#">Donwload</a></div></li>
+                            </ul>
+                        </div>
+                        <div class="item last-item">
+                            <ul>
+                                <li><img src="assets/images/game-03.jpg" alt="" class="templatemo-item"></li>
+                                <li><h4>CS-GO</h4><span>Sandbox</span></li>
+                                <li><h4>Date Added</h4><span>21/04/2036</span></li>
+                                <li><h4>Hours Played</h4><span>892 H 14 Mins</span></li>
+                                <li><h4>Currently</h4><span>Downloaded</span></li>
+                                <li><div class="main-border-button border-no-active"><a href="#">Donwloaded</a></div></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="main-button">
+                            <a href="profile.html">View Your Library</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- ***** Gaming Library End ***** -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright © 2036 <a href="#">Cyborg Gaming</a> Company. All rights reserved.
+
+                    <br>Design: <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- Scripts -->
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<script src="assets/js/isotope.min.js"></script>
+<script src="assets/js/owl-carousel.js"></script>
+<script src="assets/js/tabs.js"></script>
+<script src="assets/js/popup.js"></script>
+<script src="assets/js/custom.js"></script>
+<script src="assets/js/script.js"></script>
+
 </body>
+
 </html>
