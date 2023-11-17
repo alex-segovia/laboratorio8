@@ -35,11 +35,13 @@ public class DaoJugador extends DaoBase{
 
     public void endDia(int idJugador){
 
-        String sql = "UPDATE jugador SET horasDelDia = 0, diasDesdeCreacion = diasDesdeCreacion + 1 WHERE idJugador = ?";
+        String sql = "UPDATE jugador SET horasDelDia = 0, diasDesdeCreacion = diasDesdeCreacion + 1 WHERE idJugador = ?;" +
+                "UPDATE habitante SET diasVivo = diasVivo + 1 WHERE idJugador = ? AND estaExiliado = false AND estaMuerto = false;";
 
         try (Connection conn = this.getConection();
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
             pstmt.setInt(1, idJugador);
+            pstmt.setInt(2, idJugador);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
