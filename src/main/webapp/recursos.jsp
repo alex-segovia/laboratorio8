@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -123,15 +124,15 @@
                                 <h4><em style="color: darkmagenta !important;">Gestión</em> de Recursos</h4>
                                 <p style="color: white !important; font-size: 100%">Organiza y gestiona tanto la producción como demanda de recursos de todos los habitantes. Visualiza el estado de los pobladores con moral criticamente baja y aquellos caídos el dia anterior para plantear una estrategia que lleve adelante tu civilización.</p>
                                 <div class="main-button mt-5">
-                                    <a href="">Pasar horas</a>
-                                </div>
-                                <div class="main-button mt-5">
-                                    <a href="">Terminar día</a>
+                                    <a onclick="enviarFormulario('formPasarHoras');" href>Pasar horas</a>
+                                    <a onclick="enviarFormulario('formTerminarDia');" href>Terminar día</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
                 <!-- ***** Banner End ***** -->
 
                 <!-- ***** Most Popular Start *****
@@ -326,6 +327,18 @@
 
 
 <!-- Scripts -->
+<form id="formPasarHoras" action="<%=request.getContextPath()%>/RecursosServlet?action=pasarHoras" method="post"></form>
+<form id="formTerminarDia" action="<%=request.getContextPath()%>/RecursosServlet?action=terminarDia" method="post"></form>
+
+<script>
+    function enviarFormulario(idForm) {
+        var formulario = document.getElementById(idForm);
+        formulario.submit();
+        alert("¡Hola, esto es una alerta!");
+
+    }
+</script>
+
 <!-- Bootstrap core JavaScript -->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.min.js"></script>

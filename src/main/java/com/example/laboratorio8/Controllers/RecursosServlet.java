@@ -17,42 +17,47 @@ import java.util.HashMap;
 public class RecursosServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("holiwis");
+        request.getRequestDispatcher("recursos.jsp").forward(request,response);
+        if(false){
+            // Sesión
+            HttpSession httpSession = request.getSession();
 
-        // Sesión
-        HttpSession httpSession = request.getSession();
+            // Parámetros
+            String action = request.getParameter("action") == null ? "listado" : request.getParameter("action");
+            Jugador jugador = (Jugador) httpSession.getAttribute("jugadorActual");
 
-        // Parámetros
-        String action = request.getParameter("action") == null ? "listado" : request.getParameter("action");
-        Jugador jugador = (Jugador) httpSession.getAttribute("jugadorActual");
+            RequestDispatcher view;
 
-        RequestDispatcher view;
+            // Daos
+            DaoJugador daoJugador = new DaoJugador();
+            DaoHabitante daoHabitante = new DaoHabitante();
 
-        // Daos
-        DaoJugador daoJugador = new DaoJugador();
-        DaoHabitante daoHabitante = new DaoHabitante();
+            // Datos
+            ArrayList<Habitante> habitantesMoralBaja= daoHabitante.getHabitantesMoralBaja(jugador.getIdJugador());
+            ArrayList<Float> alimentoProduccionVsConsumo = daoHabitante.getAlimentoProduccionVsConsumo(jugador.getIdJugador());
+            ArrayList<Habitante> habitantesMuertos = daoHabitante.getHabitantesMuertos(jugador.getIdJugador()); // revisarrr
 
-        // Datos
-        ArrayList<Habitante> habitantesMoralBaja= daoHabitante.getHabitantesMoralBaja(jugador.getIdJugador());
-        ArrayList<Float> alimentoProduccionVsConsumo = daoHabitante.getAlimentoProduccionVsConsumo(jugador.getIdJugador());
-        ArrayList<Habitante> habitantesMuertos = daoHabitante.getHabitantesMuertos(jugador.getIdJugador()); // revisarrr
-
-        switch (action){
-            case "listado":
-                request.setAttribute("habitantesMoralBaja",habitantesMoralBaja);
-                request.setAttribute("alimentoProduccionVsConsumo",alimentoProduccionVsConsumo);
-                request.setAttribute("habitantesMuertos",habitantesMuertos); // revisarrr
-                break;
-            default:
-                System.out.println("uwu");
-                break;
+            switch (action){
+                case "listado":
+                    request.setAttribute("habitantesMoralBaja",habitantesMoralBaja);
+                    request.setAttribute("alimentoProduccionVsConsumo",alimentoProduccionVsConsumo);
+                    request.setAttribute("habitantesMuertos",habitantesMuertos); // revisarrr
+                    break;
+                default:
+                    System.out.println("uwu");
+                    break;
+            }
+            // Se actualiza la información del jugador por cada cambio de vista
+            httpSession.setAttribute("jugadorActual",daoJugador.getJugadorPorId(jugador.getIdJugador()));
         }
-        // Se actualiza la información del jugador por cada cambio de vista
-        httpSession.setAttribute("jugadorActual",daoJugador.getJugadorPorId(jugador.getIdJugador()));
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        System.out.println("uwu");
         // Sesión
         HttpSession httpSession = request.getSession();
 

@@ -198,6 +198,48 @@ p {
   color: #e75e8d;
 }
 
+.main-button button {
+  font-size: 14px;
+  color: #fff;
+  background-color: #e75e8d;
+  padding: 12px 30px;
+  display: inline-block;
+  border-radius: 25px;
+  font-weight: 400;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  transition: all .3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.main-button button:hover {
+  background-color: #fff;
+  color: #e75e8d;
+}
+
+.main-border-button button {
+  font-size: 14px;
+  color: #ec6090;
+  background-color: transparent;
+  border: 1px solid #ec6090;
+  padding: 12px 30px;
+  display: inline-block;
+  border-radius: 25px;
+  font-weight: 400;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  transition: all .3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.main-border-button button:hover {
+  border-color: #fff;
+  background-color: #fff;
+  color: #e75e8d;
+}
+
 .border-no-active a {
   border-color: #666;
   color: #666;
@@ -1515,6 +1557,10 @@ Top Streamers Style
   padding: 8px 20px;
 }
 
+.top-streamers ul li .main-button button {
+  padding: 8px 20px;
+}
+
 /* 
 ---------------------------------------------
 Profile Style
@@ -1677,6 +1723,10 @@ body {
     margin-top: 10px;
   }
   .top-streamers ul li .main-button a {
+    width: 100%;
+    text-align: center;
+  }
+  .top-streamers ul li .main-button button {
     width: 100%;
     text-align: center;
   }
