@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.laboratorio8.Beans.*" %><%--
   Created by IntelliJ IDEA.
   User: alexd
   Date: 16/11/2023
@@ -18,6 +19,8 @@
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
+    <%ArrayList<Habitante> listaHabitantes = (ArrayList<Habitante>) request.getSession().getAttribute("listaHabitantes");%>
+    <%Jugador jugadorActual = (Jugador) request.getSession().getAttribute("jugadorActual");%>
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="assets/css/fontawesome.css">
@@ -266,33 +269,34 @@
                                 </div>
                             </ul>
                         </div>
-                        <div class="item">
+                        <%for(Habitante habitante : listaHabitantes){%>
+                        <div class="item <%if(listaHabitantes.size()-1 == listaHabitantes.indexOf(habitante)){%>last-item<%}%>">
                             <ul>
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="row">
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">01</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">Ricardo</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">Masculino</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">100</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">50</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">10 días</span></div>
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white"><%if(habitante.getIdHabitante()<10){%>0<%=habitante.getIdHabitante()%><%}%></span></div>
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white"><%=habitante.getNombre()%></span></div>
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white"><%if(habitante.getGenero().equals("M")){%>Masculino<%}else if(habitante.getGenero().equals("F")){%>Femenino<%}else{%>Otro<%}%></span></div>
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white"><%=habitante.getAlimentacionDiaria()%></span></div>
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white"><%=habitante.getMoral()%></span></div>
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white"><%=habitante.getDiasVivo()%> día<%if(habitante.getDiasVivo()>1){%>s<%}%></span></div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="row" style="width: 99%">
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">Soldado</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">50</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">200 (A)</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">Vivo</span></div>
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white"><%if(habitante instanceof Granjero){%>Granjero<%}else if(habitante instanceof Constructor){%>Constructor<%}else if(habitante instanceof Soldado){%>Soldado<%}else{%>Ninguna<%}%></span></div>
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white"><%if(habitante instanceof Constructor){%><%=((Constructor) habitante).getFuerza()%><%}else if(habitante instanceof Soldado){%><%=((Soldado) habitante).getFuerza()%><%}else{%>--No tiene--<%}%></span></div>
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white"><%if(habitante instanceof Granjero){%><%=((Granjero) habitante).getProduccionAlimento()%> (A)<%}else if(habitante instanceof Constructor){%><%=((Constructor) habitante).getProduccionMoral()%><%}else if(habitante instanceof Soldado){%><%=((Soldado) habitante).getProduccionMoral()%><%}else{%>--No produce--<%}%></span></div>
+                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white"><%if(habitante.isEstaMuerto()){%>Muerto<%}else{%>Vivo<%}%></span></div>
                                             <div class="col-2"><button class="btn btn-dark" style="font-size: 10px; color: white"><a>Editar</a></button></div>
-                                            <div class="col-2"><button class="btn btn-dark" style="font-size: 10px; color: white"><a>Exhiliar</a></button></div>
+                                            <div class="col-2"><button class="btn btn-dark" style="font-size: 10px; color: white" <%if(habitante.isEstaExiliado()){%>disabled<%}%>><a>Exhiliar</a></button></div>
                                         </div>
                                     </div>
                                 </div>
                             </ul>
                         </div>
-
+                        <%}%>
                         <div class="item last-item">
                             <ul>
                                 <li><h4>CS-GO</h4><span>Sandbox</span></li>
