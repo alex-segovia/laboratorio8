@@ -193,6 +193,8 @@ public class DaoHabitante extends DaoBase{
         habitante.setMotivoMuerte(rs.getString(15));
         habitante.setDiaMuerte(rs.getInt(16));
 
+
+
         return habitante;
     }
 
