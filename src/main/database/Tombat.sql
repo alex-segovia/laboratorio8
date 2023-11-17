@@ -5,19 +5,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema laboratoriouwu
+-- Schema Tombat
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema laboratoriouwu
+-- Schema Tombat
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `laboratoriouwu` DEFAULT CHARACTER SET utf8 ;
-USE `laboratoriouwu` ;
+CREATE SCHEMA IF NOT EXISTS `Tombat` DEFAULT CHARACTER SET utf8 ;
+USE `Tombat` ;
 
 -- -----------------------------------------------------
--- Table `laboratoriouwu`.`jugador`
+-- Table `Tombat`.`jugador`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `laboratoriouwu`.`jugador` (
+CREATE TABLE IF NOT EXISTS `Tombat`.`jugador` (
   `idJugador` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
   `edad` INT NOT NULL,
@@ -35,9 +35,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `laboratoriouwu`.`listaNegra`
+-- Table `Tombat`.`listaNegra`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `laboratoriouwu`.`listaNegra` (
+CREATE TABLE IF NOT EXISTS `Tombat`.`listaNegra` (
   `idListaNegra` INT NOT NULL AUTO_INCREMENT,
   `correo` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idListaNegra`),
@@ -47,9 +47,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `laboratoriouwu`.`habitante`
+-- Table `Tombat`.`habitante`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `laboratoriouwu`.`habitante` (
+CREATE TABLE IF NOT EXISTS `Tombat`.`habitante` (
   `idHabitante` INT NOT NULL AUTO_INCREMENT,
   `idjugador` INT NOT NULL,
   `nombre` VARCHAR(10) NOT NULL,
@@ -69,16 +69,16 @@ CREATE TABLE IF NOT EXISTS `laboratoriouwu`.`habitante` (
   INDEX `fk_habitante_jugador1_idx` (`idjugador` ASC) VISIBLE,
   CONSTRAINT `fk_habitante_jugador1`
     FOREIGN KEY (`idjugador`)
-    REFERENCES `laboratoriouwu`.`jugador` (`idJugador`)
+    REFERENCES `Tombat`.`jugador` (`idJugador`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `laboratoriouwu`.`guerra`
+-- Table `Tombat`.`guerra`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `laboratoriouwu`.`guerra` (
+CREATE TABLE IF NOT EXISTS `Tombat`.`guerra` (
   `idGuerra` INT NOT NULL AUTO_INCREMENT,
   `idJugadorAtacante` INT NOT NULL,
   `idJugadorDefensor` INT NOT NULL,
@@ -91,12 +91,12 @@ CREATE TABLE IF NOT EXISTS `laboratoriouwu`.`guerra` (
   UNIQUE INDEX `idGuerra_UNIQUE` (`idGuerra` ASC) VISIBLE,
   CONSTRAINT `fk_jugador_has_jugador_jugador`
     FOREIGN KEY (`idJugadorAtacante`)
-    REFERENCES `laboratoriouwu`.`jugador` (`idJugador`)
+    REFERENCES `Tombat`.`jugador` (`idJugador`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_jugador_has_jugador_jugador1`
     FOREIGN KEY (`idJugadorDefensor`)
-    REFERENCES `laboratoriouwu`.`jugador` (`idJugador`)
+    REFERENCES `Tombat`.`jugador` (`idJugador`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
