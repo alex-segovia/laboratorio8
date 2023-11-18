@@ -33,7 +33,6 @@ public class RecursosServlet extends HttpServlet {
         DaoJugador daoJugador = new DaoJugador();
         DaoHabitante daoHabitante = new DaoHabitante();
 
-        jugador = daoJugador.getJugadorPorId(1);
         // Datos
         ArrayList<Habitante> habitantesMoralBaja= daoHabitante.getHabitantesMoralBaja(jugador.getIdJugador());
         ArrayList<Float> alimentoProduccionVsConsumo = daoHabitante.getAlimentoProduccionVsConsumo(jugador.getIdJugador());
@@ -46,14 +45,12 @@ public class RecursosServlet extends HttpServlet {
                 request.setAttribute("habitantesMuertos",habitantesMuertos);
                 break;
             default:
-                System.out.println("uwu owo");
+
                 break;
         }
 
         // Se actualiza la información del jugador por cada cambio de vista
-        Jugador xd = daoJugador.getJugadorPorId(1);
         httpSession.setAttribute("jugadorActual",daoJugador.getJugadorPorId(jugador.getIdJugador()));
-        request.setAttribute("jugadorActual",xd);
         System.out.println("holiwis 2");
         view.forward(request,response);
 
@@ -74,7 +71,6 @@ public class RecursosServlet extends HttpServlet {
         DaoJugador daoJugador = new DaoJugador();
         DaoHabitante daoHabitante = new DaoHabitante();
 
-        jugador = daoJugador.getJugadorPorId(1);
         switch (action){
 
             case "pasarHoras":

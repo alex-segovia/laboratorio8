@@ -19,8 +19,8 @@ public class HabitantesServlet extends HttpServlet {
         Jugador jugadorActual=(Jugador) request.getSession().getAttribute("jugadorActual");
         DaoHabitante daoHabitante = new DaoHabitante();
         DaoJugador daoJugador = new DaoJugador();
-        request.setAttribute("listaHabitantes",daoHabitante.listarHabitantes(1));
-        request.getSession().setAttribute("jugadorActual",daoJugador.getJugadorPorId(1));
+        request.setAttribute("listaHabitantes",daoHabitante.listarHabitantes(jugadorActual.getIdJugador()));
+        request.getSession().setAttribute("jugadorActual",daoJugador.getJugadorPorId(jugadorActual.getIdJugador()));
         request.getRequestDispatcher("habitantes.jsp").forward(request,response);
     }
 
@@ -39,7 +39,7 @@ public class HabitantesServlet extends HttpServlet {
                 }else{
                     String generoHabitante = request.getParameter("generoHabitante");
                     String profesionHabitante = request.getParameter("profesionHabitante");
-                    daoHabitante.crearHabitante(nombreHabitante,generoHabitante,profesionHabitante,1);
+                    daoHabitante.crearHabitante(nombreHabitante,generoHabitante,profesionHabitante,jugadorActual.getIdJugador());
                     response.sendRedirect("HabitantesServlet");
                 }
                 break;
