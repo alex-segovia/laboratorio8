@@ -224,7 +224,7 @@
                                     <span style="font-size: 18px; color: white"><%=jugadorActual.getAlimentoTotal()%></span>
                                 </div>
                             </div>
-                            <div class="row text-center mb-3">
+                            <div class="row text-center mb-4">
                                 <div class="col-12 text-center">
                                     <h6>Porcentaje</h6>
                                 </div>
@@ -238,12 +238,12 @@
                                 float consumo = alimentoProduccionVsConsumo.get(1);
 
                                 if(almacen == 0.0f){
-                                    visual = ", No produce";
+                                    visual = "No posee alimento";
                                 }else{
                                     porcentaje = Math.round((consumo*100)/(almacen));
                                     if(porcentaje>100){
                                         porcentaje = 100;
-                                        visual = ">";
+                                        visual = ">>";
                                     }
                                 }
                             %>
@@ -260,9 +260,9 @@
                                                 </svg>
                                             </div>
                                             <div class="number mt-2">
-                                                <h2><%=porcentaje%><span>%</span><%=visual%></h2>
+                                                <h2><%=porcentaje%><span>%</span><h5><%=visual%></h5></h2>
                                             </div>
-                                            <div class="number">
+                                            <div class="number mt-2">
                                                 <h2 style="font-size: 10px; color: white">DemandaVsAlmacén</h2>
                                             </div>
                                         </div>
@@ -270,7 +270,7 @@
                                 </div>
                             </div>
 
-                            <div class="row text-center mb-2 mt-1">
+                            <div class="row text-center mb-2 mt-4">
                                 <div class="col-6 text-center">
                                     <h4 style="text-underline: white !important;"><u>Hora</u></h4>
                                 </div>
@@ -320,10 +320,10 @@
                                         <td  style="font-size: 14px; color: white"><%=habitante.getMoral()%></td>
                                         <td  style="font-size: 14px; color: white"><%=habitante.getDiasVivo()%></td>
                                         <td  style="font-size: 14px; color: white">
-                                            <% if(habitante instanceof Constructor){%>Constructor<%}
-                                            else if (habitante instanceof Granjero){%>Granjero<%}
-                                            else if (habitante instanceof Soldado){%>Soldado<%}
-                                            else{%>Ninguna<%}%>
+                                            <% if(habitante instanceof Constructor){%><%if(habitante.getGenero().equals("F")){%>Constructora<%}else{%>Constructor<%}
+                                            }else if (habitante instanceof Granjero){%><%if(habitante.getGenero().equals("F")){%>Granjera<%}else{%>Granjero<%}
+                                            }else if (habitante instanceof Soldado){%><%if(habitante.getGenero().equals("F")){%>Soldada<%}else{%>Soldado<%}
+                                            }else{%>Ninguna<%}%>
                                         </td>
                                     </tr>
                                     <%}%>
@@ -372,7 +372,7 @@
                             <tbody>
                             <% for(Habitante habitante: habitantesMuertos){%>
                             <tr>
-                                <th style="font-size: 14px; color: white"><%=habitantesMuertos.indexOf(habitante)%></th>
+                                <th style="font-size: 14px; color: white"><%=habitantesMuertos.indexOf(habitante)+1%></th>
                                 <td style="font-size: 14px; color: white"><%=habitante.getIdHabitante()%></td>
                                 <td style="font-size: 14px; color: white"><%=habitante.getNombre()%></td>
                                 <td style="font-size: 14px; color: white"><%if(habitante.getGenero().equals("M")){%>Masculino<%}else if(habitante.getGenero().equals("F")){%>Femenino<%}else{%>Otro<%}%></td>
@@ -380,10 +380,10 @@
                                 <td style="font-size: 14px; color: white"><%=habitante.getMoral()%></td>
                                 <td style="font-size: 14px; color: white"><%=habitante.getDiasVivo()%></td>
                                 <td style="font-size: 14px; color: white">
-                                    <% if(habitante instanceof Constructor){%>Constructor<%}
-                                    else if (habitante instanceof Granjero){%>Granjero<%}
-                                    else if (habitante instanceof Soldado){%>Soldado<%}
-                                    else{%>Ninguna<%}%>
+                                    <% if(habitante instanceof Constructor){%><%if(habitante.getGenero().equals("F")){%>Constructora<%}else{%>Constructor<%}
+                                    }else if (habitante instanceof Granjero){%><%if(habitante.getGenero().equals("F")){%>Granjera<%}else{%>Granjero<%}
+                                    }else if (habitante instanceof Soldado){%><%if(habitante.getGenero().equals("F")){%>Soldada<%}else{%>Soldado<%}
+                                    }else{%>Ninguna<%}%>
                                 </td>
                                 <td style="font-size: 14px; color: white">
                                     <% if(habitante instanceof Constructor){%><%=((Constructor) habitante).getFuerza()%><%}
@@ -427,8 +427,6 @@
     function enviarFormulario(idForm) {
         var formulario = document.getElementById(idForm);
         formulario.submit();
-        alert("¡Hola, esto es una alerta xd!");
-
     }
 </script>
 

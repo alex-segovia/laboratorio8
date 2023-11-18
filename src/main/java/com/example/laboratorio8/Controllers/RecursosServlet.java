@@ -43,7 +43,6 @@ public class RecursosServlet extends HttpServlet {
                     request.setAttribute("habitantesMuertos", habitantesMuertos);
                     break;
                 default:
-
                     break;
             }
 
@@ -84,6 +83,7 @@ public class RecursosServlet extends HttpServlet {
 
                 default:
                     // Nothing
+                    break;
 
             }
             httpSession.setAttribute("jugadorActual", daoJugador.getJugadorPorId(jugador.getIdJugador()));

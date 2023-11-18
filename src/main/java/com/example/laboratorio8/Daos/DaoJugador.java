@@ -106,7 +106,10 @@ public class DaoJugador extends DaoBase{
         // Alimentar a la población: MUERTES POR HAMBRE
 
         ArrayList<Habitante> listaHabitantes = daoHabitante.getListaHabitantes(jugador.getIdJugador(),2);
-        float alimentoProducido = daoHabitante.getAlimentoProduccionVsConsumo(jugador.getIdJugador()).get(0);
+        ArrayList<Float> alimentoProduccionVsConsumo = daoHabitante.getAlimentoProduccionVsConsumo(jugador.getIdJugador());
+        float alimentoProducido = alimentoProduccionVsConsumo.get(0);
+        float alimentoAConsumirTotal = alimentoProduccionVsConsumo.get(1);
+        float diferencia = alimentoProducido-alimentoAConsumirTotal;
 
         if(!listaHabitantes.isEmpty()){
             ArrayList<Integer> indicesHabitantes = new ArrayList<>();
@@ -120,9 +123,10 @@ public class DaoJugador extends DaoBase{
             float alimentoAConsumir = 0.0f;
             float moralPerdida = 0.0f;
             float alimentoAcumulado = jugador.getAlimentoTotal() + alimentoProducido;
+            float alimentoAux = jugador.getAlimentoTotal();
 
-            ArrayList<Float> probando = new ArrayList<>();
-            probando.add(alimentoAcumulado);
+            //ArrayList<Float> probando = new ArrayList<>();
+            //probando.add(alimentoAcumulado);
 
             int aux = 0;
 
@@ -140,7 +144,7 @@ public class DaoJugador extends DaoBase{
                         moralPerdida = habitante.getMoral() - (alimentoAConsumir - alimentoAcumulado);
                         if(moralPerdida <= 0.0f){
                             daoHabitante.updateMoral(habitante.getIdHabitante(), 0.0f);
-                            daoHabitante.killHabitante(habitante.getIdHabitante(),"Hambre",jugador.getDiasDesdeCreacion()); // Añadir dia muerte
+                            daoHabitante.killHabitante(habitante.getIdHabitante(),"Hambre",jugador.getDiasDesdeCreacion());
                         }
                         daoHabitante.updateMoral(habitante.getIdHabitante(), moralPerdida);
                     }
@@ -150,12 +154,15 @@ public class DaoJugador extends DaoBase{
 
                 if(aux == indicesHabitantes.size()-1){
                     // Actualizar el alimento acumulado
-                    updateAlimentoAcumulado(jugador.getIdJugador(),alimentoAcumulado);
+                    if((alimentoAcumulado-alimentoAux==(diferencia)) && jugador.getAlimentoTotal()!=0.0f){
+                        updateAlimentoAcumulado(jugador.getIdJugador(),0.0f); // La comida acumulada se pudre luego de 1 dia
+                    }else{
+                        updateAlimentoAcumulado(jugador.getIdJugador(),alimentoAcumulado);
+                    }
                 }
 
                 aux +=1;
-                probando.add(alimentoAcumulado);
-
+                //probando.add(alimentoAcumulado);
             }
 
             // Crecimiento de la población: MUERTES POR DESESPERACIÓN
@@ -167,7 +174,7 @@ public class DaoJugador extends DaoBase{
                 System.out.println(":D");
             }else{
                 // Actualizar y evaluar quienes caen
-                daoHabitante.updateMoralMultiple(jugador.getIdJugador(),"Desesperación",jugador.getDiasDesdeCreacion()); // Añadir dia muerte
+                daoHabitante.updateMoralMultiple(jugador.getIdJugador(),"Desesperación",jugador.getDiasDesdeCreacion());
             }
 
             // Subir moral:

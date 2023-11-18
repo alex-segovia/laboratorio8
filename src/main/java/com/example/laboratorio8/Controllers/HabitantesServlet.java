@@ -43,7 +43,10 @@ public class HabitantesServlet extends HttpServlet {
                     } else {
                         String generoHabitante = request.getParameter("generoHabitante");
                         String profesionHabitante = request.getParameter("profesionHabitante");
-                        daoHabitante.crearHabitante(nombreHabitante, generoHabitante, profesionHabitante, jugadorActual.getIdJugador());
+                        int horasAdd = profesionHabitante.equals("Ninguna")?2:8;
+                        if(!(horasAdd + jugadorActual.getHorasDia()>24)){
+                            daoHabitante.crearHabitante(nombreHabitante, generoHabitante, profesionHabitante, jugadorActual.getIdJugador());
+                        }
                         response.sendRedirect("HabitantesServlet");
                     }
                     break;
