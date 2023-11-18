@@ -1,4 +1,51 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%String nombreVacio=(String) request.getSession().getAttribute("nombreVacio");
+String nombreError=(String) request.getSession().getAttribute("nombreError");
+String nombreLargo=(String) request.getSession().getAttribute("nombreLargo");
+String usuarioVacio=(String) request.getSession().getAttribute("usuarioVacio");
+    String usuarioError=(String) request.getSession().getAttribute("usuarioError");
+    String usuarioLargo=(String) request.getSession().getAttribute("usuarioLargo");
+    String usuarioRepetido=(String) request.getSession().getAttribute("usuarioRepetido");
+    String correoVacio=(String) request.getSession().getAttribute("correoVacio");
+    String correoLargo=(String) request.getSession().getAttribute("correoLargo");
+    String correoListaNegra=(String) request.getSession().getAttribute("correoListaNegra");
+    String correoRepetido=(String) request.getSession().getAttribute("correoRepetido");
+    String edadVacia=(String) request.getSession().getAttribute("edadVacia");
+    String edadError=(String) request.getSession().getAttribute("edadError");
+    String contrasenaVacia=(String) request.getSession().getAttribute("contrasenaVacia");
+    String repetirContrasenaVacia=(String) request.getSession().getAttribute("repetirContrasenaVacia");
+    String contrasenasDiferentes=(String) request.getSession().getAttribute("contrasenasDiferentes");
+    String contrasenaLarga=(String) request.getSession().getAttribute("contrasenaLarga");
+    String contrasenaIncorrecta=(String) request.getSession().getAttribute("contrasenaIncorrecta");
+    request.getSession().removeAttribute("nombreVacio");
+    request.getSession().removeAttribute("nombreError");
+    request.getSession().removeAttribute("nombreLargo");
+    request.getSession().removeAttribute("usuarioVacio");
+    request.getSession().removeAttribute("usuarioError");
+    request.getSession().removeAttribute("usuarioLargo");
+    request.getSession().removeAttribute("correoVacio");
+    request.getSession().removeAttribute("correoLargo");
+    request.getSession().removeAttribute("correoListaNegra");
+    request.getSession().removeAttribute("correoRepetido");
+    request.getSession().removeAttribute("edadVacia");
+    request.getSession().removeAttribute("edadError");
+    request.getSession().removeAttribute("contrasenaVacia");
+    request.getSession().removeAttribute("repetirContrasenaVacia");
+    request.getSession().removeAttribute("contrasenasDiferentes");
+    request.getSession().removeAttribute("contrasenaLarga");
+    request.getSession().removeAttribute("contrasenaIncorrecta");
+    String nombre=(String) request.getAttribute("nombre");
+    String usuario=(String) request.getAttribute("usuario");
+    String edad=(String) request.getAttribute("edad");
+    String correo=(String) request.getAttribute("correo");
+    String usuarioCorreoLoginVacio=(String) request.getSession().getAttribute("usuarioCorreoLoginVacio");
+    String contrasenaLoginVacia=(String) request.getSession().getAttribute("contrasenaLoginVacia");
+    String loginError=(String) request.getSession().getAttribute("loginError");
+    request.getSession().removeAttribute("usuarioCorreoLoginVacio");
+    request.getSession().removeAttribute("contrasenaLoginVacia");
+    request.getSession().removeAttribute("loginError");
+    String usuarioCorreoLogin=(String) request.getAttribute("usuarioCorreoLogin");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,8 +64,66 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Macondo&display=swap" rel="stylesheet">
     <script src="js/html5shiv.min.js"> </script>
+    <style>
+        .bloqueuwu{
+            position: relative;
+            top: -30px;
+            height: 900px;background-color: rgba(255, 234, 245, 0.8);box-shadow: 5px 20px 50px #000;padding: 0 !important;
+            overflow: hidden;
+        }
+        .titulo{
+            top: -2050px;
+            position: relative;
+            font-size: 150%;justify-content: center;display: flex;font-style: inherit;font-weight: bold;
+            align-items: end;
+            padding: 0 50px 0 50px;
+            transition: .5s ease-in-out;
+            background-color: rgba(120, 52, 87, 1);
+            border-radius: 50% / 20%;
+            height: 400px;
+        }
+        .labelAux{
+            font-size: 250%;justify-content: center;display: flex;font-style: inherit;font-weight: bold;
+            transition: .5s ease-in-out;
+        }
+        .loginAux{
+            background-color: rgba(120, 52, 87, 1);
+            padding: 5px 50px 0 50px;
+            transition: .5s ease-in-out;
+            margin-top: 60px;
+            border-radius: 50% / 10%;
+            height: 800px;
+        }
+        .signInAux{
+            padding: 0 50px 0 50px;
+            transition: .5s ease-in-out;
+        }
+        .signInAux .form-fix .labelAux{
+            margin-top: 15px;
+        }
+        #chk:checked ~ .titulo{
+            transform: translateY(175px);
+            transform: scale(2);
+        }
+        #chk:checked ~ .bloqueuwu{
+            transform: scale(.5);
+        }
+        #chk:checked ~ .signInAux{
+            transform: translateY(185px);
+        }
+        #chk:checked ~  .signInAux .form-fix .labelAux{
+            transform: scale(.75);
+        }
+        #chk:checked ~ .loginAux .form-fix .labelAux{
+            padding: 15px 50px 0 50px;
+            transform: scale(1.25);
+        }
+        #chk:checked ~ .loginAux{
+            transform: translateY(-550px);
+        }
+    </style>
 </head>
-<body>
+<body style="overflow: hidden">
 <!-- Page preloader-->
 <div class="page-loader">
     <div class="page-loader-body">
@@ -132,73 +237,70 @@
 
             <div class="container container-bigger form-request-wrap form-request-wrap-modern">
                 <div class="row row-fix justify-content-sm-center justify-content-lg-end">
-                    <div class="col-lg-6 col-xxl-5">
-                        <div class="form-request form-request-modern bg-gray-lighter novi-background">
-                            <h4 style="font-family: 'Macondo', cursive !important; font-size: 200% !important" class="text-center"><b>RISE & REVOLT</b></h4>
+                    <div class="col-lg-6 col-xxl-5" style="align-items: center">
+                        <div class="form-request form-request-modern bloqueuwu">
                             <!-- RD Mailform-->
-                            <form class="rd-mailform form-fix">
-                                <div class="row row-20 row-fix">
-                                    <div class="col-sm-12">
-                                        <label class="form-label-outside">From</label>
-                                        <div class="form-wrap form-wrap-inline">
-                                            <select class="form-input select-filter" data-placeholder="All" data-minimum-results-for-search="Infinity" name="city">
-                                                <option value="1">New York</option>
-                                                <option value="2">Lisbon</option>
-                                                <option value="3">Stockholm</option>
-                                            </select>
+                            <input type="checkbox" id="chk" style="display: none" aria-hidden="true">
+                            <div class="signInAux">
+                                <form method="post" id="signIn" action="?action=signIn" class="rd-mailform form-fix">
+                                    <label for="chk" class="labelAux" aria-hidden="true">Registrarse</label>
+                                    <div class="row row-20 row-fix">
+                                        <div class="col-sm-12">
+                                            <label for="nombreSignIn" class="form-label-outside" style="cursor: auto !important;">Nombre <a style="color: red"><%if(nombreVacio!=null){%>Ingrese un nombre<%} else if (nombreError!=null){%>La primera letra no puede ser un número<%}else if(nombreLargo!=null){%>El nombre es muy largo<%}%></a></label>
+                                            <input class="form-input" name="nombre" type="text" <%if(nombre!=null){%>value="<%=nombre%>"<%}%> id="nombreSignIn">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="usuarioSignIn" class="form-label-outside" style="cursor: auto !important;">Usuario <a style="color: red"><%if(usuarioVacio!=null){%>Ingrese un usuario<%} else if (usuarioError!=null){%>La primera letra no puede ser un número<%}else if(usuarioLargo!=null){%>El usuario es muy largo<%}else if(usuarioRepetido!=null){%>El usuario ya se encuentra registrado<%}%></a></label>
+                                            <input class="form-input" name="usuario" type="text" <%if(usuario!=null){%>value="<%=usuario%>"<%}%> id="usuarioSignIn">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="edadSignIn" class="form-label-outside" style="cursor: auto !important;">Edad <a style="color: red"><%if(edadVacia!=null){%>Ingrese una edad<%} else if (edadError!=null){%>La edad tiene que ser un número<%}%></a></label>
+                                            <input class="form-input" name="edad" type="number" <%if(edad!=null){%>value="<%=edad%>"<%}%> id="edadSignIn">
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label for="correoSignIn" class="form-label-outside" style="cursor: auto !important;">Correo electrónico <a style="color: red"><%if(correoVacio!=null){%>Ingrese un correo<%} else if (correoLargo!=null){%>El correo es muy largo<%}else if(correoListaNegra!=null){%>El correo se encuentra en lista negra<%}else if(correoRepetido!=null){%>El correo ya se encuentra registrado<%}%></a></label>
+                                            <input class="form-input" name="correo" type="email" <%if(correo!=null){%>value="<%=correo%>"<%}%> id="correoSignIn">
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label for="contrasenaSignIn" class="form-label-outside" style="cursor: auto !important;">Contraseña <a style="color: red"><%if(contrasenaVacia!=null){%>Ingrese una contraseña<%} else if (contrasenasDiferentes!=null){%>Las contraseñas no coinciden<%}else if(contrasenaLarga!=null){%>La contraseña es muy larga<%}%></a></label>
+                                            <input class="form-input" name="contrasena" type="password" id="contrasenaSignIn">
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label for="repetirContrasenaSignIn" class="form-label-outside" style="cursor: auto !important;">Repetir contraseña <a style="color: red"><%if(repetirContrasenaVacia!=null){%>Ingrese una contraseña<%}else if(contrasenaIncorrecta!=null){%>La contraseña debe contener por lo menos una mayúscula, un número y un carácter especial<%}%></a></label>
+                                            <input class="form-input" name="repetirContrasena" type="password" id="repetirContrasenaSignIn">
                                         </div>
                                     </div>
-                                    <div class="col-sm-12">
-                                        <label class="form-label-outside">To</label>
-                                        <div class="form-wrap form-wrap-inline">
-                                            <select class="form-input select-filter" data-placeholder="All" data-minimum-results-for-search="Infinity" name="city">
-                                                <option value="1">Chicago</option>
-                                                <option value="2">Madrid</option>
-                                                <option value="3">Paris</option>
-                                            </select>
+                                    <div class="form-wrap form-button">
+                                        <button onclick="enviarForm('signIn')" class="button button-block button-secondary" type="submit">Registrarse</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="loginAux">
+                                <form method="post" id="logIn" action="?action=logIn" class="rd-mailform form-fix">
+                                    <label class="labelAux" for="chk" aria-hidden="true" style="color: white">Iniciar sesión</label>
+                                    <div class="row row-20 row-fix">
+                                        <div class="col-sm-12">
+                                            <label for="usuarioLogin" style="color: white;cursor: auto !important;" class="form-label-outside">Usuario/Correo electrónico <a style="color: red"><%if(usuarioCorreoLoginVacio!=null){%>Ingrese un correo/usuario<%}%></a></label>
+                                            <input class="form-input" name="login" type="text" <%if(usuarioCorreoLogin!=null){%>value="<%=usuarioCorreoLogin%>"<%}%> id="usuarioLogin">
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label for="contrasenaLogin" style="color: white;cursor: auto !important;" class="form-label-outside">Contraseña <a style="color: red"><%if(contrasenaLoginVacia!=null){%>Ingrese una contraseña<%}%></a></label>
+                                            <input class="form-input" name="password" type="text" id="contrasenaLogin">
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 col-lg-6">
-                                        <label class="form-label-outside">Depart Date</label>
-                                        <div class="form-wrap form-wrap-validation">
-                                            <!-- Select -->
-                                            <input class="form-input" id="dateForm" name="date" type="text" data-time-picker="date">
-                                            <label class="form-label" for="dateForm">Choose the date</label>
-                                            <!--select.form-input.select-filter(data-placeholder="All", data-minimum-results-for-search="Infinity",  name='city')-->
-                                            <!--  option(value="1") Choose the date-->
-                                            <!--  option(value="2") Primary-->
-                                            <!--  option(value="3") Middle-->
-                                        </div>
+                                    <div class="form-wrap form-button">
+                                        <button onclick="enviarForm('logIn')" class="button button-block button-secondary" style="background: rgba(255, 234, 245, 0.8);color: rgba(120, 52, 87, 1)" type="submit">Iniciar sesión</button>
                                     </div>
-                                    <div class="col-sm-12 col-lg-6">
-                                        <label class="form-label-outside">Duration</label>
-                                        <div class="form-wrap form-wrap-validation">
-                                            <!-- Select 2-->
-                                            <select class="form-input select-filter" data-placeholder="All" data-minimum-results-for-search="Infinity" name="city">
-                                                <option value="1">Any length</option>
-                                                <option value="2">2 days</option>
-                                                <option value="3">3 days</option>
-                                                <option value="4">4 days</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <label class="form-label-outside">Adults</label>
-                                        <div class="form-wrap form-wrap-modern">
-                                            <input class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <label class="form-label-outside">Children</label>
-                                        <div class="form-wrap form-wrap-modern">
-                                            <input class="form-input input-append" id="form-element-stepper-1" type="number" min="0" max="300" value="0">
-                                        </div>
-                                    </div>
+                                    <%if(loginError!=null){%>
+                                    <a style="color: red">Las credenciales no son correctas</a>
+                                    <%}%>
+                                </form>
+                            </div>
+                            <div class="titulo">
+                                <div>
+                                    <label style="font-family: 'Macondo', cursive !important; color: white">RISE &<br> REVOLT</label>
                                 </div>
-                                <div class="form-wrap form-button">
-                                    <button class="button button-block button-secondary" type="submit">search flight</button>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -207,6 +309,12 @@
     </section>
 </div>
 <!-- Javascript-->
+<script>
+    function enviarForm(idForm){
+        let form=document.getElementById(idForm);
+        form.submit();
+    }
+</script>
 <script src="inicioSesion/js/core.min.js"></script>
 <script src="inicioSesion/js/script.js"></script>
 </body>

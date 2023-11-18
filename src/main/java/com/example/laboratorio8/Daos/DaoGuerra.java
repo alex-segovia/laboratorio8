@@ -1,13 +1,13 @@
 package com.example.laboratorio8.Daos;
 
-import com.example.laboratorio8.Beans.Guerra;
-import com.example.laboratorio8.Beans.Jugador;
+import com.example.laboratorio8.Beans.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class DaoGuerra extends DaoBase{
     public ArrayList<Guerra> historialGuerrasPorID(int idJugador){
@@ -67,6 +67,102 @@ public class DaoGuerra extends DaoBase{
             throw new RuntimeException(e);
         }
     }
+    public float getSumaFuerzaPorProfesion(int idJugador,String profesion){
+        String sql = "select sum(h.fuerza) from habitante h inner join jugador j on j.idJugador=h.idJugador where j.idJugador=? and h.profesion=? group by h.profesion";
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setInt(1, idJugador);
+            pstmt.setString(2,profesion);
+            try(ResultSet rs = pstmt.executeQuery()){
+                if (rs.next()){
+                    return rs.getFloat(1);
+                }else {
+                    return 0;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    public void updateSoldadosVictoria(int idJugador){
+        String sql = "update habitante set moral=moral*2,fuerza=fuerza*1.2 where idJugador=? and profesion ='Soldado'";
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setInt(1,idJugador);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void updateGranjerosVictoriaAtaque(int idJugador){
+        String sql="update habitante set produccionAlimento=produccionAlimento*1.2 where idJugador=? and profesion='Granjero'";
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setInt(1,idJugador);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    public void updateHabitantesVictoriaDefensa(int idJugador){
+        String sql="update habitante set produccionAlimento=produccionAlimento*1.4 where idJugador=? and profesion='Granjero';update habitante set produccionMoral=produccionMoral*1.4 where idJugador=? and (profesion='Constructor' or profesion='Soldado')";
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setInt(1,idJugador);
+            pstmt.setInt(2,idJugador);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateHabitanteSobrevivientePerderMoralDerrota(int idHabitante){
+        String sql="update habitante set moral=moral*0.5 where idHabitante=?";
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setInt(1,idHabitante);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateTransferirHabitante(int idHabitante,int idJugadorDestino){
+        String sql="update habitante set idJugador=? where idHabitante=?";
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setInt(1,idJugadorDestino);
+            pstmt.setInt(2,idHabitante);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateHabitantesPerderMoralDerrotaDefensa(int idJugador){
+        String sql="update habitante set moral=moral*(0.2+rand()*0.6) where idJugador=?";
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setInt(1,idJugador);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void aumentarProduccionVictoriaAtaque(int idJugadorAtacante,int idJugadorDefensor){
+        String sql="update jugador set alimentoTotal=alimentoTotal+(select sum(h.produccionAlimento) from jugador j inner join habitante h on j.idJugador=h.idJugador where j.idJugador=?) where idJugador=?;update habitante set moral=moral+(select sum(h.produccionMoral) from jugador j inner join habitante h on j.idJugador=h.idJugador where idJugador=?) where idJugador=?";
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setInt(1,idJugadorDefensor);
+            pstmt.setInt(2,idJugadorAtacante);
+            pstmt.setInt(3,idJugadorDefensor);
+            pstmt.setInt(4,idJugadorAtacante);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

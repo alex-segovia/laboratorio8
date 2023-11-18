@@ -175,4 +175,92 @@ public class DaoJugador extends DaoBase{
 
     }
 
+    public void signIn(String nombre,String usuario,int edad,String correo,String contrasena){
+        String sql = "insert into jugador (nombre,edad,correo,usuario,contrasena,horasDelDia,diasDesdeCreacion,alimentoTotal) values (?,?,?,?,sha2(?,256),0,0,0)";
+        try (Connection conn = this.getConection();PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1,nombre);
+            pstmt.setInt(2,edad);
+            pstmt.setString(3,correo);
+            pstmt.setString(4,usuario);
+            pstmt.setString(5,contrasena);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Jugador logIn(String texto,String contrasena){
+        String sql = "select idJugador,nombre,edad,correo,usuario,horasDelDia,diasDesdeCreacion,estado,alimentoTotal from jugador where (correo=? or usuario=?) and contrasena=sha2(?,256)";
+        try (Connection conn = this.getConection();PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1,texto);
+            pstmt.setString(2,texto);
+            pstmt.setString(3,contrasena);
+            try(ResultSet rs=pstmt.executeQuery()){
+                if(rs.next()){
+                    Jugador j=new Jugador();
+                    j.setIdJugador(rs.getInt(1));
+                    j.setNombreJugador(rs.getString(2));
+                    j.setEdad(rs.getInt(3));
+                    j.setCorreo(rs.getString(4));
+                    j.setUsuario(rs.getString(5));
+                    j.setHorasDia(rs.getInt(6));
+                    j.setDiasDesdeCreacion(rs.getInt(7));
+                    j.setEstado(rs.getString(8));
+                    j.setAlimentoTotal(rs.getFloat(9));
+                    return j;
+                }else{
+                    return null;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public boolean verifyUsuarioRepetido(String usuario){
+        String sql = "select idJugador from jugador where usuario=?";
+        try (Connection conn = this.getConection();PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1,usuario);
+            try(ResultSet rs=pstmt.executeQuery()){
+                if(rs.next()){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean verifyCorreoRepetido(String correo){
+        String sql = "select idJugador from jugador where correo=?";
+        try (Connection conn = this.getConection();PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1,correo);
+            try(ResultSet rs=pstmt.executeQuery()){
+                if(rs.next()){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean estaEnPaz(int idJugador){
+        String sql = "select idJugador from jugador where estado='En paz'";
+        try (Connection conn = this.getConection();PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1,idJugador);
+            try(ResultSet rs=pstmt.executeQuery()){
+                if(rs.next()){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
