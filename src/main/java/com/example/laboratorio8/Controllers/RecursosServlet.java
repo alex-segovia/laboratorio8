@@ -86,7 +86,7 @@ public class RecursosServlet extends HttpServlet {
                     // Nothing
 
             }
-
+            httpSession.setAttribute("jugadorActual", daoJugador.getJugadorPorId(jugador.getIdJugador()));
             response.sendRedirect("RecursosServlet");
         }else{
             response.sendRedirect("");

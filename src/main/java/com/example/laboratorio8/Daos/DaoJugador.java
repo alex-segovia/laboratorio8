@@ -106,7 +106,7 @@ public class DaoJugador extends DaoBase{
         // Alimentar a la población: MUERTES POR HAMBRE
 
         ArrayList<Habitante> listaHabitantes = daoHabitante.getListaHabitantes(jugador.getIdJugador(),2);
-        float alimentoProducido = daoHabitante.getAlimentoProduccionVsConsumo(jugador.getIdJugador()).get(1);
+        float alimentoProducido = daoHabitante.getAlimentoProduccionVsConsumo(jugador.getIdJugador()).get(0);
 
         if(!listaHabitantes.isEmpty()){
             ArrayList<Integer> indicesHabitantes = new ArrayList<>();
@@ -136,6 +136,7 @@ public class DaoJugador extends DaoBase{
                     if((alimentoAcumulado-alimentoAConsumir)>0.0f){
                         alimentoAcumulado = alimentoAcumulado - alimentoAConsumir;
                     }else{
+                        alimentoAcumulado = 0.0f;
                         moralPerdida = habitante.getMoral() - (alimentoAConsumir - alimentoAcumulado);
                         if(moralPerdida <= 0.0f){
                             daoHabitante.updateMoral(habitante.getIdHabitante(), 0.0f);

@@ -95,13 +95,22 @@ public class DaoHabitante extends DaoBase{
             throw new RuntimeException(e);
         }
 
-        String sql2 = "UPDATE habitante SET estaMuerto = true, motivoMuerte = ?, diaMuerte = ? WHERE (idJugador = ? AND moral = 0)";
+        String sql2 = "UPDATE habitante SET estaMuerto = true, motivoMuerte = ?, diaMuerte = ? WHERE (idJugador = ? AND moral <= 0 AND estaMuerto=false AND estaExiliado=false)";
         try (Connection conn2 = this.getConection();
             PreparedStatement pstmt2 = conn2.prepareStatement(sql2);) {
             pstmt2.setString(1,motivoMuerte);
             pstmt2.setInt(2,diaMuerte);
             pstmt2.setInt(3,idJugador);
             pstmt2.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql3 = "UPDATE habitante SET moral = 0 WHERE (idJugador = ? AND moral <= 0)";
+        try (Connection conn3 = this.getConection();
+             PreparedStatement pstmt3 = conn3.prepareStatement(sql3);) {
+            pstmt3.setInt(1,idJugador);
+            pstmt3.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -196,8 +205,6 @@ public class DaoHabitante extends DaoBase{
                 break;
             default:
                 habitante = new Habitante();
-                System.out.println("Me olvidé polimorfismo xd");
-
         }
 
         habitante.setIdHabitante(rs.getInt(1));
