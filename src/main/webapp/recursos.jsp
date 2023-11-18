@@ -7,7 +7,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%Jugador jugadorActual = (Jugador) request.getSession().getAttribute("jugadorActual");%>
+<%//Jugador jugadorActual = (Jugador) request.getSession().getAttribute("jugadorActual");%>
+<%Jugador jugadorActual = (Jugador) request.getAttribute("jugadorActual");%>
 <%ArrayList<Float> alimentoProduccionVsConsumo = (ArrayList<Float>) request.getAttribute("alimentoProduccionVsConsumo");%>
 <%ArrayList<Habitante> habitantesMoralBaja = (ArrayList<Habitante>) request.getAttribute("habitantesMoralBaja");%>
 <%ArrayList<Habitante> habitantesMuertos = (ArrayList<Habitante>) request.getAttribute("habitantesMuertos");%>
@@ -182,6 +183,12 @@
                     );
                 </script>
 
+                <% if(habitantesMoralBaja.size()==0){%>
+
+                <div class ="row mt-5 text-center">
+                    <p style="color: #ec6090 !important; font-size: 24px">Tu civilización está vacía, ve y recluta a tu próxima población! </p>
+                </div>
+                <%}else{%>
                 <div class="row mt-5">
                     <div class="col-lg-4">
                         <div class="featured-games header-text">
@@ -229,7 +236,7 @@
                                 if(almacen == 0.0f){
                                     visual = ", No produce";
                                 }else{
-                                    porcentaje = Math.round((consumo)/(almacen))*100;
+                                    porcentaje = Math.round((consumo*100)/(almacen));
                                     if(porcentaje>100){
                                         porcentaje = 100;
                                         visual = ">";
@@ -260,12 +267,21 @@
                             </div>
 
                             <div class="row text-center mb-2 mt-1">
-                                <h4 style="text-underline: white !important;"><u>Horas transcurridas</u></h4>
+                                <div class="col-6 text-center">
+                                    <h4 style="text-underline: white !important;"><u>Hora</u></h4>
+                                </div>
+                                <div class="col-6 text-center">
+                                    <h4 style="text-underline: white !important;"><u>Día actual</u></h4>
+                                </div>
                             </div>
 
                             <div class="row text-center mb-2">
-                                <div class="col-12 text-center">
-                                    <span style="font-size: 18px; color: white"><%=jugadorActual.getHorasDia()%>/span>
+                                <div class="col-6 text-center">
+                                    <%int dia = jugadorActual.getHorasDia();%>
+                                    <h4 style="text-underline: white !important;"><%=dia%></h4>
+                                </div>
+                                <div class="col-6 text-center">
+                                    <h4 style="text-underline: white !important;"><%=jugadorActual.getDiasDesdeCreacion()%></h4>
                                 </div>
                             </div>
 
@@ -358,7 +374,7 @@
                                 <td style="font-size: 14px; color: white"><%if(habitante.getGenero().equals("M")){%>Masculino<%}else if(habitante.getGenero().equals("F")){%>Femenino<%}else{%>Otro<%}%></td>
                                 <td style="font-size: 14px; color: white"><%=habitante.getAlimentacionDiaria()%></td>
                                 <td style="font-size: 14px; color: white"><%=habitante.getMoral()%></td>
-                                <td style="font-size: 14px; color: white"><%=habitante.getDiasVivo()%>/td>
+                                <td style="font-size: 14px; color: white"><%=habitante.getDiasVivo()%></td>
                                 <td style="font-size: 14px; color: white">
                                     <% if(habitante instanceof Constructor){%>Constructor<%}
                                     else if (habitante instanceof Granjero){%>Granjero<%}
@@ -368,13 +384,13 @@
                                 <td style="font-size: 14px; color: white">
                                     <% if(habitante instanceof Constructor){%><%=((Constructor) habitante).getFuerza()%><%}
                                     else if (habitante instanceof Soldado){%><%=((Soldado) habitante).getFuerza()%><%}
-                                    else {%>--No tiene--<%}%>
+                                    else {%>No tiene<%}%>
                                     </td>
                                 <td style="font-size: 14px; color: white">
                                     <% if(habitante instanceof Constructor){%><%=((Constructor) habitante).getProduccionMoral()%> (M)<%}
                                     else if (habitante instanceof Soldado){%><%=((Soldado) habitante).getProduccionMoral()%> (M)<%}
                                     else if (habitante instanceof Granjero){%><%=((Granjero) habitante).getProduccionAlimento()%> (A)<%}
-                                    else{%>--No produce--<%}%>
+                                    else{%>No produce<%}%>
                                 </td>
                                 <td style="font-size: 14px; color: white"><%=habitante.getMotivoMuerte()%></td>
                             </tr>
@@ -386,6 +402,7 @@
                 </div>
                 <!-- ***** Gaming Library End ***** -->
             </div>
+        <%}%>
         </div>
     </div>
 </div>

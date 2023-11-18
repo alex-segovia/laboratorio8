@@ -32,7 +32,7 @@ public class DaoHabitante extends DaoBase{
 
     public ArrayList<Habitante> getHabitantesMoralBaja(int idJugador){
 
-        String sql = "SELECT * FROM habitante WHERE idJugador = ? ORDER BY moral LIMIT 5;";
+        String sql = "SELECT * FROM habitante WHERE idJugador = ? AND estaMuerto = false AND estaExiliado = false ORDER BY moral LIMIT 5;";
         ArrayList<Habitante> habitantesMoralBaja = new ArrayList<>();
 
         try (Connection conn = this.getConection();
@@ -50,13 +50,14 @@ public class DaoHabitante extends DaoBase{
         return habitantesMoralBaja;
     }
 
-    public ArrayList<Habitante> getHabitantesMuertos(int idJugador){
-        String sql = "SELECT * FROM habitante WHERE idJugador = ? AND (estaMuerto = true)";
+    public ArrayList<Habitante> getHabitantesMuertos(int idJugador, int diaJugador){
+        String sql = "SELECT * FROM habitante WHERE idJugador = ? AND estaMuerto = true AND diaMuerte = ?";
         ArrayList<Habitante> habitantesMuertos = new ArrayList<>();
 
         try (Connection conn = this.getConection();
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
             pstmt.setInt(1, idJugador);
+            pstmt.setInt(2,diaJugador-1);
 
             try(ResultSet rs = pstmt.executeQuery()){
                 while(rs.next()){
@@ -70,7 +71,7 @@ public class DaoHabitante extends DaoBase{
     }
 
     public void killHabitante(int idHabitante, String motivoMuerte, int diaMuerte){
-        String sql = "UPDATE habitante SET estaMuerto = true, motivoMuerte = ?, diaMuerte = ? AND idHabitante = ?;";
+        String sql = "UPDATE habitante SET estaMuerto = true, motivoMuerte = ?, diaMuerte = ? WHERE idHabitante = ?;";
 
         try (Connection conn = this.getConection();
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
@@ -84,29 +85,52 @@ public class DaoHabitante extends DaoBase{
     }
 
     public void updateMoralMultiple(int idJugador, String motivoMuerte, int diaMuerte){
-        String sql = "UPDATE habitante SET moral = moral-ceil(moral*0.5), estaMuerto = IF(moral-ceil(moral*0.5) = 0,?,estaMuerto), " +
-                "motivoMuerte = IF(moral-ceil(moral*0.5) = 0,?,motivoMuerte), diaMuerte = IF(moral-ceil(moral*0.5) = 0,?,diaMuerte) WHERE idJugador = ?";
+        String sql = "UPDATE habitante SET moral = moral-ceil(moral*0.5) WHERE idJugador = ?";
 
         try (Connection conn = this.getConection();
             PreparedStatement pstmt = conn.prepareStatement(sql);) {
-            pstmt.setBoolean(1,true);
-            pstmt.setString(2,motivoMuerte);
-            pstmt.setInt(3,diaMuerte);
-            pstmt.setInt(4,idJugador);
+            pstmt.setInt(1,idJugador);
             pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql2 = "UPDATE habitante SET estaMuerto = true, motivoMuerte = ?, diaMuerte = ? WHERE (idJugador = ? AND moral = 0)";
+        try (Connection conn2 = this.getConection();
+            PreparedStatement pstmt2 = conn2.prepareStatement(sql2);) {
+            pstmt2.setString(1,motivoMuerte);
+            pstmt2.setInt(2,diaMuerte);
+            pstmt2.setInt(3,idJugador);
+            pstmt2.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
     public void updateMoralMultiple (int idJugador){
-        String sql = "UPDATE habitante SET moral = moral + (SELECT sum(produccionMoral) FROM habitante WHERE idJugador = ? GROUP BY idJugador) WHERE idJugador = ?;";
+        String sql = "SELECT sum(produccionMoral) FROM habitante WHERE idJugador = ? GROUP BY idJugador;";
+        float sumaProduccion = 0.0f;
 
         try (Connection conn = this.getConection();
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
             pstmt.setInt(1,idJugador);
-            pstmt.setInt(2,idJugador);
-            pstmt.executeUpdate();
+            try(ResultSet rs = pstmt.executeQuery()){
+                if(rs.next()){
+                    sumaProduccion = rs.getFloat(1);
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql2 = "UPDATE habitante SET moral = moral + ? WHERE idJugador = ?";
+
+        try (Connection conn2 = this.getConection();
+             PreparedStatement pstmt2 = conn2.prepareStatement(sql2);) {
+            pstmt2.setFloat(1,sumaProduccion);
+            pstmt2.setInt(2,idJugador);
+            pstmt2.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -139,7 +163,7 @@ public class DaoHabitante extends DaoBase{
     }
 
     public void updateMoral (int idHabitante, Float moral){
-        String sql = "UPDATE habitante SET moral = ? idHabitante = ?";
+        String sql = "UPDATE habitante SET moral = ? WHERE idHabitante = ?";
 
         try (Connection conn = this.getConection();
             PreparedStatement pstmt = conn.prepareStatement(sql);) {

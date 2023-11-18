@@ -18,7 +18,6 @@ public class RecursosServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("holiwis");
-        request.getRequestDispatcher("recursos.jsp").forward(request,response);
 
         // Sesión
         HttpSession httpSession = request.getSession();
@@ -34,10 +33,11 @@ public class RecursosServlet extends HttpServlet {
         DaoJugador daoJugador = new DaoJugador();
         DaoHabitante daoHabitante = new DaoHabitante();
 
+        jugador = daoJugador.getJugadorPorId(1);
         // Datos
         ArrayList<Habitante> habitantesMoralBaja= daoHabitante.getHabitantesMoralBaja(jugador.getIdJugador());
         ArrayList<Float> alimentoProduccionVsConsumo = daoHabitante.getAlimentoProduccionVsConsumo(jugador.getIdJugador());
-        ArrayList<Habitante> habitantesMuertos = daoHabitante.getHabitantesMuertos(jugador.getIdJugador()); // revisarrr
+        ArrayList<Habitante> habitantesMuertos = daoHabitante.getHabitantesMuertos(jugador.getIdJugador(),jugador.getDiasDesdeCreacion());
 
         switch (action){
             case "listado":
@@ -51,9 +51,11 @@ public class RecursosServlet extends HttpServlet {
         }
 
         // Se actualiza la información del jugador por cada cambio de vista
+        Jugador xd = daoJugador.getJugadorPorId(1);
         httpSession.setAttribute("jugadorActual",daoJugador.getJugadorPorId(jugador.getIdJugador()));
+        request.setAttribute("jugadorActual",xd);
+        System.out.println("holiwis 2");
         view.forward(request,response);
-
 
     }
 
@@ -72,24 +74,23 @@ public class RecursosServlet extends HttpServlet {
         DaoJugador daoJugador = new DaoJugador();
         DaoHabitante daoHabitante = new DaoHabitante();
 
-
+        jugador = daoJugador.getJugadorPorId(1);
         switch (action){
 
             case "pasarHoras":
-                httpSession.setAttribute("validacionPasarHoras",false);
-                httpSession.setAttribute("validacionTerminarDia",true);
-                daoJugador.skipHoras(jugador.getIdJugador());
+                if(!(jugador.getHorasDia()==24)){
+                    daoJugador.skipHoras(jugador.getIdJugador());
+                }
+
                 break;
 
             case "terminarDia":
-                httpSession.setAttribute("validacionPasarHoras",true);
-                httpSession.setAttribute("validacionTerminarDia",false);
-
-                daoJugador.proceedEndDia(jugador, daoHabitante);
-
+                if(jugador.getHorasDia()==24){
+                    daoJugador.proceedEndDia(jugador, daoHabitante);
+                }
                 break;
 
-                default:
+            default:
                     // Nothing
 
         }
