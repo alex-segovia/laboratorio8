@@ -17,23 +17,6 @@ String usuarioVacio=(String) request.getSession().getAttribute("usuarioVacio");
     String contrasenasDiferentes=(String) request.getSession().getAttribute("contrasenasDiferentes");
     String contrasenaLarga=(String) request.getSession().getAttribute("contrasenaLarga");
     String contrasenaIncorrecta=(String) request.getSession().getAttribute("contrasenaIncorrecta");
-    request.getSession().removeAttribute("nombreVacio");
-    request.getSession().removeAttribute("nombreError");
-    request.getSession().removeAttribute("nombreLargo");
-    request.getSession().removeAttribute("usuarioVacio");
-    request.getSession().removeAttribute("usuarioError");
-    request.getSession().removeAttribute("usuarioLargo");
-    request.getSession().removeAttribute("correoVacio");
-    request.getSession().removeAttribute("correoLargo");
-    request.getSession().removeAttribute("correoListaNegra");
-    request.getSession().removeAttribute("correoRepetido");
-    request.getSession().removeAttribute("edadVacia");
-    request.getSession().removeAttribute("edadError");
-    request.getSession().removeAttribute("contrasenaVacia");
-    request.getSession().removeAttribute("repetirContrasenaVacia");
-    request.getSession().removeAttribute("contrasenasDiferentes");
-    request.getSession().removeAttribute("contrasenaLarga");
-    request.getSession().removeAttribute("contrasenaIncorrecta");
     String nombre=(String) request.getAttribute("nombre");
     String usuario=(String) request.getAttribute("usuario");
     String edad=(String) request.getAttribute("edad");
@@ -41,10 +24,48 @@ String usuarioVacio=(String) request.getSession().getAttribute("usuarioVacio");
     String usuarioCorreoLoginVacio=(String) request.getSession().getAttribute("usuarioCorreoLoginVacio");
     String contrasenaLoginVacia=(String) request.getSession().getAttribute("contrasenaLoginVacia");
     String loginError=(String) request.getSession().getAttribute("loginError");
-    request.getSession().removeAttribute("usuarioCorreoLoginVacio");
-    request.getSession().removeAttribute("contrasenaLoginVacia");
-    request.getSession().removeAttribute("loginError");
     String usuarioCorreoLogin=(String) request.getAttribute("usuarioCorreoLogin");
+    if(nombreVacio!=null){
+        request.getSession().removeAttribute("nombreVacio");
+    }if(nombreError!=null){
+        request.getSession().removeAttribute("nombreError");
+    }if(nombreLargo!=null){
+        request.getSession().removeAttribute("nombreLargo");
+    }if(usuarioVacio!=null){
+        request.getSession().removeAttribute("usuarioVacio");
+    }if(usuarioError!=null){
+        request.getSession().removeAttribute("usuarioError");
+    }if(usuarioLargo!=null){
+        request.getSession().removeAttribute("usuarioLargo");
+    }if(correoVacio!=null){
+        request.getSession().removeAttribute("correoVacio");
+    }if(correoLargo!=null){
+        request.getSession().removeAttribute("correoLargo");
+    }if(correoListaNegra!=null){
+        request.getSession().removeAttribute("correoListaNegra");
+    }if(correoRepetido!=null){
+        request.getSession().removeAttribute("correoRepetido");
+    }if(edadVacia!=null){
+        request.getSession().removeAttribute("edadVacia");
+    }if(edadError!=null){
+        request.getSession().removeAttribute("edadError");
+    }if(contrasenaVacia!=null){
+        request.getSession().removeAttribute("contrasenaVacia");
+    }if(repetirContrasenaVacia!=null){
+        request.getSession().removeAttribute("repetirContrasenaVacia");
+    }if(contrasenasDiferentes!=null){
+        request.getSession().removeAttribute("contrasenasDiferentes");
+    }if(contrasenaLarga!=null){
+        request.getSession().removeAttribute("contrasenaLarga");
+    }if(contrasenaIncorrecta!=null){
+        request.getSession().removeAttribute("contrasenaIncorrecta");
+    }if(usuarioCorreoLoginVacio!=null){
+        request.getSession().removeAttribute("usuarioCorreoLoginVacio");
+    }if(contrasenaLoginVacia!=null){
+        request.getSession().removeAttribute("contrasenaLoginVacia");
+    }if(loginError!=null){
+        request.getSession().removeAttribute("loginError");
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -262,16 +283,16 @@ String usuarioVacio=(String) request.getSession().getAttribute("usuarioVacio");
                                             <input class="form-input" name="correo" type="email" <%if(correo!=null){%>value="<%=correo%>"<%}%> id="correoSignIn">
                                         </div>
                                         <div class="col-sm-12">
-                                            <label for="contrasenaSignIn" class="form-label-outside" style="cursor: auto !important;">Contraseña <a style="color: red"><%if(contrasenaVacia!=null){%>Ingrese una contraseña<%} else if (contrasenasDiferentes!=null){%>Las contraseñas no coinciden<%}else if(contrasenaLarga!=null){%>La contraseña es muy larga<%}%></a></label>
+                                            <label for="contrasenaSignIn" class="form-label-outside" style="cursor: auto !important;">Contraseña <a style="color: red"><%if(contrasenaVacia!=null){%>Ingrese una contraseña<%} else if (contrasenasDiferentes!=null){%>Las contraseñas no coinciden<%}else if(contrasenaLarga!=null){%>La contraseña es muy larga<%}else if(contrasenaIncorrecta!=null){%>La contraseña debe contener por lo menos una mayúscula, un número y un carácter especial<%}%></a></label>
                                             <input class="form-input" name="contrasena" type="password" id="contrasenaSignIn">
                                         </div>
                                         <div class="col-sm-12">
-                                            <label for="repetirContrasenaSignIn" class="form-label-outside" style="cursor: auto !important;">Repetir contraseña <a style="color: red"><%if(repetirContrasenaVacia!=null){%>Ingrese una contraseña<%}else if(contrasenaIncorrecta!=null){%>La contraseña debe contener por lo menos una mayúscula, un número y un carácter especial<%}%></a></label>
+                                            <label for="repetirContrasenaSignIn" class="form-label-outside" style="cursor: auto !important;">Repetir contraseña <a style="color: red"><%if(repetirContrasenaVacia!=null){%>Ingrese una contraseña<%}%></a></label>
                                             <input class="form-input" name="repetirContrasena" type="password" id="repetirContrasenaSignIn">
                                         </div>
                                     </div>
                                     <div class="form-wrap form-button">
-                                        <button onclick="enviarForm('signIn')" class="button button-block button-secondary" type="submit">Registrarse</button>
+                                        <button onclick="enviarForm('signIn')" class="button button-block button-secondary">Registrarse</button>
                                     </div>
                                 </form>
                             </div>
@@ -285,11 +306,11 @@ String usuarioVacio=(String) request.getSession().getAttribute("usuarioVacio");
                                         </div>
                                         <div class="col-sm-12">
                                             <label for="contrasenaLogin" style="color: white;cursor: auto !important;" class="form-label-outside">Contraseña <a style="color: red"><%if(contrasenaLoginVacia!=null){%>Ingrese una contraseña<%}%></a></label>
-                                            <input class="form-input" name="password" type="text" id="contrasenaLogin">
+                                            <input class="form-input" name="password" type="password" id="contrasenaLogin">
                                         </div>
                                     </div>
                                     <div class="form-wrap form-button">
-                                        <button onclick="enviarForm('logIn')" class="button button-block button-secondary" style="background: rgba(255, 234, 245, 0.8);color: rgba(120, 52, 87, 1)" type="submit">Iniciar sesión</button>
+                                        <button onclick="enviarForm('logIn')" class="button button-block button-secondary" style="background: rgba(255, 234, 245, 0.8);color: rgba(120, 52, 87, 1)">Iniciar sesión</button>
                                     </div>
                                     <%if(loginError!=null){%>
                                     <a style="color: red">Las credenciales no son correctas</a>

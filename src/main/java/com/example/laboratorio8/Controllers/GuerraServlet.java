@@ -71,6 +71,7 @@ public class GuerraServlet extends HttpServlet {
                         }
                         dG.updateHabitantesPerderMoralDerrotaDefensa(jugadorDefensor.getIdJugador());
                         dG.aumentarProduccionVictoriaAtaque(jugadorActual.getIdJugador(), jugadorDefensor.getIdJugador());
+                        dG.nuevaGuerra(jugadorActual.getIdJugador(),jugadorDefensor.getIdJugador(),"Victoria atacante",jugadorActual.getDiasDesdeCreacion(),jugadorDefensor.getDiasDesdeCreacion());
                     } else if (fuerzaTotalAtacante < fuerzaTotalDefensor) {
                         dG.updateSoldadosVictoria(jugadorDefensor.getIdJugador());
                         dG.updateHabitantesVictoriaDefensa(jugadorDefensor.getIdJugador());
@@ -87,6 +88,9 @@ public class GuerraServlet extends HttpServlet {
                             }
                         }
                         dG.updateHabitantesPerderMoralDerrotaDefensa(jugadorActual.getIdJugador());
+                        dG.nuevaGuerra(jugadorActual.getIdJugador(),jugadorDefensor.getIdJugador(),"Victoria defensiva",jugadorActual.getDiasDesdeCreacion(),jugadorDefensor.getDiasDesdeCreacion());
+                    }else{
+                        dG.nuevaGuerra(jugadorActual.getIdJugador(),jugadorDefensor.getIdJugador(),"Empate",jugadorActual.getDiasDesdeCreacion(),jugadorDefensor.getDiasDesdeCreacion());
                     }
                     dJ.proceedEndDia(jugadorActual, dH);
                     dJ.proceedEndDia(jugadorDefensor, dH);

@@ -56,7 +56,7 @@ ArrayList<Jugador> listaJugadoresGuerra=(ArrayList<Jugador>) request.getAttribut
             z-index: 10001;
             width: 100%;
             max-width: 650px;
-            background-color: #fff;
+            background-color: rgba(255, 234, 245, 0.8)
         }
 
         /* Estilo para el botón de cerrar */
@@ -208,19 +208,19 @@ ArrayList<Jugador> listaJugadoresGuerra=(ArrayList<Jugador>) request.getAttribut
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="row text-center">
-                                                <%if(g.getResultado().equals("VictoriaAtacante")&&g.getJugadorAtacante().getIdJugador()==jugadorActual.getIdJugador()){%>
+                                                <%if(g.getResultado().equals("Victoria atacante")&&g.getJugadorAtacante().getIdJugador()==jugadorActual.getIdJugador()){%>
                                                 <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center" style="color: greenyellow">Victoria</span></div>
                                                 <%}else{%>
                                                 <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center" style="color: red">Derrota</span></div>
                                                 <%}if(g.getJugadorAtacante().getIdJugador()==jugadorActual.getIdJugador()){
-                                                if(g.getDiasRelativosJugadorAtacante()==1){%>
+                                                if(jugadorActual.getDiasDesdeCreacion()-g.getDiasRelativosJugadorAtacante()==1){%>
                                                 <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center">Hace 1 día</span></div>
                                                 <%}else{%>
-                                                <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center">Hace <%=g.getDiasRelativosJugadorAtacante()%> días</span></div>
-                                                <%}}else{if(g.getDiasRelativosJugadorDefensor()==1){%>
+                                                <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center">Hace <%=jugadorActual.getDiasDesdeCreacion()-g.getDiasRelativosJugadorAtacante()%> días</span></div>
+                                                <%}}else{if(jugadorActual.getDiasDesdeCreacion()-g.getDiasRelativosJugadorDefensor()==1){%>
                                                 <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center">Hace 1 día</span></div>
                                                 <%}else{%>
-                                                <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center">Hace <%=g.getDiasRelativosJugadorDefensor()%> días</span></div>
+                                                <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center">Hace <%=jugadorActual.getDiasDesdeCreacion()-g.getDiasRelativosJugadorDefensor()%> días</span></div>
                                                 <%}}%>
                                             </div>
                                         </div>
@@ -237,16 +237,22 @@ ArrayList<Jugador> listaJugadoresGuerra=(ArrayList<Jugador>) request.getAttribut
                             </div>
                             <%if(guerraHaceUnDia){%>
                             <ul>
-                                <%if(historialGuerras.get(0).getResultado().equals("VictoriaAtacante")&&historialGuerras.get(0).getJugadorAtacante().getIdJugador()==jugadorActual.getIdJugador()){%>
+                                <%if(historialGuerras.get(0).getResultado().equals("Victoria atacante")&&historialGuerras.get(0).getJugadorAtacante().getIdJugador()==jugadorActual.getIdJugador()){
+                                if(request.getSession().getAttribute("primeraVez")!=null){%>
+                                <audio src="sonidoVictoria.mp3" controls autoplay style="display: none"></audio>
+                                <%}%>
                                 <li>
-                                    <div class="row">
-                                        <img src="iconoVictoria.png" style="width: 100%" alt="">
+                                    <div class="row" style="display: flex;justify-content: center">
+                                        <img src="iconoVictoria.png" style="width:60%" alt="">
                                     </div>
                                     <div class="row text-center" style="margin-top: 20px">
                                         <h2 style="font-size: 300%;color: greenyellow">Victoria</h2>
                                     </div>
                                 </li>
-                                <%}else{%>
+                                <%}else{
+                                    if(request.getSession().getAttribute("primeraVez")!=null){%>
+                                <audio src="sonidoDerrota.mp3" controls autoplay style="display: none"></audio>
+                                <%request.getSession().removeAttribute("primeraVez");}%>
                                 <li>
                                     <div class="row">
                                         <img src="iconoDerrota.png" style="width: 100%" alt="">
@@ -259,9 +265,9 @@ ArrayList<Jugador> listaJugadoresGuerra=(ArrayList<Jugador>) request.getAttribut
                                 <li>
                                     <div>
                                         <%if(historialGuerras.get(0).getJugadorAtacante().getIdJugador()==jugadorActual.getIdJugador()){%>
-                                        <h6>Durante el último día se ha registrado una guerra con <span style="color: darkmagenta;"><%=historialGuerras.get(0).getJugadorDefensor().getUsuario()%></span></h6>
+                                        <h6>Durante el último día se ha registrado una guerra con <span style="color: darkmagenta;font-size:150%"><%=historialGuerras.get(0).getJugadorDefensor().getUsuario()%></span></h6>
                                         <%}else{%>
-                                        <h6>Durante el último día se ha registrado una guerra con <span style="color: darkmagenta;"><%=historialGuerras.get(0).getJugadorAtacante().getUsuario()%></span></h6>
+                                        <h6>Durante el último día se ha registrado una guerra con <span style="color: darkmagenta;font-size:150%"><%=historialGuerras.get(0).getJugadorAtacante().getUsuario()%></span></h6>
                                         <%}%>
                                     </div>
                                 </li>
@@ -307,11 +313,11 @@ ArrayList<Jugador> listaJugadoresGuerra=(ArrayList<Jugador>) request.getAttribut
                                                     <div class="item">
                                                         <div class="thumb" id="mostrarPopupListaJugadores<%=listaJugadoresGuerra.indexOf(j)%>">
                                                             <img src="fotoAlex.png" alt="" style="border-radius: 23px; height: 100%">
-                                                            <a><img src="iconoAtacar.png" alt=""></a>
+                                                            <a onclick="popupFunc()"><img src="iconoAtacar.png" alt=""></a>
                                                         </div>
                                                         <div class="down-content text-center">
                                                             <div class="row">
-                                                                <h4>AlexZ_19</h4>
+                                                                <h4><%=j.getUsuario()%></h4>
                                                             </div>
                                                             <div class="row">
                                                                 <%if(j.getDiasDesdeCreacion()==1){%>
@@ -356,7 +362,7 @@ ArrayList<Jugador> listaJugadoresGuerra=(ArrayList<Jugador>) request.getAttribut
         <div class="row">
             <div class="col-sm-1"></div>
             <div class="col-sm-10">
-                <h5 style="text-align: center;">¿Está seguro de declarar la guerra a <span style="color: red"><%=j.getUsuario()%></span> con <span style="color: #20c997">días</span> de jugar?</h5>
+                <h5 style="text-align: center;">¿Está seguro de declarar la guerra a <span style="color: red"><%=j.getUsuario()%></span> con <%if(j.getDiasDesdeCreacion()==1){%><span style="color: #20c997">1 día</span><%}else{%><span style="color: #20c997"><%=j.getDiasDesdeCreacion()%> días</span><%}%> de jugar?</h5>
             </div>
             <div class="col-sm-1"></div>
         </div>
@@ -364,14 +370,14 @@ ArrayList<Jugador> listaJugadoresGuerra=(ArrayList<Jugador>) request.getAttribut
     <br>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-6" style="margin-top: 5px;">
-                <form method="post" action="<%=request.getContextPath()%>/ListaDeActividadesServlet?action=finalizarActividad">
+            <div class="col-sm-6 d-flex justify-content-center" style="margin-top: 5px;">
+                <form method="post" action="<%=request.getContextPath()%>/GuerraServlet?action=declararGuerra">
                     <input type="hidden" name="idJugadorDefensor" value="<%=j.getIdJugador()%>">
-                    <button type="submit" class="button secondary">Sí</button>
+                    <button type="submit" class="button secondary" style="background-color:rgba(224, 12, 121, 0.8);color:white">Sí</button>
                 </form>
             </div>
-            <div class="col-sm-6" style="margin-top: 5px;">
-                <button class="button secondary" id="cerrarPopupListaJugadores<%=listaJugadoresGuerra.indexOf(j)%>aux" style="background-color: grey;">Cancelar</button>
+            <div class="col-sm-6 d-flex justify-content-center" style="margin-top: 5px;">
+                <button class="button secondary" id="cerrarPopupListaJugadores<%=listaJugadoresGuerra.indexOf(j)%>aux" style="background-color: rgba(120, 52, 87, 0.8);color: white">Cancelar</button>
             </div>
         </div>
     </div>
@@ -410,8 +416,10 @@ ArrayList<Jugador> listaJugadoresGuerra=(ArrayList<Jugador>) request.getAttribut
             }
         });
     }
+</script>
+<script>
     <%for(int i=0;i<listaJugadoresGuerra.size();i++){%>
-    popupFunc(popupListaJugadores<%=i%>,mostrarPopupListaJugadores<%=i%>,[cerrarPopupListaJugadores<%=i%>,cerrarPopupListaJugadores<%=i%>aux],overlayListaJugadores<%=i%>);
+    popupFunc('popupListaJugadores<%=i%>','mostrarPopupListaJugadores<%=i%>',['cerrarPopupListaJugadores<%=i%>','cerrarPopupListaJugadores<%=i%>aux'],'overlayListaJugadores<%=i%>');
     <%}%>
 </script>
 
