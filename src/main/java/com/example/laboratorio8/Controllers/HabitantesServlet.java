@@ -24,7 +24,7 @@ public class HabitantesServlet extends HttpServlet {
             request.getSession().setAttribute("jugadorActual", daoJugador.getJugadorPorId(jugadorActual.getIdJugador()));
             request.getRequestDispatcher("habitantes.jsp").forward(request, response);
         }else{
-            response.sendRedirect("");
+            response.sendRedirect(request.getContextPath());
         }
     }
 
@@ -64,7 +64,7 @@ public class HabitantesServlet extends HttpServlet {
                     break;
             }
         }else{
-            response.sendRedirect("");
+            response.sendRedirect(request.getContextPath());
         }
     }
 }

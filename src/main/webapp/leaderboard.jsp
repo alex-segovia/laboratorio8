@@ -93,8 +93,8 @@
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                    <a href="" class="logo d-flex justify-content-center">
-                        <img class="img-fluid" src="assets/images/textologo.png">
+                    <a class="logo d-flex align-items-center justify-content-center">
+                        <h4 style="color: #ff90b7">Bienvenido, <%=jugadorActual.getUsuario()%></h4>
                     </a>
                     <ul class="nav">
                         <li><a href="<%=request.getContextPath()%>/HabitantesServlet">Habitantes<img src="assets/images/logoHabitante.jpg" alt=""></a></li>
@@ -148,16 +148,16 @@
                                 <div class="row" >
                                     <div class="col">
                                         <div class="row">
-                                            <span style="width: 10% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 15px; color: #ec6090;">Ranking</span></span>
-                                            <span style="width: 10% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 15px; color: #ec6090;">Jugador</span></span>
-                                            <span style="width: 10% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 15px; color: #ec6090;">Días jugados</span></span>
-                                            <span style="width: 10% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 15px; color: #ec6090">Población</span></span>
-                                            <span style="width: 10% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 15px; color: #ec6090;">Moral total</span></span>
-                                            <span style="width: 10% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 15px; color: #ec6090;">Guerra ganadas</span></span>
-                                            <span style="width: 10% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 15px; color: #ec6090;">Victorias de guerras (%)</span></span>
-                                            <span style="width: 10% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 15px; color: #ec6090;">Fuerza total</span></span>
-                                            <span style="width: 10% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 15px; color: #ec6090;">Máx. días por persona</span></span>
-                                            <span style="width: 10% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 15px; color: #ec6090;">Prod. de alimento</span></span>
+                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;">Ranking</span></span>
+                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;">Jugador</span></span>
+                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;">Días jugados</span></span>
+                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;">Población total</span></span>
+                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;">Moral de la civilización</span></span>
+                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;">Guerras ganadas</span></span>
+                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;">Victorias de guerras (%)</span></span>
+                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;">Fuerza de la civilización</span></span>
+                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;">Máx. días de un habitante</span></span>
+                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;">Producción de alimento</span></span>
                                         </div>
                                     </div>
                                 </div>

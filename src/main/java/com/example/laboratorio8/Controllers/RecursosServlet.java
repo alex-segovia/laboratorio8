@@ -51,7 +51,7 @@ public class RecursosServlet extends HttpServlet {
             httpSession.setAttribute("jugadorActual", daoJugador.getJugadorPorId(jugador.getIdJugador()));
             view.forward(request, response);
         }else{
-            response.sendRedirect("");
+            response.sendRedirect(request.getContextPath());
         }
     }
 
@@ -89,7 +89,7 @@ public class RecursosServlet extends HttpServlet {
             httpSession.setAttribute("jugadorActual", daoJugador.getJugadorPorId(jugador.getIdJugador()));
             response.sendRedirect("RecursosServlet");
         }else{
-            response.sendRedirect("");
+            response.sendRedirect(request.getContextPath());
         }
     }
 }

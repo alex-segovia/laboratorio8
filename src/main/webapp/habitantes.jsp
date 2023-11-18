@@ -192,8 +192,8 @@
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                    <a href="" class="logo d-flex justify-content-center">
-                        <img class="img-fluid" src="assets/images/textologo.png">
+                    <a class="logo d-flex align-items-center justify-content-center">
+                        <h4 style="color: #ff90b7">Bienvenido, <%=jugadorActual.getUsuario()%></h4>
                     </a>
                     <ul class="nav">
                         <li><a href="<%=request.getContextPath()%>/HabitantesServlet" class="active">Habitantes<img src="assets/images/logoHabitante.jpg" alt=""></a></li>
@@ -227,7 +227,7 @@
                         <div class="col-lg-7">
                             <div class="header-text">
                                 <h4><em style="color: darkmagenta !important;">Gestión</em> de Habitantes</h4>
-                                <p style="color: white !important; font-size: 100%">Mantén un registro de todos los habitantes. Cada uno tiene distintas habilidades que aportarán al éxito de tu civilización.</p>
+                                <p style="color: white !important; font-size: 100%">Mantén un registro de todos los habitantes. Tu rol como líder se centra en el cuidado y crecimiento de tus habitantes. Desde asignar roles estratégicos hasta garantizar su bienestar y felicidad.</p>
                                 <div class="main-button mt-5">
                                     <a class="crearBoton" style="cursor: pointer; font-size: 17px !important; color: white !important" id="mostrarPopupCrear"><b>Crear habitante</b></a>
                                 </div>
