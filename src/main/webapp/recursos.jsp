@@ -187,7 +187,7 @@
                     );
                 </script>
 
-                <% if(habitantesMoralBaja.size()==0){%>
+                <% if(habitantesMoralBaja.isEmpty()){%>
 
                 <div class ="row mt-5 text-center">
                     <p style="color: #ec6090 !important; font-size: 24px">Tu civilización está vacía, ve y recluta a tu próxima población! </p>
@@ -332,9 +332,9 @@
                             </div>
 
                             <div class="row mt-3 text-center">
-                                <p style="color: #ec6090 !important; font-size: 24px">No te desanimes!</p>
+                                <p style="color: #ec6090 !important; font-size: 24px">No te desanimes, <%=jugadorActual.getUsuario()%>!</p>
                                 <hr>
-                                <p style="color: white !important; font-size: 100%">Aunque tus pobladores enfrenten desafíos y su moral pueda estar en baja, recuerda que la grandeza de una civilización se forja en los momentos más difíciles. Inspira a tus ciudadanos con tu visión y muestra el camino hacia un futuro próspero!</p>
+                                <p style="color: white !important; font-size: 100%">Aunque tus pobladores enfrenten desafíos y su moral pueda estar en baja, recuerda que la grandeza de una civilización se forja en los momentos más difíciles. Inspira a tus habitantes con tu visión y muestra el camino hacia un futuro próspero!</p>
 
                             </div>
                         </div>
