@@ -21,7 +21,6 @@
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
-    <%ArrayList<Habitante> listaHabitantes = (ArrayList<Habitante>) request.getSession().getAttribute("listaHabitantes");%>
     <%Jugador jugadorActual = (Jugador) request.getSession().getAttribute("jugadorActual");%>
 
     <!-- Additional CSS Files -->
@@ -32,6 +31,63 @@
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
 
     <style>
+        input::placeholder {
+            color: rgba(236, 96, 144, 1); /* Color sólido para el placeholder */
+            opacity: 1; /* Opacidad completa para el placeholder */
+        }
+        .boton1{
+            background-color: #ffa6c3 !important;
+        }
+        .boton1:hover{
+            background-color: darkmagenta !important;
+        }
+        input[type="text"] {
+            padding: 8px; /* Espaciado interno */
+            font-size: 17px; /* Tamaño de la fuente */
+            border: 0px solid #ff00ff; /* Borde de tono magenta */
+            border-radius: 5px; /* Bordes redondeados */
+            background-color: inherit; /* Fondo en tono magenta */
+            color: #ec6090; /* Texto en negro */
+            width: 35%; /* Ancho automático basado en el contenido */
+            box-sizing: border-box; /* Incluir padding y border en el ancho total */
+            float: right; /* Alineación a la derecha */
+            text-align: center;
+        }
+        input[type="text"]:focus {
+            outline: none; /* Eliminar el contorno de enfoque */
+            box-shadow: 0 0 5px rgba(255, 0, 255, 0.5); /* Sombra al estar enfocado en tono magenta con transparencia */
+        }
+        /* Estilo base para el ComboBox con fondo magenta y texto negro */
+        select {
+            padding: 8px; /* Espaciado interno */
+            font-size: 17px; /* Tamaño de la fuente */
+            border: 0px solid black; /* Borde de tono magenta */
+            border-radius: 5px; /* Bordes redondeados */
+            appearance: none; /* Elimina el estilo por defecto del sistema */
+            -webkit-appearance: none; /* Para navegadores basados en WebKit */
+            -moz-appearance: none; /* Para navegadores basados en Gecko (Firefox) */
+            background-color: inherit; /* Fondo en tono magenta */
+            color: #ec6090; /* Texto en negro */
+            background-image: url('data:image/svg+xml;utf8,<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* Icono de flecha personalizado en negro */
+            background-repeat: no-repeat; /* No repetir el icono */
+            background-size: 30px; /* Tamaño del icono */
+            width: 35%; /* Ancho automático basado en el contenido */
+            max-width: 100%; /* Ancho máximo */
+            box-sizing: border-box; /* Incluir padding y border en el ancho total */
+            float: right; /* Alineación a la derecha */
+            text-align: center;
+        }
+
+        /* Estilos al pasar el mouse sobre el ComboBox */
+        select:hover {
+            border-color: #cc00cc; /* Cambio de color del borde al pasar el mouse */
+        }
+
+        /* Estilos cuando el ComboBox está enfocado */
+        select:focus {
+            outline: none; /* Eliminar el contorno de enfoque */
+            box-shadow: 0 0 5px rgba(255, 0, 255, 0.5); /* Sombra al estar enfocado en tono magenta con transparencia */
+        }
         .overlay {
             display: none;
             position: fixed;
@@ -49,11 +105,12 @@
             position: fixed;
             top: 50%;
             left: 50%;
-            border-radius: 12px;
+            border-radius: 20px;
             transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
+            background-color: rgba(225, 29, 109,0.8);
+            padding-top: 20px;
             z-index: 10001;
+            box-shadow: 5px 20px 50px #000
         }
         /* Estilo para el botón de cerrar */
         .cerrarPopup {
@@ -183,65 +240,55 @@
                         <div class="item">
                             <ul>
                                 <div class="row" >
-                                    <div class="col-6">
+                                    <div class="col">
                                         <div class="row">
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">ID</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Nombre</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Género</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Consumo</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Moral</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Tiempo</span></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="row" style="width: 99%">
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Profesión</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Fuerza</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Producción</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Estado</span></div>
+                                            <span style="width: 4% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090;">ID</span></span>
+                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090;">Nombre</span></span>
+                                            <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090;">Género</span></span>
+                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Consumo</span></span>
+                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090;">Moral</span></span>
+                                            <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090;">Tiempo</span></span>
+                                            <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090;">Profesión</span></span>
+                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090;">Fuerza</span></span>
+                                            <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090;">Producción</span></span>
+                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090;">Estado</span></span>
+                                            <span style="width: 10% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090;"></span></span>
+                                            <span style="width: 10% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090;"></span></span>
                                         </div>
                                     </div>
                                 </div>
                             </ul>
                         </div>
+                        <%if(request.getAttribute("listaHabitantes")!=null){ArrayList<Habitante> listaHabitantes = (ArrayList<Habitante>) request.getAttribute("listaHabitantes");%>
                         <%for(Habitante habitante : listaHabitantes){%>
                         <div class="item <%if(listaHabitantes.size()-1 == listaHabitantes.indexOf(habitante)){%>last-item<%}%>">
                             <ul>
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col">
                                         <div class="row">
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white"><%if(habitante.getIdHabitante()<10){%>0<%=habitante.getIdHabitante()%><%}%></span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white"><%=habitante.getNombre()%></span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white"><%if(habitante.getGenero().equals("M")){%>Masculino<%}else if(habitante.getGenero().equals("F")){%>Femenino<%}else{%>Otro<%}%></span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white"><%=habitante.getAlimentacionDiaria()%></span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white"><%=habitante.getMoral()%></span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white"><%=habitante.getDiasVivo()%> día<%if(habitante.getDiasVivo()>1){%>s<%}%></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="row" style="width: 99%">
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white"><%if(habitante instanceof Granjero){%>Granjero<%}else if(habitante instanceof Constructor){%>Constructor<%}else if(habitante instanceof Soldado){%>Soldado<%}else{%>Ninguna<%}%></span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white"><%if(habitante instanceof Constructor){%><%=((Constructor) habitante).getFuerza()%><%}else if(habitante instanceof Soldado){%><%=((Soldado) habitante).getFuerza()%><%}else{%>--No tiene--<%}%></span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white"><%if(habitante instanceof Granjero){%><%=((Granjero) habitante).getProduccionAlimento()%> (A)<%}else if(habitante instanceof Constructor){%><%=((Constructor) habitante).getProduccionMoral()%><%}else if(habitante instanceof Soldado){%><%=((Soldado) habitante).getProduccionMoral()%><%}else{%>--No produce--<%}%></span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white"><%if(habitante.isEstaMuerto()){%>Muerto<%}else{%>Vivo<%}%></span></div>
-                                            <div class="col-2"><button class="btn btn-dark" style="font-size: 10px; color: white"><a>Editar</a></button></div>
-                                            <div class="col-2"><button class="btn btn-dark" style="font-size: 10px; color: white" <%if(habitante.isEstaExiliado()){%>disabled<%}%>><a>Exhiliar</a></button></div>
+                                            <span style="width: 4% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%if(habitante.getIdHabitante()<10){%>0<%=habitante.getIdHabitante()%><%}%></span></span>
+                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=habitante.getNombre()%></span></span>
+                                            <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%if(habitante.getGenero().equals("M")){%>Masculino<%}else if(habitante.getGenero().equals("F")){%>Femenino<%}else{%>Otro<%}%></span></span>
+                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=habitante.getAlimentacionDiaria()%></span></span>
+                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=habitante.getMoral()%></span></span>
+                                            <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=habitante.getDiasVivo()%> día<%if(habitante.getDiasVivo()>1){%>s<%}%></span></span>
+                                            <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%if(habitante instanceof Granjero){%>Granjero<%}else if(habitante instanceof Constructor){%>Constructor<%}else if(habitante instanceof Soldado){%>Soldado<%}else{%>Ninguna<%}%></span></span>
+                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%if(habitante instanceof Constructor){%><%=((Constructor) habitante).getFuerza()%><%}else if(habitante instanceof Soldado){%><%=((Soldado) habitante).getFuerza()%><%}else{%>No tiene<%}%></span></span>
+                                            <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 13px; color: white;"><%if(habitante instanceof Granjero){%><%=((Granjero) habitante).getProduccionAlimento()%> (A)<%}else if(habitante instanceof Constructor){%><%=((Constructor) habitante).getProduccionMoral()%> (M)<%}else if(habitante instanceof Soldado){%><%=((Soldado) habitante).getProduccionMoral()%> (M)<%}else{%>No produce<%}%></span></span>
+                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%if(habitante.isEstaMuerto()){%>Muerto<%}else{%>Vivo<%}%></span></span>
+                                            <span style="width: 10% !important"><button class="btn btn-dark" style="font-size: 10px; color: white" id="mostrarPopupEditar<%=listaHabitantes.indexOf(habitante)%>"><a>Editar</a></button></span>
+                                            <span style="width: 10% !important">
+                                                <form style="margin: 0; padding: 0" method="post" action="<%=request.getContextPath()%>/HabitantesServlet?action=exhiliar">
+                                                    <input style="" type="hidden" name="habitanteExhiliado" value="<%=habitante.getIdHabitante()%>">
+                                                    <button type="submit" class="btn btn-dark" style="font-size: 10px; color: white" <%if(habitante.isEstaExiliado()){%>disabled<%}%>><a>Exhiliar</a></button>
+                                                </form>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                             </ul>
                         </div>
-                        <%}%>
-                        <div class="item last-item">
-                            <ul>
-                                <li><h4>CS-GO</h4><span>Sandbox</span></li>
-                                <li><h4>Date Added</h4><span>21/04/2036</span></li>
-                                <li><h4>Hours Played</h4><span>892 H 14 Mins</span></li>
-                                <li><h4>Currently</h4><span>Downloaded</span></li>
-                                <li><div class="main-border-button border-active"><a href="#">Editar</a></div></li>
-                                <li><div class="main-border-button border-active"><a href="#">Exiliar</a></div></li>
-                            </ul>
-                        </div>
+                        <%}}%>
                     </div>
                 </div>
                 <!-- ***** Gaming Library End ***** -->
@@ -252,50 +299,117 @@
 
 <!-- Popup para crear habitante -->
 <div class="overlay" id="overlayCrear"></div>
-<div class="popup contenedorCrear" style="width: 700px;" id="popupCrear">
+<div class="popup contenedorCrear" style="width: 500px;" id="popupCrear">
+    <h5 style="text-align: center; color: #ffa6c3; font-size: 25px"><b>Crear habitante</b></h5>
     <svg class="cerrarPopup" id="cerrarPopupCrear" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M11.4142 10L16.7071 4.70711C17.0976 4.31658 17.0976 3.68342 16.7071 3.29289C16.3166 2.90237 15.6834 2.90237 15.2929 3.29289L10 8.58579L4.70711 3.29289C4.31658 2.90237 3.68342 2.90237 3.29289 3.29289C2.90237 3.68342 2.90237 4.31658 3.29289 4.70711L8.58579 10L3.29289 15.2929C2.90237 15.6834 2.90237 16.3166 3.29289 16.7071C3.68342 17.0976 4.31658 17.0976 4.70711 16.7071L10 11.4142L15.2929 16.7071C15.6834 17.0976 16.3166 17.0976 16.7071 16.7071C17.0976 16.3166 17.0976 15.6834 16.7071 15.2929L11.4142 10Z" fill="black"/>
     </svg>
-
-        <div class="container-fluid">
-            <div class="row"><div class="col"><h5 style="text-align: center;">Crear habitante</h5></div></div>
-            <div class="row">
-                <div class="col-sm-7">
-                    <br>
-                    <label for="nombreHabitante" style="margin-top: 25px;"><b>Nombre del habitante:</b></label>
-                    <input type="text" name="nombreHabitante" id="nombreHabitante" placeholder="Nombre" required>
-
-                    <label for="generoHabitante" style="margin-top: 25px;"><b>Género del habitante:</b></label>
-                    <select style="height: 55px;padding-left: 20px" name="generoHabitante" id="generoHabitante" required>
-                        <option value="M">Masculino</option>
-                        <option value="F">Femenino</option>
-                        <option value="O">Otro</option>
-                    </select>
-
-                    <label for="profesionHabitante" style="margin-top: 25px;"><b>Profesión del habitante:</b></label>
-                    <select style="height: 55px;padding-left: 20px" name="profesionHabitante" id="profesionHabitante" required>
-                        <option value="Ninguna">--Ninguna--</option>
-                        <option value="Granjero">Granjero</option>
-                        <option value="Constructor">Constructor</option>
-                        <option value="Soldado">Soldado</option>
-                    </select>
-
+    <div style="padding-bottom: 20px; background-color: rgba(118, 0, 134,0.8); margin-top:20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;">
+        <form method="post" action="<%=request.getContextPath()%>/HabitantesServlet?action=crear">
+            <div class="container-fluid">
+                <br>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        <br>
+                        <div class="row">
+                            <div class="col">
+                                <label for="nombreHabitante" style="margin-top: 25px;color: #ffa6c3"><b>Nombre del habitante:</b></label>
+                                <input style="margin-top: 15px" type="text" name="nombreHabitante" id="nombreHabitante" placeholder="Nombre" required>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col">
+                                <label for="generoHabitante" style="margin-top: 25px;color: #ffa6c3"><b>Género del habitante:</b></label>
+                                <select style="height: 55px;margin-top: 10px;" name="generoHabitante" id="generoHabitante" required>
+                                    <option style="background-color: rgba(118, 0, 134,0.8); color: whitesmoke" value="M">Masculino</option>
+                                    <option style="background-color: rgba(118, 0, 134,0.8); color: whitesmoke" value="F">Femenino</option>
+                                    <option style="background-color: rgba(118, 0, 134,0.8); color: whitesmoke" value="O">Otro</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col">
+                                <label for="profesionHabitante" style="margin-top: 25px;color: #ffa6c3"><b>Profesión del habitante:</b></label>
+                                <select style="height: 55px;margin-top: 10px;" name="profesionHabitante" id="profesionHabitante" required>
+                                    <option style="background-color: rgba(118, 0, 134,0.8); color: whitesmoke" value="Ninguna">Ninguna</option>
+                                    <option style="background-color: rgba(118, 0, 134,0.8); color: whitesmoke" value="Granjero">Granjero</option>
+                                    <option style="background-color: rgba(118, 0, 134,0.8); color: whitesmoke" value="Constructor">Constructor</option>
+                                    <option style="background-color: rgba(118, 0, 134,0.8); color: whitesmoke" value="Soldado">Soldado</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
                 </div>
             </div>
-        </div>
-        <br>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-6" style="margin-top: 5px;">
-                    <button type="submit" style="opacity: 0.5" class="button secondary" id="cerrarPopupCrear1" disabled>Crear</button>
-                </div>
-                <div class="col-sm-6" style="margin-top: 5px;">
-                    <button class="button secondary" id="cerrarPopupCrear2" style="background-color: grey;">Cancelar</button>
+            <br>
+            <div class="container-fluid">
+                <div class="row text-center">
+                    <div class="col-sm-6" style="margin-top: 5px;">
+                        <div class="main-button">
+                            <button style="background: none; color: inherit; border:0; opacity: 0.5" type="submit" id="cerrarPopupCrear1" disabled><a class="boton1" style="color: black !important"><b>Crear</b></a></button>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" style="margin-top: 5px;">
+                        <div class="main-button">
+                            <button style="background: none; color: inherit; border:0" id="cerrarPopupCrear2"><a class="boton1" style="color: black !important"><b>Cancelar</b></a></button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
+    </div>
 </div>
 
+<%if(request.getAttribute("listaHabitantes")!=null){ArrayList<Habitante> listaHabitantes = (ArrayList<Habitante>) request.getAttribute("listaHabitantes");
+for(int i=0;i<listaHabitantes.size();i++){%>
+<div class="overlay" id="overlayEditar<%=i%>"></div>
+<div class="popup contenedorCrear" style="width: 500px;" id="popupEditar<%=i%>">
+    <h5 style="text-align: center; color: #ffa6c3; font-size: 25px"><b>Editar habitante</b></h5>
+    <svg class="cerrarPopup" id="cerrarPopupEditar<%=i%>" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M11.4142 10L16.7071 4.70711C17.0976 4.31658 17.0976 3.68342 16.7071 3.29289C16.3166 2.90237 15.6834 2.90237 15.2929 3.29289L10 8.58579L4.70711 3.29289C4.31658 2.90237 3.68342 2.90237 3.29289 3.29289C2.90237 3.68342 2.90237 4.31658 3.29289 4.70711L8.58579 10L3.29289 15.2929C2.90237 15.6834 2.90237 16.3166 3.29289 16.7071C3.68342 17.0976 4.31658 17.0976 4.70711 16.7071L10 11.4142L15.2929 16.7071C15.6834 17.0976 16.3166 17.0976 16.7071 16.7071C17.0976 16.3166 17.0976 15.6834 16.7071 15.2929L11.4142 10Z" fill="black"/>
+    </svg>
+    <div style="padding-bottom: 20px; background-color: rgba(118, 0, 134,0.8); margin-top:20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;">
+        <form method="post" action="<%=request.getContextPath()%>/HabitantesServlet?action=editar">
+            <div class="container-fluid">
+                <br>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        <br>
+                        <div class="row">
+                            <div class="col">
+                                <label for="nombreHabitanteEditar<%=i%>" style="margin-top: 25px;color: #ffa6c3"><b>Nombre del habitante:</b></label>
+                                <input style="margin-top: 15px" type="text" name="nombreHabitante" id="nombreHabitanteEditar<%=i%>" placeholder="Nombre" value="<%=listaHabitantes.get(i).getNombre()%>" required>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </div>
+            <br>
+            <div class="container-fluid">
+                <div class="row text-center">
+                    <div class="col-sm-6" style="margin-top: 5px;">
+                        <div class="main-button">
+                            <button style="background: none; color: inherit; border:0; opacity: 0.5" type="submit" id="cerrarPopupEditar1<%=i%>" disabled><a class="boton1" style="color: black !important"><b>Editar</b></a></button>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" style="margin-top: 5px;">
+                        <div class="main-button">
+                            <button style="background: none; color: inherit; border:0" id="cerrarPopupEditar2<%=i%>"><a class="boton1" style="color: black !important"><b>Cancelar</b></a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<%}}%>
 <footer>
     <div class="container">
         <div class="row">
@@ -340,8 +454,39 @@
             }
         });
     }
+    function verificarInput(miInput,submitBoton){
+        let input = document.getElementById(miInput);
+        let boton = document.getElementById(submitBoton);
+        function validacion(){
+            if (input.value.trim() === '') {
+                boton.disabled = true; // Si el input está vacío, desactiva el botón
+                boton.style.opacity=0.5;
+            } else {
+                boton.disabled = false; // Si el input no está vacío, activa el
+                boton.style.opacity=1;
+            }
+        }
+        input.addEventListener('input', validacion);
+        validacion();
+    }
+
+    //Crear
     popupFunc('popupCrear','mostrarPopupCrear',['cerrarPopupCrear','cerrarPopupCrear1','cerrarPopupCrear2'],'overlayCrear');
+
+    //Validar en creación
+    verificarInput('nombreHabitante','cerrarPopupCrear1')
+
+    <%if(request.getAttribute("listaHabitantes")!=null){ArrayList<Habitante> listaHabitantes = (ArrayList<Habitante>) request.getAttribute("listaHabitantes");%>
+    <%if(listaHabitantes!=null){
+    for(int i=0;i<listaHabitantes.size();i++){%>
+    //Editar
+    popupFunc('popupEditar<%=i%>','mostrarPopupEditar<%=i%>',['cerrarPopupEditar<%=i%>','cerrarPopupEditar1<%=i%>','cerrarPopupEditar2<%=i%>'],'overlayEditar<%=i%>');
+
+    //Validar en edición
+    verificarInput('nombreHabitanteEditar<%=i%>','cerrarPopupEditar1<%=i%>')
+    <%}}}%>
 </script>
+
 
 <!-- Scripts -->
 <!-- Bootstrap core JavaScript -->

@@ -2,11 +2,9 @@ package com.example.laboratorio8.Daos;
 
 import com.example.laboratorio8.Beans.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class DaoHabitante extends DaoBase{
@@ -204,9 +202,8 @@ public class DaoHabitante extends DaoBase{
             pstmt.setInt(1,idJugador);
             try(ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
-                    Habitante habitante = new Habitante();
                     if (rs.getString(4).equals("Granjero")) {
-                        Granjero granjero = (Granjero) habitante;
+                        Granjero granjero = new Granjero();
                         granjero.setIdHabitante(rs.getInt(1));
                         granjero.setNombre(rs.getString(3));
                         granjero.setGenero(rs.getString(5));
@@ -218,7 +215,7 @@ public class DaoHabitante extends DaoBase{
                         granjero.setProduccionAlimento(rs.getFloat(13));
                         listaHabitantes.add(granjero);
                     } else if (rs.getString(4).equals("Constructor")) {
-                        Constructor constructor = (Constructor) habitante;
+                        Constructor constructor = new Constructor();
                         constructor.setIdHabitante(rs.getInt(1));
                         constructor.setNombre(rs.getString(3));
                         constructor.setGenero(rs.getString(5));
@@ -231,7 +228,7 @@ public class DaoHabitante extends DaoBase{
                         constructor.setProduccionMoral(rs.getFloat(14));
                         listaHabitantes.add(constructor);
                     } else if (rs.getString(4).equals("Soldado")) {
-                        Soldado soldado = (Soldado) habitante;
+                        Soldado soldado = new Soldado();
                         soldado.setIdHabitante(rs.getInt(1));
                         soldado.setNombre(rs.getString(3));
                         soldado.setGenero(rs.getString(5));
@@ -244,6 +241,7 @@ public class DaoHabitante extends DaoBase{
                         soldado.setProduccionMoral(rs.getFloat(14));
                         listaHabitantes.add(soldado);
                     } else {
+                        Habitante habitante = new Habitante();
                         habitante.setIdHabitante(rs.getInt(1));
                         habitante.setNombre(rs.getString(3));
                         habitante.setGenero(rs.getString(5));
@@ -256,10 +254,10 @@ public class DaoHabitante extends DaoBase{
                     }
                 }
             }
-            return listaHabitantes;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return listaHabitantes;
     }
 
     public float getSumaFuerzaPorProfesion(int idJugador,String profesion){
@@ -274,6 +272,115 @@ public class DaoHabitante extends DaoBase{
                 }else {
                     return 0;
                 }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void crearHabitante(String nombre, String genero, String profesion, int idJugador){
+        String sql = "insert into habitante(idjugador, nombre, profesion, genero, horasDelDia, diasVivo, estaExiliado, estaMuerto, alimentacionDiaria, moral, fuerza, produccionAlimento, produccionMoral, motivoMuerte, diaMuerte) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        try(Connection conn = getConection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+            Habitante habitante = new Habitante();
+            Jugador jugador = new Jugador();
+            jugador.setIdJugador(idJugador);
+            if(profesion.equals("Ninguna")){
+                habitante.setJugador(jugador);
+                habitante.setNombre(nombre);
+                habitante.setGenero(genero);
+                habitante.setAlimentacionDiaria((float)(new Random().nextInt(21)+30));
+                habitante.setMoral((float)(new Random().nextInt(31)+20));
+                pstmt.setInt(1,habitante.getJugador().getIdJugador());
+                pstmt.setString(2,habitante.getNombre());
+                pstmt.setString(3,profesion);
+                pstmt.setString(4,habitante.getGenero());
+                pstmt.setInt(5,habitante.getHorasDia());
+                pstmt.setInt(6,habitante.getDiasVivo());
+                pstmt.setBoolean(7,habitante.isEstaExiliado());
+                pstmt.setBoolean(8,habitante.isEstaMuerto());
+                pstmt.setFloat(9,habitante.getAlimentacionDiaria());
+                pstmt.setFloat(10,habitante.getMoral());
+                pstmt.setNull(11, Types.FLOAT);
+                pstmt.setNull(12, Types.FLOAT);
+                pstmt.setNull(13, Types.FLOAT);
+                pstmt.setNull(14, Types.VARCHAR);
+                pstmt.setNull(15,Types.INTEGER);
+                pstmt.executeUpdate();
+            }else if(profesion.equals("Granjero")){
+                Granjero granjero = new Granjero();
+                granjero.setJugador(jugador);
+                granjero.setNombre(nombre);
+                granjero.setGenero(genero);
+                granjero.setAlimentacionDiaria((float)(new Random().nextInt(21)+10));
+                granjero.setMoral((float)(new Random().nextInt(31)+10));
+                granjero.setProduccionAlimento((float)(new Random().nextInt(101)+100));
+                pstmt.setInt(1,granjero.getJugador().getIdJugador());
+                pstmt.setString(2,granjero.getNombre());
+                pstmt.setString(3,profesion);
+                pstmt.setString(4,granjero.getGenero());
+                pstmt.setInt(5,granjero.getHorasDia());
+                pstmt.setInt(6,granjero.getDiasVivo());
+                pstmt.setBoolean(7,granjero.isEstaExiliado());
+                pstmt.setBoolean(8,granjero.isEstaMuerto());
+                pstmt.setFloat(9,granjero.getAlimentacionDiaria());
+                pstmt.setFloat(10,granjero.getMoral());
+                pstmt.setNull(11, Types.FLOAT);
+                pstmt.setFloat(12, granjero.getProduccionAlimento());
+                pstmt.setNull(13, Types.FLOAT);
+                pstmt.setNull(14, Types.VARCHAR);
+                pstmt.setNull(15,Types.INTEGER);
+                pstmt.executeUpdate();
+            }else if(profesion.equals("Soldado")){
+                Soldado soldado = new Soldado();
+                soldado.setJugador(jugador);
+                soldado.setNombre(nombre);
+                soldado.setGenero(genero);
+                soldado.setAlimentacionDiaria((float)(new Random().nextInt(31)+70));
+                soldado.setMoral((float)(new Random().nextInt(21)+30));
+                soldado.setFuerza((float)(new Random().nextInt(36)+15));
+                soldado.setProduccionMoral((float)(new Random().nextInt(21)));
+                pstmt.setInt(1,soldado.getJugador().getIdJugador());
+                pstmt.setString(2,soldado.getNombre());
+                pstmt.setString(3,profesion);
+                pstmt.setString(4,soldado.getGenero());
+                pstmt.setInt(5,soldado.getHorasDia());
+                pstmt.setInt(6,soldado.getDiasVivo());
+                pstmt.setBoolean(7,soldado.isEstaExiliado());
+                pstmt.setBoolean(8,soldado.isEstaMuerto());
+                pstmt.setFloat(9,soldado.getAlimentacionDiaria());
+                pstmt.setFloat(10,soldado.getMoral());
+                pstmt.setFloat(11,soldado.getFuerza());
+                pstmt.setNull(12, Types.FLOAT);
+                pstmt.setFloat(13, soldado.getProduccionMoral());
+                pstmt.setNull(14, Types.VARCHAR);
+                pstmt.setNull(15,Types.INTEGER);
+                pstmt.executeUpdate();
+            }else if(profesion.equals("Constructor")){
+                Constructor constructor = new Constructor();
+                constructor.setJugador(jugador);
+                constructor.setNombre(nombre);
+                constructor.setGenero(genero);
+                constructor.setAlimentacionDiaria((float)(new Random().nextInt(21)+50));
+                constructor.setMoral((float)(new Random().nextInt(31)+10));
+                constructor.setFuerza((float)(new Random().nextInt(19)+2));
+                constructor.setProduccionMoral((float)(new Random().nextInt(11)+10));
+                pstmt.setInt(1,constructor.getJugador().getIdJugador());
+                pstmt.setString(2,constructor.getNombre());
+                pstmt.setString(3,profesion);
+                pstmt.setString(4,constructor.getGenero());
+                pstmt.setInt(5,constructor.getHorasDia());
+                pstmt.setInt(6,constructor.getDiasVivo());
+                pstmt.setBoolean(7,constructor.isEstaExiliado());
+                pstmt.setBoolean(8,constructor.isEstaMuerto());
+                pstmt.setFloat(9,constructor.getAlimentacionDiaria());
+                pstmt.setFloat(10,constructor.getMoral());
+                pstmt.setFloat(11,constructor.getFuerza());
+                pstmt.setNull(12, Types.FLOAT);
+                pstmt.setFloat(13, constructor.getProduccionMoral());
+                pstmt.setNull(14, Types.VARCHAR);
+                pstmt.setNull(15,Types.INTEGER);
+                pstmt.executeUpdate();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
