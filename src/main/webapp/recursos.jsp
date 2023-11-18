@@ -237,69 +237,79 @@
                         </div>
                     </div>
                     <div class="col-lg-8">
-                        <div class="top-downloaded">
+                        <div class="top-downloaded maincra">
                             <div class="heading-section">
                                 <h4><em>Ciudadanos</em> con moral baja</h4>
                             </div>
 
-                            <div class="item">
-                                <ul>
-                                    <div class="row" >
-                                        <div class="col-6">
-                                            <div class="row">
-                                                <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">ID</span></div>
-                                                <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Nombre</span></div>
-                                                <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Género</span></div>
-                                                <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Consumo</span></div>
-                                                <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Moral</span></div>
-                                                <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Tiempo</span></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="row" style="width: 99%">
-                                                <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Profesión</span></div>
-                                                <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Fuerza</span></div>
-                                                <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Producción</span></div>
-                                                <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Estado</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </ul>
-                            </div>
-                            <div class="item">
-                                <ul>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="row">
-                                                <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">01</span></div>
-                                                <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">Ricardo</span></div>
-                                                <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">Masculino</span></div>
-                                                <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">100</span></div>
-                                                <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">50</span></div>
-                                                <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">10 días</span></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="row" style="width: 99%">
-                                                <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">Soldado</span></div>
-                                                <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">50</span></div>
-                                                <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">200 (A)</span></div>
-                                                <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">Vivo</span></div>
-                                                <div class="col-2"><button class="btn btn-dark" style="font-size: 10px; color: white"><a>Editar</a></button></div>
-                                                <div class="col-2"><button class="btn btn-dark" style="font-size: 10px; color: white"><a>Exhiliar</a></button></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </ul>
+                            <div class="row mt-3 justify-content-center">
+
+                                <table class="table justify-content-center table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" style="font-size: 17px; color: #ec6090">ID</th>
+                                        <th scope="col" style="font-size: 17px; color: #ec6090">Nombre</th>
+                                        <th scope="col" style="font-size: 17px; color: #ec6090">Consumo</th>
+                                        <th scope="col" style="font-size: 17px; color: #ec6090">Moral</th>
+                                        <th scope="col" style="font-size: 17px; color: #ec6090">Tiempo</th>
+                                        <th scope="col" style="font-size: 17px; color: #ec6090">Profesión</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="my-4">
+                                        <td  style="font-size: 14px; color: white">1</td>
+                                        <td  style="font-size: 14px; color: white">Mark</td>
+                                        <td  style="font-size: 14px; color: white">Otto</td>
+                                        <td  style="font-size: 14px; color: white">@mdo</td>
+                                        <td  style="font-size: 14px; color: white">Mark</td>
+                                        <td  style="font-size: 14px; color: white">Otto</td>
+                                    </tr>
+                                    <tr class="my-4">
+                                        <td style="font-size: 14px; color: white">1</td>
+                                        <td style="font-size: 14px; color: white">Mark</td>
+                                        <td style="font-size: 14px; color: white">Otto</td>
+                                        <td style="font-size: 14px; color: white">@mdo</td>
+                                        <td style="font-size: 14px; color: white">Mark</td>
+                                        <td style="font-size: 14px; color: white">Otto</td>
+                                    </tr>
+                                    <tr>
+                                        <th style="font-size: 14px; color: white">1</th>
+                                        <td style="font-size: 14px; color: white">Mark</td>
+                                        <td style="font-size: 14px; color: white">Otto</td>
+                                        <td style="font-size: 14px; color: white">@mdo</td>
+                                        <td style="font-size: 14px; color: white">Mark</td>
+                                        <td style="font-size: 14px; color: white">Otto</td>
+                                    </tr>
+                                    <tr>
+                                        <th style="font-size: 14px; color: white">1</th>
+                                        <td style="font-size: 14px; color: white">Mark</td>
+                                        <td style="font-size: 14px; color: white">Otto</td>
+                                        <td style="font-size: 14px; color: white">@mdo</td>
+                                        <td style="font-size: 14px; color: white">Mark</td>
+                                        <td style="font-size: 14px; color: white">Otto</td>
+                                    </tr>
+                                    <tr>
+                                        <th style="font-size: 14px; color: white">1</th>
+                                        <td style="font-size: 14px; color: white">Mark</td>
+                                        <td style="font-size: 14px; color: white">Otto</td>
+                                        <td style="font-size: 14px; color: white">@mdo</td>
+                                        <td style="font-size: 14px; color: white">Mark</td>
+                                        <td style="font-size: 14px; color: white">Otto</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
 
+                            <div class="row mt-3 text-center">
+                                <p style="color: #ec6090 !important; font-size: 24px">No te desanimes!</p>
+                                <hr>
+                                <p style="color: white !important; font-size: 100%">Aunque tus pobladores enfrenten desafíos y su moral pueda estar en baja, recuerda que la grandeza de una civilización se forja en los momentos más difíciles. Inspira a tus ciudadanos con tu visión y muestra el camino hacia un futuro próspero!</p>
 
+                            </div>
                         </div>
                     </div>
 
-                            <div class="text-button">
-                                <a href="profile.html">View All Games</a>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -308,69 +318,89 @@
                 <div class="gaming-library">
                     <div class="col-lg-12">
                         <div class="heading-section">
-                            <h4>Mis habitantes:</h4>
-                        </div>
-                        <div class="item">
-                            <ul>
-                                <div class="row" >
-                                    <div class="col-6">
-                                        <div class="row">
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">ID</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Nombre</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Género</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Consumo</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Moral</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Tiempo</span></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="row" style="width: 99%">
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Profesión</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Fuerza</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Producción</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Estado</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </ul>
-                        </div>
-                        <div class="item">
-                            <ul>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="row">
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">01</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">Ricardo</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">Masculino</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">100</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">50</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">10 días</span></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="row" style="width: 99%">
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">Soldado</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">50</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">200 (A)</span></div>
-                                            <div class="col-2 d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white">Vivo</span></div>
-                                            <div class="col-2"><button class="btn btn-dark" style="font-size: 10px; color: white"><a>Editar</a></button></div>
-                                            <div class="col-2"><button class="btn btn-dark" style="font-size: 10px; color: white"><a>Exhiliar</a></button></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </ul>
+                            <h4><em>Habitantes</em> fallecidos el día anterior:</h4>
                         </div>
 
-                        <div class="item last-item">
-                            <ul>
-                                <li><h4>CS-GO</h4><span>Sandbox</span></li>
-                                <li><h4>Date Added</h4><span>21/04/2036</span></li>
-                                <li><h4>Hours Played</h4><span>892 H 14 Mins</span></li>
-                                <li><h4>Currently</h4><span>Downloaded</span></li>
-                                <li><div class="main-border-button border-active"><a href="#">Editar</a></div></li>
-                                <li><div class="main-border-button border-active"><a href="#">Exiliar</a></div></li>
-                            </ul>
-                        </div>
+                    <div class="col-lg-12 d-flex justify-content-center">
+                        <table class="table table-responsive table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col" style="font-size: 17px; color: #ec6090">#</th>
+                                <th scope="col" style="font-size: 17px; color: #ec6090">ID</th>
+                                <th scope="col" style="font-size: 17px; color: #ec6090">Nombre</th>
+                                <th scope="col" style="font-size: 17px; color: #ec6090">Género</th>
+                                <th scope="col" style="font-size: 17px; color: #ec6090">Consumo</th>
+                                <th scope="col" style="font-size: 17px; color: #ec6090">Moral</th>
+                                <th scope="col" style="font-size: 17px; color: #ec6090">Tiempo</th>
+                                <th scope="col" style="font-size: 17px; color: #ec6090">Profesión</th>
+                                <th scope="col" style="font-size: 17px; color: #ec6090">Fuerza</th>
+                                <th scope="col" style="font-size: 17px; color: #ec6090">Producción</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th style="font-size: 14px; color: white">1</th>
+                                <td style="font-size: 14px; color: white">Mark</td>
+                                <td style="font-size: 14px; color: white">Otto</td>
+                                <td style="font-size: 14px; color: white">@mdo</td>
+                                <td style="font-size: 14px; color: white">Mark</td>
+                                <td style="font-size: 14px; color: white">Otto</td>
+                                <td style="font-size: 14px; color: white">@mdo</td>
+                                <td style="font-size: 14px; color: white">Mark</td>
+                                <td style="font-size: 14px; color: white">Otto</td>
+                                <td style="font-size: 14px; color: white">@mdo</td>
+                            </tr>
+                            <tr>
+                                <th style="font-size: 14px; color: white">1</th>
+                                <td style="font-size: 14px; color: white">Mark</td>
+                                <td style="font-size: 14px; color: white">Otto</td>
+                                <td style="font-size: 14px; color: white">@mdo</td>
+                                <td style="font-size: 14px; color: white">Mark</td>
+                                <td style="font-size: 14px; color: white">Otto</td>
+                                <td style="font-size: 14px; color: white">@mdo</td>
+                                <td style="font-size: 14px; color: white">Mark</td>
+                                <td style="font-size: 14px; color: white">Otto</td>
+                                <td style="font-size: 14px; color: white">@mdo</td>
+                            </tr>
+                            <tr>
+                                <th style="font-size: 14px; color: white">1</th>
+                                <td style="font-size: 14px; color: white">Mark</td>
+                                <td style="font-size: 14px; color: white">Otto</td>
+                                <td style="font-size: 14px; color: white">@mdo</td>
+                                <td style="font-size: 14px; color: white">Mark</td>
+                                <td style="font-size: 14px; color: white">Otto</td>
+                                <td style="font-size: 14px; color: white">@mdo</td>
+                                <td style="font-size: 14px; color: white">Mark</td>
+                                <td style="font-size: 14px; color: white">Otto</td>
+                                <td style="font-size: 14px; color: white">@mdo</td>
+                            </tr>
+                            <tr>
+                                <th style="font-size: 14px; color: white">1</th>
+                                <td style="font-size: 14px; color: white">Mark</td>
+                                <td style="font-size: 14px; color: white">Otto</td>
+                                <td style="font-size: 14px; color: white">@mdo</td>
+                                <td style="font-size: 14px; color: white">Mark</td>
+                                <td style="font-size: 14px; color: white">Otto</td>
+                                <td style="font-size: 14px; color: white">@mdo</td>
+                                <td style="font-size: 14px; color: white">Mark</td>
+                                <td style="font-size: 14px; color: white">Otto</td>
+                                <td style="font-size: 14px; color: white">@mdo</td>
+                            </tr>
+                            <tr>
+                                <th style="font-size: 14px; color: white">1</th>
+                                <td style="font-size: 14px; color: white">Mark</td>
+                                <td style="font-size: 14px; color: white">Otto</td>
+                                <td style="font-size: 14px; color: white">@mdo</td>
+                                <td style="font-size: 14px; color: white">Mark</td>
+                                <td style="font-size: 14px; color: white">Otto</td>
+                                <td style="font-size: 14px; color: white">@mdo</td>
+                                <td style="font-size: 14px; color: white">Mark</td>
+                                <td style="font-size: 14px; color: white">Otto</td>
+                                <td style="font-size: 14px; color: white">@mdo</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
                     </div>
                 </div>
                 <!-- ***** Gaming Library End ***** -->
