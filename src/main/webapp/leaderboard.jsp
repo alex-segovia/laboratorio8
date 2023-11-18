@@ -140,7 +140,7 @@
                     <div class="col-lg-12">
                         <div class="heading-section">
                             <div class ="row text-center">
-                                <span style="color: #ec6090; font-size: 34px; text-decoration: none; margin-bottom: 30px; text-shadow: 10px 15px 7px black"><b>Tabla de Clasificación</b></span>
+                                <span style="color: #ec6090; font-size: 34px; text-decoration: none; margin-bottom: 30px; text-shadow: 10px 15px 7px #333333"><b>Tabla de Clasificación</b></span>
                             </div>
                         </div>
                         <div class="item">
@@ -148,8 +148,8 @@
                                 <div class="row" >
                                     <div class="col">
                                         <div class="row">
-                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;">Ranking</span></span>
-                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;">Jugador</span></span>
+                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;"><a style="cursor: default" href="#">Ranking</a></span></span>
+                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;"><a style="cursor: default" href="#">Jugador</a></span></span>
                                             <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;"><a href="<%=request.getContextPath()%>/LeaderboardServlet?orden=1">Días jugados</a></span></span>
                                             <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;"><a href="<%=request.getContextPath()%>/LeaderboardServlet?orden=2">Población total</a></span></span>
                                             <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;"><a href="<%=request.getContextPath()%>/LeaderboardServlet?orden=3">Moral de la civilización</a></span></span>
@@ -163,23 +163,32 @@
                                 </div>
                             </ul>
                         </div>
+                        <% String usuarioActual = jugadorActual.getUsuario();
+                           String coloruwu = "";%>
                         <%if(top10!=null){%>
                         <%for(DtoLeaderboard ditto : top10){%>
                         <div class="item <%if(top10.size()-1 == top10.indexOf(ditto)){%>last-item<%}%>">
+
+                            <% if(usuarioActual.equals(ditto.getJugador().getUsuario())){
+                                coloruwu = "#ec6090";
+                            }else{
+                                coloruwu = "white";
+                            }
+                            %>
                             <ul>
                                 <div class="row">
                                     <div class="col">
                                         <div class="row">
-                                            <span style="width: 5% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=top10.indexOf(ditto)+1%></span></span>
-                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=ditto.getJugador().getUsuario()%></span></span>
-                                            <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=ditto.getDiasJugados()%></span></span>
-                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=ditto.getPoblacionTotal()%></span></span>
-                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=ditto.getMoralTotal()%></span></span>
-                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=ditto.getGuerrasGanadas()%></span></span>
-                                            <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%if(ditto.getPorcentajeVictoriasGuerras()<0){%>N.A<%}else{%><%=ditto.getPorcentajeVictoriasGuerras()%> %<%}%></span></span>
-                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=ditto.getFuerzaTotal()%></span></span>
-                                            <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 13px; color: white;"><%=ditto.getMaxDiasHabitante()%></span></span>
-                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=ditto.getProduccionTotal()%></span></span>
+                                            <span style="width: 7% !important;" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: <%=coloruwu%>;text-align: center !important;"><%=top10.indexOf(ditto)+1%></span></span>
+                                            <span style="width: 10% !important; margin-left: 20px" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: <%=coloruwu%>;text-align: center !important;"><%=ditto.getJugador().getUsuario()%></span></span>
+                                            <span style="width: 10% !important; margin-left: 14px" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: <%=coloruwu%>;text-align: center !important;"><%=ditto.getDiasJugados()%></span></span>
+                                            <span style="width: 10% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: <%=coloruwu%>;text-align: center !important;"><%=ditto.getPoblacionTotal()%></span></span>
+                                            <span style="width: 10% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 11px; color: <%=coloruwu%>;text-align: center !important;"><%=ditto.getMoralTotal()%></span></span>
+                                            <span style="width: 10% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: <%=coloruwu%>;text-align: center !important;"><%=ditto.getGuerrasGanadas()%></span></span>
+                                            <span style="width: 10% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: <%=coloruwu%>;text-align: center !important;"><%if(ditto.getPorcentajeVictoriasGuerras()<0){%>N.A<%}else{%><%=ditto.getPorcentajeVictoriasGuerras()%> %<%}%></span></span>
+                                            <span style="width: 10% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 11px; color: <%=coloruwu%>;text-align: center !important;"><%=ditto.getFuerzaTotal()%></span></span>
+                                            <span style="width: 10% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 13px; color: <%=coloruwu%>;text-align: center !important;"><%=ditto.getMaxDiasHabitante()%></span></span>
+                                            <span style="width: 10% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 11px; color: <%=coloruwu%>;text-align: center !important;"><%=ditto.getProduccionTotal()%></span></span>
                                         </div>
                                     </div>
                                 </div>

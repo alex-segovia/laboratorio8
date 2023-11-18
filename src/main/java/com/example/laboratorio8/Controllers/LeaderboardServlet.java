@@ -22,9 +22,9 @@ public class LeaderboardServlet extends HttpServlet {
             DaoJugador daoJugador = new DaoJugador();
             DaoLeaderboard daoLeaderboard = new DaoLeaderboard();
             int tipo;
+            String orden = (String) request.getParameter("orden");
             try{
-                tipo = Integer.parseInt((String) request.getAttribute("orden"));
-
+                tipo = Integer.parseInt(orden);
             }catch (NumberFormatException e){
                 tipo = 1;
             }
