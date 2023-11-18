@@ -36,6 +36,30 @@ public class DaoJugador extends DaoBase{
 
     }
 
+    public Jugador getJugadorPorUsuario(String usuario){
+        String sql = "SELECT * FROM jugador WHERE usuario = ?";
+        Jugador jugador = null;
+
+        try (Connection conn = this.getConection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setString(1, usuario);
+
+            try(ResultSet rs = pstmt.executeQuery()){
+
+                if(rs.next()){
+                    jugador = fillJugador(jugador,rs);
+                }
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return jugador;
+
+    }
+
     public void endDia(int idJugador){
 
         String sql = "UPDATE jugador SET horasDelDia = 0, diasDesdeCreacion = diasDesdeCreacion + 1 WHERE idJugador = ?;";

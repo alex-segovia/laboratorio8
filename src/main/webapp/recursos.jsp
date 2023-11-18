@@ -25,7 +25,7 @@
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="assets/css/botonUwu.css">
     <link rel="stylesheet" href="assets/css/popupEwe.css">
@@ -162,7 +162,7 @@
                                         </div>
                                         <%}else{%>
                                         <form id="formTerminarDia" action="<%=request.getContextPath()%>/RecursosServlet?action=terminarDia" method="post"></form>
-                                        <a onclick="enviarFormulario('formTerminarDia');" href="#">Terminar día</a>
+                                        <a onclick="enviarFormulario('formTerminarDia');" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Al presionar el botón, se procederá con la repartición de recursos.">Terminar día</a>
                                         <%}%>
                                 </div>
                                 </section>
@@ -171,21 +171,6 @@
                         </div>
                     </div>
                 </div>
-
-
-                <script>
-                    const section = document.querySelector("section"),
-                        overlay = document.querySelector(".overlay"),
-                        showBtn = document.querySelector(".show-modal"),
-                        closeBtn = document.querySelector(".close-btn");
-                    showBtn.addEventListener("click", () => section.classList.add("active"));
-                    overlay.addEventListener("click", () =>
-                        section.classList.remove("active")
-                    );
-                    closeBtn.addEventListener("click", () =>
-                        section.classList.remove("active")
-                    );
-                </script>
 
                 <% if(habitantesMoralBaja.isEmpty()){%>
 
@@ -204,13 +189,13 @@
                             </div>
                             <div class="row text-center mb-1">
                                 <div class="col-4 text-center">
-                                    <h6>Consumo</h6>
+                                    <h6 title="Cantidad de alimento que tus habitantes consumen diariamente.">Consumo</h6>
                                 </div>
                                 <div class="col-4 text-center">
-                                    <h6>Producción</h6>
+                                    <h6 title="Cantidad de alimento que tus granjeros producen diariamente.">Producción</h6>
                                 </div>
                                 <div class="col-4 text-center">
-                                    <h6>Acumulado</h6>
+                                    <h6 title="Cantidad de alimento sobrante del día anterior. Se vuelve putrefacta después de un día.">Acumulado</h6>
                                 </div>
                             </div>
                             <div class="row text-center mb-3">
@@ -221,7 +206,7 @@
                                     <span style="font-size: 18px; color: white"><%=alimentoProduccionVsConsumo.get(0)%></span>
                                 </div>
                                 <div class="col-4 text-center">
-                                    <span style="font-size: 18px; color: white"><%=jugadorActual.getAlimentoTotal()%></span>
+                                    <span style="font-size: 18px; color: white" title="Recuerda que la comida acumulada se pudre después de un día."><%=jugadorActual.getAlimentoTotal()%></span>
                                 </div>
                             </div>
                             <div class="row text-center mb-4">
@@ -263,7 +248,7 @@
                                                 <h2><%=porcentaje%><span>%</span><h5><%=visual%></h5></h2>
                                             </div>
                                             <div class="number mt-2">
-                                                <h2 style="font-size: 10px; color: white">DemandaVsAlmacén</h2>
+                                                <h2 style="font-size: 10px; color: white"title="Representa la porción de comida que tus ciudadanos requieren respecto al alimento disponible.">DemandaVsAlmacén</h2>
                                             </div>
                                         </div>
                                     </div>
@@ -421,6 +406,11 @@
     </div>
 </footer>
 
+<script>
+    $(function() {
+        $('[data-bs-toggle="tooltip"]').tooltip();
+    });
+</script>
 
 <!-- Scripts -->
 <script>
@@ -429,6 +419,29 @@
         formulario.submit();
     }
 </script>
+
+<script>
+    const section = document.querySelector("section"),
+        overlay = document.querySelector(".overlay"),
+        showBtn = document.querySelector(".show-modal"),
+        closeBtn = document.querySelector(".close-btn");
+    showBtn.addEventListener("click", () => section.classList.add("active"));
+    overlay.addEventListener("click", () =>
+        section.classList.remove("active")
+    );
+    closeBtn.addEventListener("click", () =>
+        section.classList.remove("active")
+    );
+</script>
+
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 <!-- Bootstrap core JavaScript -->
 <script src="vendor/jquery/jquery.min.js"></script>

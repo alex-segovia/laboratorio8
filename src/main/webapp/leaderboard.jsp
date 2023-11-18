@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.example.laboratorio8.Beans.*" %><%--
+<%@ page import="com.example.laboratorio8.Beans.*" %>
+<%@ page import="com.example.laboratorio8.Dtos.DtoLeaderboard" %><%--
   Created by IntelliJ IDEA.
   User: alexd
   Date: 16/11/2023
@@ -7,7 +8,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%Jugador jugadorActual = (Jugador) request.getSession().getAttribute("jugadorActual");%>
+<%ArrayList<DtoLeaderboard> top10 = (ArrayList<DtoLeaderboard>) request.getAttribute("top10");%>
 
 <html lang="en">
 <head>
@@ -20,8 +22,6 @@
     <link rel="icon" href="assets/images/logoarmas.ico">
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
-
-    <%Jugador jugadorActual = (Jugador) request.getSession().getAttribute("jugadorActual");%>
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="assets/css/fontawesome.css">
@@ -150,43 +150,36 @@
                                         <div class="row">
                                             <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;">Ranking</span></span>
                                             <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;">Jugador</span></span>
-                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;">Días jugados</span></span>
-                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;">Población total</span></span>
-                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;">Moral de la civilización</span></span>
-                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;">Guerras ganadas</span></span>
-                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;">Victorias de guerras (%)</span></span>
-                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;">Fuerza de la civilización</span></span>
-                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;">Máx. días de un habitante</span></span>
-                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;">Producción de alimento</span></span>
+                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;"><a href="<%=request.getContextPath()%>/LeaderboardServlet?orden=1">Días jugados</a></span></span>
+                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;"><a href="<%=request.getContextPath()%>/LeaderboardServlet?orden=2">Población total</a></span></span>
+                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;"><a href="<%=request.getContextPath()%>/LeaderboardServlet?orden=3">Moral de la civilización</a></span></span>
+                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;"><a href="<%=request.getContextPath()%>/LeaderboardServlet?orden=4">Guerras ganadas</a></span></span>
+                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;"><a href="<%=request.getContextPath()%>/LeaderboardServlet?orden=5">Victorias de guerras (%)</a></span></span>
+                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;"><a href="<%=request.getContextPath()%>/LeaderboardServlet?orden=6">Fuerza de la civilización</a></span></span>
+                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;"><a href="<%=request.getContextPath()%>/LeaderboardServlet?orden=7">Máx. días de un habitante</a></span></span>
+                                            <span style="width: 10% !important" class="d-flex align-items-center pt-3"><span style="font-size: 15px; color: #ec6090;text-align: center !important;"><a href="<%=request.getContextPath()%>/LeaderboardServlet?orden=8">Producción de alimento</a></span></span>
                                         </div>
                                     </div>
                                 </div>
                             </ul>
                         </div>
-                        <%if(request.getAttribute("listaHabitantes")!=null){ArrayList<Habitante> listaHabitantes = (ArrayList<Habitante>) request.getAttribute("listaHabitantes");%>
-                        <%for(Habitante habitante : listaHabitantes){%>
-                        <div class="item <%if(listaHabitantes.size()-1 == listaHabitantes.indexOf(habitante)){%>last-item<%}%>">
+                        <%if(top10!=null){%>
+                        <%for(DtoLeaderboard ditto : top10){%>
+                        <div class="item <%if(top10.size()-1 == top10.indexOf(ditto)){%>last-item<%}%>">
                             <ul>
                                 <div class="row">
                                     <div class="col">
                                         <div class="row">
-                                            <span style="width: 5% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%if(habitante.getIdHabitante()<10){%>0<%=habitante.getIdHabitante()%><%}else{%><%=habitante.getIdHabitante()%><%}%></span></span>
-                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=habitante.getNombre()%></span></span>
-                                            <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%if(habitante.getGenero().equals("M")){%>Masculino<%}else if(habitante.getGenero().equals("F")){%>Femenino<%}else{%>Otro<%}%></span></span>
-                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=habitante.getAlimentacionDiaria()%></span></span>
-                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=habitante.getMoral()%></span></span>
-                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=habitante.getDiasVivo()%> día<%if(habitante.getDiasVivo()>1){%>s<%}%></span></span>
-                                            <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%if(habitante.getGenero().equals("F")){%><%if(habitante instanceof Granjero){%>Granjera<%}else if(habitante instanceof Constructor){%>Constructora<%}else if(habitante instanceof Soldado){%>Soldada<%}else{%>Ninguna<%}}else{%><%if(habitante instanceof Granjero){%>Granjero<%}else if(habitante instanceof Constructor){%>Constructor<%}else if(habitante instanceof Soldado){%>Soldado<%}else{%>Ninguna<%}}%></span></span>
-                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%if(habitante instanceof Constructor){%><%=((Constructor) habitante).getFuerza()%><%}else if(habitante instanceof Soldado){%><%=((Soldado) habitante).getFuerza()%><%}else{%>No tiene<%}%></span></span>
-                                            <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 13px; color: white;"><%if(habitante instanceof Granjero){%><%=((Granjero) habitante).getProduccionAlimento()%> (A)<%}else if(habitante instanceof Constructor){%><%=((Constructor) habitante).getProduccionMoral()%> (M)<%}else if(habitante instanceof Soldado){%><%=((Soldado) habitante).getProduccionMoral()%> (M)<%}else{%>No produce<%}%></span></span>
-                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%if(habitante.getGenero().equals("F")){%><%if(habitante.isEstaExiliado()){%>Exhiliada<%}else{%><%if(habitante.isEstaMuerto()){%>Muerta<%}else{%>Viva<%}}}else{%><%if(habitante.isEstaExiliado()){%>Exhiliado<%}else{%><%if(habitante.isEstaMuerto()){%>Muerto<%}else{%>Vivo<%}}%><%}%></span></span>
-                                            <span style="width: 10% !important"><button class="btn btn-dark" style="font-size: 15px; color: white" id="mostrarPopupEditar<%=listaHabitantes.indexOf(habitante)%>"<%if(habitante.isEstaExiliado() || habitante.isEstaMuerto()){%>disabled<%}%>><a>Editar</a></button></span>
-                                            <span style="width: 10% !important">
-                                                <form style="margin: 0; padding: 0" method="post" action="<%=request.getContextPath()%>/HabitantesServlet?action=exhiliar">
-                                                    <input style="" type="hidden" name="idHabitante" value="<%=habitante.getIdHabitante()%>">
-                                                    <button type="submit" class="btn btn-dark" style="font-size: 15px; color: white" <%if(habitante.isEstaExiliado() || habitante.isEstaMuerto()){%>disabled<%}%>><a>Exhiliar</a></button>
-                                                </form>
-                                            </span>
+                                            <span style="width: 5% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=top10.indexOf(ditto)+1%></span></span>
+                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=ditto.getJugador().getUsuario()%></span></span>
+                                            <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=ditto.getDiasJugados()%></span></span>
+                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=ditto.getPoblacionTotal()%></span></span>
+                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=ditto.getMoralTotal()%></span></span>
+                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=ditto.getGuerrasGanadas()%></span></span>
+                                            <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%if(ditto.getPorcentajeVictoriasGuerras()<0){%>N.A<%}else{%><%=ditto.getPorcentajeVictoriasGuerras()%> %<%}%></span></span>
+                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=ditto.getFuerzaTotal()%></span></span>
+                                            <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 13px; color: white;"><%=ditto.getMaxDiasHabitante()%></span></span>
+                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=ditto.getProduccionTotal()%></span></span>
                                         </div>
                                     </div>
                                 </div>

@@ -4,6 +4,7 @@ import com.example.laboratorio8.Beans.Jugador;
 
 public class DtoLeaderboard {
     private Jugador jugador;
+    private int poblacionTotal;
     private int diasJugados;
     private float moralTotal;
     private int guerrasGanadas;
@@ -18,6 +19,14 @@ public class DtoLeaderboard {
 
     public void setJugador(Jugador jugador) {
         this.jugador = jugador;
+    }
+
+    public int getPoblacionTotal() {
+        return poblacionTotal;
+    }
+
+    public void setPoblacionTotal(int poblacionTotal) {
+        this.poblacionTotal = poblacionTotal;
     }
 
     public int getDiasJugados() {

@@ -3,6 +3,7 @@ package com.example.laboratorio8.Controllers;
 import com.example.laboratorio8.Beans.Jugador;
 import com.example.laboratorio8.Daos.DaoHabitante;
 import com.example.laboratorio8.Daos.DaoJugador;
+import com.example.laboratorio8.Daos.DaoLeaderboard;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -19,7 +20,16 @@ public class LeaderboardServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath());
         }else {
             DaoJugador daoJugador = new DaoJugador();
+            DaoLeaderboard daoLeaderboard = new DaoLeaderboard();
+            int tipo;
+            try{
+                tipo = Integer.parseInt((String) request.getAttribute("orden"));
+
+            }catch (NumberFormatException e){
+                tipo = 1;
+            }
             request.getSession().setAttribute("jugadorActual", daoJugador.getJugadorPorId(jugadorActual.getIdJugador()));
+            request.setAttribute("top10",daoLeaderboard.listaLeaderboard(tipo));
             request.getRequestDispatcher("leaderboard.jsp").forward(request, response);
         }
     }
