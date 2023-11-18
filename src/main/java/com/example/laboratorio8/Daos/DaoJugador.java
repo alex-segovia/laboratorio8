@@ -147,13 +147,16 @@ public class DaoJugador extends DaoBase{
                     alimentoAcumulado = 0.0f;
                 }
 
+                if(aux == indicesHabitantes.size()-1){
+                    // Actualizar el alimento acumulado
+                    updateAlimentoAcumulado(jugador.getIdJugador(),alimentoAcumulado);
+                }
 
                 aux +=1;
                 probando.add(alimentoAcumulado);
 
             }
 
-            probando.add(0.0f);
             // Crecimiento de la población: MUERTES POR DESESPERACIÓN
 
             int cantidadPoblacion = listaHabitantes.size();

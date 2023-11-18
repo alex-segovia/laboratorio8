@@ -11,7 +11,7 @@ public class DaoHabitante extends DaoBase{
 
     public ArrayList<Float> getAlimentoProduccionVsConsumo(int idJugador){
 
-        String sql = "SELECT sum(produccionAlimento), sum(alimentacionDiaria) FROM habitante WHERE idJugador = ? GROUP BY idJugador, estaExiliado = false, estaMuerto = false;";
+        String sql = "SELECT sum(produccionAlimento), sum(alimentacionDiaria) FROM habitante WHERE idJugador = ? AND estaMuerto = false AND estaExiliado = false GROUP BY idJugador;";
         ArrayList<Float> alimentoProduccionVsConsumo = new ArrayList<>();
 
         try (Connection conn = this.getConection();
@@ -85,7 +85,7 @@ public class DaoHabitante extends DaoBase{
     }
 
     public void updateMoralMultiple(int idJugador, String motivoMuerte, int diaMuerte){
-        String sql = "UPDATE habitante SET moral = moral-ceil(moral*0.5) WHERE idJugador = ?";
+        String sql = "UPDATE habitante SET moral = moral-ceil(moral*0.5) WHERE idJugador = ? AND estaMuerto = false AND estaExiliado = false";
 
         try (Connection conn = this.getConection();
             PreparedStatement pstmt = conn.prepareStatement(sql);) {
@@ -108,7 +108,7 @@ public class DaoHabitante extends DaoBase{
     }
 
     public void updateMoralMultiple (int idJugador){
-        String sql = "SELECT sum(produccionMoral) FROM habitante WHERE idJugador = ? GROUP BY idJugador;";
+        String sql = "SELECT sum(produccionMoral) FROM habitante WHERE idJugador = ? AND estaMuerto = false AND estaExiliado = false GROUP BY idJugador;";
         float sumaProduccion = 0.0f;
 
         try (Connection conn = this.getConection();

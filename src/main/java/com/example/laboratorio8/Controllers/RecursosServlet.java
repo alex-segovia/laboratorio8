@@ -17,8 +17,6 @@ import java.util.HashMap;
 public class RecursosServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("holiwis");
-
         // Sesión
         HttpSession httpSession = request.getSession();
 
@@ -51,7 +49,6 @@ public class RecursosServlet extends HttpServlet {
 
             // Se actualiza la información del jugador por cada cambio de vista
             httpSession.setAttribute("jugadorActual", daoJugador.getJugadorPorId(jugador.getIdJugador()));
-            System.out.println("holiwis 2");
             view.forward(request, response);
         }else{
             response.sendRedirect(request.getContextPath());
@@ -60,8 +57,6 @@ public class RecursosServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        System.out.println("uwu");
         // Sesión
         HttpSession httpSession = request.getSession();
 
@@ -76,14 +71,13 @@ public class RecursosServlet extends HttpServlet {
             switch (action) {
 
                 case "pasarHoras":
-                    if (!(jugador.getHorasDia() == 24)) {
+                    if (!(jugador.getHorasDia() >= 24) ) {
                         daoJugador.skipHoras(jugador.getIdJugador());
                     }
-
                     break;
 
                 case "terminarDia":
-                    if (jugador.getHorasDia() == 24) {
+                    if (jugador.getHorasDia() >= 24) {
                         daoJugador.proceedEndDia(jugador, daoHabitante);
                     }
                     break;
@@ -93,7 +87,6 @@ public class RecursosServlet extends HttpServlet {
 
             }
 
-            httpSession.setAttribute("jugadorActual", daoJugador.getJugadorPorId(jugador.getIdJugador()));
             response.sendRedirect("RecursosServlet");
         }else{
             response.sendRedirect(request.getContextPath());
