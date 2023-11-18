@@ -30,6 +30,7 @@ public class LeaderboardServlet extends HttpServlet {
             }
             request.getSession().setAttribute("jugadorActual", daoJugador.getJugadorPorId(jugadorActual.getIdJugador()));
             request.setAttribute("top10",daoLeaderboard.listaLeaderboard(tipo));
+            request.setAttribute("tipo",tipo);
             request.getRequestDispatcher("leaderboard.jsp").forward(request, response);
         }
     }
