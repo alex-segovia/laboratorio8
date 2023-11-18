@@ -1,7 +1,7 @@
 package com.example.laboratorio8.Beans;
 
 public class Granjero extends Habitante{
-    float produccionAlimento;
+    private float produccionAlimento;
 
     public float getProduccionAlimento() {
         return produccionAlimento;

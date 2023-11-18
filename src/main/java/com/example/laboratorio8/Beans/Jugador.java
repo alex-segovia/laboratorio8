@@ -1,16 +1,16 @@
 package com.example.laboratorio8.Beans;
 
 public class Jugador {
-    int idJugador;
-    String nombreJugador;
-    int edad;
-    String correo;
-    String usuario;
-    String contrasena;
-    int horasDia = 0;
-    int diasDesdeCreacion = 0;
-    String estado = "En paz";
-    float alimentoTotal;
+    private int idJugador;
+    private String nombreJugador;
+    private int edad;
+    private String correo;
+    private String usuario;
+    private String contrasena;
+    private int horasDia = 0;
+    private int diasDesdeCreacion = 0;
+    private String estado = "En paz";
+    private float alimentoTotal;
 
     public int getIdJugador() {
         return idJugador;

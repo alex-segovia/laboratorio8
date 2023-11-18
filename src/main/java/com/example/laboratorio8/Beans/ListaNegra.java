@@ -1,8 +1,8 @@
 package com.example.laboratorio8.Beans;
 
 public class ListaNegra {
-    int idListaNegra;
-    String correo;
+    private int idListaNegra;
+    private String correo;
 
     public int getIdListaNegra() {
         return idListaNegra;

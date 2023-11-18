@@ -1,18 +1,18 @@
 package com.example.laboratorio8.Beans;
 
 public class Habitante {
-    int idHabitante;
-    Jugador jugador;
-    String nombre;
-    String genero;
-    int horasDia=0;
-    int diasVivo=0;
-    boolean estaExiliado=false;
-    boolean estaMuerto=false;
-    float alimentacionDiaria;
-    float moral;
-    String motivoMuerte;
-    int diaMuerte;
+    private int idHabitante;
+    private Jugador jugador;
+    private String nombre;
+    private String genero;
+    private int horasDia=0;
+    private int diasVivo=0;
+    private boolean estaExiliado=false;
+    private boolean estaMuerto=false;
+    private float alimentacionDiaria;
+    private float moral;
+    private String motivoMuerte;
+    private int diaMuerte;
 
 
 

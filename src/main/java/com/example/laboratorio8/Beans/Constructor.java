@@ -1,8 +1,8 @@
 package com.example.laboratorio8.Beans;
 
 public class Constructor extends Habitante{
-    float produccionMoral;
-    float fuerza;
+    private float produccionMoral;
+    private float fuerza;
 
     public float getProduccionMoral() {
         return produccionMoral;
