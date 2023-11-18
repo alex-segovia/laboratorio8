@@ -136,7 +136,7 @@
                                 <h4><em style="color: darkmagenta !important;">Gestión</em> de Recursos</h4>
                                 <p style="color: white !important; font-size: 100%">Organiza y gestiona tanto la producción como demanda de recursos de todos los habitantes. Visualiza el estado de los pobladores con moral criticamente baja y aquellos caídos el dia anterior para plantear una estrategia que lleve adelante tu civilización.</p>
 
-                                <% if(habitantesMoralBaja.isEmpty()){%>
+                                <% if(!habitantesMoralBaja.isEmpty()){%>
                                 <section style="margin-top: 5% !important;">
 
                                 <div class="main-button">

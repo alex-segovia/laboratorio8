@@ -25,35 +25,37 @@ public class RecursosServlet extends HttpServlet {
         // Parámetros
         String action = request.getParameter("action") == null ? "listado" : request.getParameter("action");
         Jugador jugador = (Jugador) httpSession.getAttribute("jugadorActual");
+        if(jugador!=null) {
+            RequestDispatcher view;
+            view = request.getRequestDispatcher("recursos.jsp");
 
-        RequestDispatcher view;
-        view = request.getRequestDispatcher("recursos.jsp");
+            // Daos
+            DaoJugador daoJugador = new DaoJugador();
+            DaoHabitante daoHabitante = new DaoHabitante();
 
-        // Daos
-        DaoJugador daoJugador = new DaoJugador();
-        DaoHabitante daoHabitante = new DaoHabitante();
+            // Datos
+            ArrayList<Habitante> habitantesMoralBaja = daoHabitante.getHabitantesMoralBaja(jugador.getIdJugador());
+            ArrayList<Float> alimentoProduccionVsConsumo = daoHabitante.getAlimentoProduccionVsConsumo(jugador.getIdJugador());
+            ArrayList<Habitante> habitantesMuertos = daoHabitante.getHabitantesMuertos(jugador.getIdJugador(), jugador.getDiasDesdeCreacion());
 
-        // Datos
-        ArrayList<Habitante> habitantesMoralBaja= daoHabitante.getHabitantesMoralBaja(jugador.getIdJugador());
-        ArrayList<Float> alimentoProduccionVsConsumo = daoHabitante.getAlimentoProduccionVsConsumo(jugador.getIdJugador());
-        ArrayList<Habitante> habitantesMuertos = daoHabitante.getHabitantesMuertos(jugador.getIdJugador(),jugador.getDiasDesdeCreacion());
+            switch (action) {
+                case "listado":
+                    request.setAttribute("habitantesMoralBaja", habitantesMoralBaja);
+                    request.setAttribute("alimentoProduccionVsConsumo", alimentoProduccionVsConsumo);
+                    request.setAttribute("habitantesMuertos", habitantesMuertos);
+                    break;
+                default:
 
-        switch (action){
-            case "listado":
-                request.setAttribute("habitantesMoralBaja",habitantesMoralBaja);
-                request.setAttribute("alimentoProduccionVsConsumo",alimentoProduccionVsConsumo);
-                request.setAttribute("habitantesMuertos",habitantesMuertos);
-                break;
-            default:
+                    break;
+            }
 
-                break;
+            // Se actualiza la información del jugador por cada cambio de vista
+            httpSession.setAttribute("jugadorActual", daoJugador.getJugadorPorId(jugador.getIdJugador()));
+            System.out.println("holiwis 2");
+            view.forward(request, response);
+        }else{
+            response.sendRedirect("");
         }
-
-        // Se actualiza la información del jugador por cada cambio de vista
-        httpSession.setAttribute("jugadorActual",daoJugador.getJugadorPorId(jugador.getIdJugador()));
-        System.out.println("holiwis 2");
-        view.forward(request,response);
-
     }
 
     @Override
@@ -66,34 +68,36 @@ public class RecursosServlet extends HttpServlet {
         // Parámetros
         String action = request.getParameter("action") == null ? "listado" : request.getParameter("action");
         Jugador jugador = (Jugador) httpSession.getAttribute("jugadorActual");
+        if(jugador!=null) {
+            // Daos
+            DaoJugador daoJugador = new DaoJugador();
+            DaoHabitante daoHabitante = new DaoHabitante();
 
-        // Daos
-        DaoJugador daoJugador = new DaoJugador();
-        DaoHabitante daoHabitante = new DaoHabitante();
+            switch (action) {
 
-        switch (action){
+                case "pasarHoras":
+                    if (!(jugador.getHorasDia() == 24)) {
+                        daoJugador.skipHoras(jugador.getIdJugador());
+                    }
 
-            case "pasarHoras":
-                if(!(jugador.getHorasDia()==24)){
-                    daoJugador.skipHoras(jugador.getIdJugador());
-                }
+                    break;
 
-                break;
+                case "terminarDia":
+                    if (jugador.getHorasDia() == 24) {
+                        daoJugador.proceedEndDia(jugador, daoHabitante);
+                    }
+                    break;
 
-            case "terminarDia":
-                if(jugador.getHorasDia()==24){
-                    daoJugador.proceedEndDia(jugador, daoHabitante);
-                }
-                break;
-
-            default:
+                default:
                     // Nothing
 
+            }
+
+            httpSession.setAttribute("jugadorActual", daoJugador.getJugadorPorId(jugador.getIdJugador()));
+            response.sendRedirect("RecursosServlet");
+        }else{
+            response.sendRedirect("");
         }
-
-        httpSession.setAttribute("jugadorActual",daoJugador.getJugadorPorId(jugador.getIdJugador()));
-        response.sendRedirect("RecursosServlet");
-
     }
 }
 
