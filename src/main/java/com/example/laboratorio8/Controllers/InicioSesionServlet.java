@@ -46,8 +46,10 @@ public class InicioSesionServlet extends HttpServlet {
                     if(!succesfulLogin) {
                         response.sendRedirect(request.getContextPath());
                     }else if(dJ.estaEnPaz(jugador.getIdJugador())){
+                        request.getSession().setAttribute("jugadorActual",jugador);
                         response.sendRedirect("HabitantesServlet");
                     }else{
+                        request.getSession().setAttribute("jugadorActual",jugador);
                         response.sendRedirect("GuerraServlet");
                     }
                 }
