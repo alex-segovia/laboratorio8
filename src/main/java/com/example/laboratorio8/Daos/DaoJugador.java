@@ -249,7 +249,7 @@ public class DaoJugador extends DaoBase{
     }
 
     public boolean estaEnPaz(int idJugador){
-        String sql = "select idJugador from jugador where estado='En paz'";
+        String sql = "select idJugador from jugador where estado='En paz' and idJugador=?";
         try (Connection conn = this.getConection();PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setInt(1,idJugador);
             try(ResultSet rs=pstmt.executeQuery()){

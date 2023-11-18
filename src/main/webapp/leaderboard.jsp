@@ -156,7 +156,7 @@
                                             <span style="width: 10% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 15px; color: #ec6090;">Guerra ganadas</span></span>
                                             <span style="width: 10% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 15px; color: #ec6090;">Victorias de guerras (%)</span></span>
                                             <span style="width: 10% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 15px; color: #ec6090;">Fuerza total</span></span>
-                                            <span style="width: 10% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 15px; color: #ec6090;">Máx días por habitante</span></span>
+                                            <span style="width: 10% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 15px; color: #ec6090;">Máx. días por persona</span></span>
                                             <span style="width: 10% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 15px; color: #ec6090;">Prod. de alimento</span></span>
                                         </div>
                                     </div>
