@@ -139,7 +139,7 @@ public class DaoHabitante extends DaoBase{
     }
 
     public void updateMoral (int idHabitante, Float moral){
-        String sql = "UPDATE habitante SET moral = ? idHabitante = ?";
+        String sql = "UPDATE habitante SET moral = ? WHERE idHabitante = ?";
 
         try (Connection conn = this.getConection();
             PreparedStatement pstmt = conn.prepareStatement(sql);) {
@@ -382,7 +382,85 @@ public class DaoHabitante extends DaoBase{
                 pstmt.setNull(15,Types.INTEGER);
                 pstmt.executeUpdate();
             }
+            String sql2 = "update jugador set horasDelDia=horasDelDia+? where idJugador=?";
+            try(Connection conn2 = getConection();
+                PreparedStatement pstmt2 = conn2.prepareStatement(sql2)){
+                if(profesion.equals("Ninguna")){
+                    pstmt2.setInt(1,2);
+                }else{
+                    pstmt2.setInt(1,8);
+                }
+                pstmt2.setInt(2,idJugador);
+                pstmt2.executeUpdate();
+            }catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public int obtenerHorasPorId(int idJugador){
+        String sql = "select horasDelDia from jugador where idJugador=?";
+        try(Connection conn = getConection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1,idJugador);
+            try(ResultSet rs = pstmt.executeQuery()){
+                if(rs.next()){
+                    return rs.getInt(1);
+                }else{
+                    return 0;
+                }
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void editarNombreHabitante(String nombre, int idHabitante){
+        String sql = "update habitante set nombre=? where idHabitante=?";
+        try(Connection conn = getConection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1,nombre);
+            pstmt.setInt(2,idHabitante);
+            pstmt.executeUpdate();
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void exhiliarHabitante(int idHabitante){
+        String sql = "update habitante set estaExiliado=true where idHabitante=?";
+        try(Connection conn = getConection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1,idHabitante);
+            pstmt.executeUpdate();
+            String sql2= "update habitante set moral=moral-? where idHabitante!=?";
+            try(Connection conn2 = getConection();
+                PreparedStatement pstmt2 = conn2.prepareStatement(sql2)){
+                pstmt2.setFloat(1,new Random().nextFloat()*(this.obtenerMoralPorId(idHabitante)/2));
+                pstmt2.setInt(2,idHabitante);
+                pstmt2.executeUpdate();
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public float obtenerMoralPorId(int idHabitante){
+        String sql = "select moral from habitante where idHabitante=?";
+        try(Connection conn = getConection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1,idHabitante);
+            try(ResultSet rs = pstmt.executeQuery()){
+                if(rs.next()){
+                    return rs.getFloat(1);
+                }else{
+                    return 0;
+                }
+            }
+        }catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }

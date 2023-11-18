@@ -235,19 +235,22 @@
                 <div class="gaming-library">
                     <div class="col-lg-12">
                         <div class="heading-section">
-                            <h4>Mis habitantes:</h4>
+                            <div class ="row">
+                                <span style="color: #ec6090; font-size: 34px; text-decoration: none; margin-bottom: 30px;">Mis habitantes:</span>
+                                <span style="color: #e369e3 !important; text-align: end; margin-bottom: -100px !important;"><b><%=jugadorActual.getHorasDia()%> horas</b></span>
+                            </div>
                         </div>
                         <div class="item">
                             <ul>
                                 <div class="row" >
                                     <div class="col">
                                         <div class="row">
-                                            <span style="width: 4% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090;">ID</span></span>
+                                            <span style="width: 5% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090;">ID</span></span>
                                             <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090;">Nombre</span></span>
                                             <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090;">Género</span></span>
                                             <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090">Consumo</span></span>
                                             <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090;">Moral</span></span>
-                                            <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090;">Tiempo</span></span>
+                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090;">Tiempo</span></span>
                                             <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090;">Profesión</span></span>
                                             <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090;">Fuerza</span></span>
                                             <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 17px; color: #ec6090;">Producción</span></span>
@@ -266,21 +269,21 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="row">
-                                            <span style="width: 4% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%if(habitante.getIdHabitante()<10){%>0<%=habitante.getIdHabitante()%><%}%></span></span>
+                                            <span style="width: 5% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%if(habitante.getIdHabitante()<10){%>0<%=habitante.getIdHabitante()%><%}else{%><%=habitante.getIdHabitante()%><%}%></span></span>
                                             <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=habitante.getNombre()%></span></span>
                                             <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%if(habitante.getGenero().equals("M")){%>Masculino<%}else if(habitante.getGenero().equals("F")){%>Femenino<%}else{%>Otro<%}%></span></span>
                                             <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=habitante.getAlimentacionDiaria()%></span></span>
                                             <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=habitante.getMoral()%></span></span>
-                                            <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=habitante.getDiasVivo()%> día<%if(habitante.getDiasVivo()>1){%>s<%}%></span></span>
-                                            <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%if(habitante instanceof Granjero){%>Granjero<%}else if(habitante instanceof Constructor){%>Constructor<%}else if(habitante instanceof Soldado){%>Soldado<%}else{%>Ninguna<%}%></span></span>
+                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=habitante.getDiasVivo()%> día<%if(habitante.getDiasVivo()>1){%>s<%}%></span></span>
+                                            <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%if(habitante.getGenero().equals("F")){%><%if(habitante instanceof Granjero){%>Granjera<%}else if(habitante instanceof Constructor){%>Constructora<%}else if(habitante instanceof Soldado){%>Soldada<%}else{%>Ninguna<%}}else{%><%if(habitante instanceof Granjero){%>Granjero<%}else if(habitante instanceof Constructor){%>Constructor<%}else if(habitante instanceof Soldado){%>Soldado<%}else{%>Ninguna<%}}%></span></span>
                                             <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%if(habitante instanceof Constructor){%><%=((Constructor) habitante).getFuerza()%><%}else if(habitante instanceof Soldado){%><%=((Soldado) habitante).getFuerza()%><%}else{%>No tiene<%}%></span></span>
                                             <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 13px; color: white;"><%if(habitante instanceof Granjero){%><%=((Granjero) habitante).getProduccionAlimento()%> (A)<%}else if(habitante instanceof Constructor){%><%=((Constructor) habitante).getProduccionMoral()%> (M)<%}else if(habitante instanceof Soldado){%><%=((Soldado) habitante).getProduccionMoral()%> (M)<%}else{%>No produce<%}%></span></span>
-                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%if(habitante.isEstaMuerto()){%>Muerto<%}else{%>Vivo<%}%></span></span>
-                                            <span style="width: 10% !important"><button class="btn btn-dark" style="font-size: 10px; color: white" id="mostrarPopupEditar<%=listaHabitantes.indexOf(habitante)%>"><a>Editar</a></button></span>
+                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%if(habitante.getGenero().equals("F")){%><%if(habitante.isEstaExiliado()){%>Exhiliada<%}else{%><%if(habitante.isEstaMuerto()){%>Muerta<%}else{%>Viva<%}}}else{%><%if(habitante.isEstaExiliado()){%>Exhiliado<%}else{%><%if(habitante.isEstaMuerto()){%>Muerto<%}else{%>Vivo<%}}%><%}%></span></span>
+                                            <span style="width: 10% !important"><button class="btn btn-dark" style="font-size: 15px; color: white" id="mostrarPopupEditar<%=listaHabitantes.indexOf(habitante)%>"<%if(habitante.isEstaExiliado() || habitante.isEstaMuerto()){%>disabled<%}%>><a>Editar</a></button></span>
                                             <span style="width: 10% !important">
                                                 <form style="margin: 0; padding: 0" method="post" action="<%=request.getContextPath()%>/HabitantesServlet?action=exhiliar">
-                                                    <input style="" type="hidden" name="habitanteExhiliado" value="<%=habitante.getIdHabitante()%>">
-                                                    <button type="submit" class="btn btn-dark" style="font-size: 10px; color: white" <%if(habitante.isEstaExiliado()){%>disabled<%}%>><a>Exhiliar</a></button>
+                                                    <input style="" type="hidden" name="idHabitante" value="<%=habitante.getIdHabitante()%>">
+                                                    <button type="submit" class="btn btn-dark" style="font-size: 15px; color: white" <%if(habitante.isEstaExiliado() || habitante.isEstaMuerto()){%>disabled<%}%>><a>Exhiliar</a></button>
                                                 </form>
                                             </span>
                                         </div>
@@ -382,8 +385,9 @@ for(int i=0;i<listaHabitantes.size();i++){%>
                         <br>
                         <div class="row">
                             <div class="col">
+                                <input type="hidden" name="idHabitante" value="<%=listaHabitantes.get(i).getIdHabitante()%>">
                                 <label for="nombreHabitanteEditar<%=i%>" style="margin-top: 25px;color: #ffa6c3"><b>Nombre del habitante:</b></label>
-                                <input style="margin-top: 15px" type="text" name="nombreHabitante" id="nombreHabitanteEditar<%=i%>" placeholder="Nombre" value="<%=listaHabitantes.get(i).getNombre()%>" required>
+                                <input style="margin-top: 15px" type="text" name="nombreNuevoHabitante" id="nombreHabitanteEditar<%=i%>" placeholder="Nombre" value="<%=listaHabitantes.get(i).getNombre()%>" required>
                             </div>
                         </div>
                         <br>
