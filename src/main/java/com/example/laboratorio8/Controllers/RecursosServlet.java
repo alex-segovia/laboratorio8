@@ -19,38 +19,41 @@ public class RecursosServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("holiwis");
         request.getRequestDispatcher("recursos.jsp").forward(request,response);
-        if(false){
-            // Sesión
-            HttpSession httpSession = request.getSession();
 
-            // Parámetros
-            String action = request.getParameter("action") == null ? "listado" : request.getParameter("action");
-            Jugador jugador = (Jugador) httpSession.getAttribute("jugadorActual");
+        // Sesión
+        HttpSession httpSession = request.getSession();
 
-            RequestDispatcher view;
+        // Parámetros
+        String action = request.getParameter("action") == null ? "listado" : request.getParameter("action");
+        Jugador jugador = (Jugador) httpSession.getAttribute("jugadorActual");
 
-            // Daos
-            DaoJugador daoJugador = new DaoJugador();
-            DaoHabitante daoHabitante = new DaoHabitante();
+        RequestDispatcher view;
+        view = request.getRequestDispatcher("recursos.jsp");
 
-            // Datos
-            ArrayList<Habitante> habitantesMoralBaja= daoHabitante.getHabitantesMoralBaja(jugador.getIdJugador());
-            ArrayList<Float> alimentoProduccionVsConsumo = daoHabitante.getAlimentoProduccionVsConsumo(jugador.getIdJugador());
-            ArrayList<Habitante> habitantesMuertos = daoHabitante.getHabitantesMuertos(jugador.getIdJugador()); // revisarrr
+        // Daos
+        DaoJugador daoJugador = new DaoJugador();
+        DaoHabitante daoHabitante = new DaoHabitante();
 
-            switch (action){
-                case "listado":
-                    request.setAttribute("habitantesMoralBaja",habitantesMoralBaja);
-                    request.setAttribute("alimentoProduccionVsConsumo",alimentoProduccionVsConsumo);
-                    request.setAttribute("habitantesMuertos",habitantesMuertos); // revisarrr
-                    break;
-                default:
-                    System.out.println("uwu");
-                    break;
-            }
-            // Se actualiza la información del jugador por cada cambio de vista
-            httpSession.setAttribute("jugadorActual",daoJugador.getJugadorPorId(jugador.getIdJugador()));
+        // Datos
+        ArrayList<Habitante> habitantesMoralBaja= daoHabitante.getHabitantesMoralBaja(jugador.getIdJugador());
+        ArrayList<Float> alimentoProduccionVsConsumo = daoHabitante.getAlimentoProduccionVsConsumo(jugador.getIdJugador());
+        ArrayList<Habitante> habitantesMuertos = daoHabitante.getHabitantesMuertos(jugador.getIdJugador()); // revisarrr
+
+        switch (action){
+            case "listado":
+                request.setAttribute("habitantesMoralBaja",habitantesMoralBaja);
+                request.setAttribute("alimentoProduccionVsConsumo",alimentoProduccionVsConsumo);
+                request.setAttribute("habitantesMuertos",habitantesMuertos);
+                break;
+            default:
+                System.out.println("uwu owo");
+                break;
         }
+
+        // Se actualiza la información del jugador por cada cambio de vista
+        httpSession.setAttribute("jugadorActual",daoJugador.getJugadorPorId(jugador.getIdJugador()));
+        view.forward(request,response);
+
 
     }
 
@@ -64,8 +67,6 @@ public class RecursosServlet extends HttpServlet {
         // Parámetros
         String action = request.getParameter("action") == null ? "listado" : request.getParameter("action");
         Jugador jugador = (Jugador) httpSession.getAttribute("jugadorActual");
-
-        RequestDispatcher view;
 
         // Daos
         DaoJugador daoJugador = new DaoJugador();
