@@ -33,7 +33,7 @@ public class GuerraServlet extends HttpServlet {
                     break;
             }
         }else{
-            response.sendRedirect("");
+            response.sendRedirect(request.getContextPath());
         }
     }
 
@@ -94,7 +94,7 @@ public class GuerraServlet extends HttpServlet {
                     break;
             }
         }else{
-            response.sendRedirect("");
+            response.sendRedirect(request.getContextPath());
         }
     }
 }

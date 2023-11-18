@@ -141,8 +141,8 @@ ArrayList<Jugador> listaJugadoresGuerra=(ArrayList<Jugador>) request.getAttribut
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                    <a href="" class="logo d-flex justify-content-center">
-                        <img class="img-fluid" src="assets/images/textologo.png">
+                    <a class="logo d-flex align-items-center justify-content-center">
+                        <h4 style="color: #ff90b7">Bienvenido, <%=jugadorActual.getUsuario()%></h4>
                     </a>
                     <ul class="nav">
                         <li><a href="<%=request.getContextPath()%>/HabitantesServlet">Habitantes<img src="assets/images/logoHabitante.jpg" alt=""></a></li>
@@ -305,9 +305,9 @@ ArrayList<Jugador> listaJugadoresGuerra=(ArrayList<Jugador>) request.getAttribut
                                                 <%for(Jugador j:listaJugadoresGuerra){%>
                                                 <div class="col-lg-3 col-sm-6">
                                                     <div class="item">
-                                                        <div class="thumb">
+                                                        <div class="thumb" id="mostrarPopupListaJugadores<%=listaJugadoresGuerra.indexOf(j)%>">
                                                             <img src="fotoAlex.png" alt="" style="border-radius: 23px; height: 100%">
-                                                            <a id="mostrarPopupListaJugadores<%=listaJugadoresGuerra.indexOf(j)%>"><img src="iconoAtacar.png" alt=""></a>
+                                                            <a><img src="iconoAtacar.png" alt=""></a>
                                                         </div>
                                                         <div class="down-content text-center">
                                                             <div class="row">

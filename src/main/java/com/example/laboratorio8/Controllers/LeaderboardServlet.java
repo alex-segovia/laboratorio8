@@ -16,7 +16,7 @@ public class LeaderboardServlet extends HttpServlet {
         response.setContentType("text/html");
         Jugador jugadorActual=(Jugador) request.getSession().getAttribute("jugadorActual");
         if(jugadorActual==null){
-            response.sendRedirect("");
+            response.sendRedirect(request.getContextPath());
         }else {
             DaoJugador daoJugador = new DaoJugador();
             request.getSession().setAttribute("jugadorActual", daoJugador.getJugadorPorId(jugadorActual.getIdJugador()));

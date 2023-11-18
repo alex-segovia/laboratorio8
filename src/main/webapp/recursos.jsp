@@ -99,8 +99,8 @@
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                    <a href="" class="logo d-flex justify-content-center">
-                        <img class="img-fluid" src="assets/images/textologo.png">
+                    <a class="logo d-flex align-items-center justify-content-center">
+                        <h4 style="color: #ff90b7">Bienvenido, <%=jugadorActual.getUsuario()%></h4>
                     </a>
                     <ul class="nav">
                         <li><a href="<%=request.getContextPath()%>/HabitantesServlet">Habitantes<img src="assets/images/logoHabitante.jpg" alt=""></a></li>
