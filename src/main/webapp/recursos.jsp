@@ -136,13 +136,14 @@
                                 <section style="margin-top: 5% !important;">
 
                                 <div class="main-button">
+                                        <% if(jugadorActual.getHorasDia()<24){%>
                                         <a class="show-modal" href="#">Pasar horas</a>
                                         <span class="overlay"></span>
                                         <div class="modal-box" style="z-index: 10">
                                             <i class="fa-solid fa-triangle-exclamation" style="color: #ec6090;"></i>
                                             <h2>Advertencia</h2>
                                             <div class="mt-3 mb-3">
-                                                <h3 >Está seguro que desea pasar las horas?. Esta acción no es reversible</h3>
+                                                <h3 >Está seguro que desea pasar las horas?. Esta acción es irreversible!</h3>
                                             </div>
                                             <div class="row">
                                                 <div class="col-6">
@@ -155,7 +156,10 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <%}else{%>
+                                        <form id="formTerminarDia" action="<%=request.getContextPath()%>/RecursosServlet?action=terminarDia" method="post"></form>
                                         <a onclick="enviarFormulario('formTerminarDia');" href="#">Terminar día</a>
+                                        <%}%>
                                 </div>
                                 </section>
                             </div>
@@ -398,8 +402,6 @@
 
 
 <!-- Scripts -->
-<form id="formTerminarDia" action="<%=request.getContextPath()%>/RecursosServlet?action=terminarDia" method="post"></form>
-
 <script>
     function enviarFormulario(idForm) {
         var formulario = document.getElementById(idForm);
