@@ -242,7 +242,7 @@
                     <div class="col-lg-12">
                         <div class="heading-section">
                             <div class ="row">
-                                <span style="color: #ec6090; font-size: 34px; text-decoration: none; margin-bottom: -10px;">Mis habitantes:</span>
+                                <span style="color: #ec6090; font-size: 34px; text-decoration: none; margin-bottom: -10px;"><b>Mis habitantes</b></span>
                                 <span style="color: #e369e3 !important; text-align: end; position: relative; top: -50px !important;"><b><%=jugadorActual.getDiasDesdeCreacion()%> días</b></span>
                                 <span style="color: #e369e3 !important; text-align: end; position: relative; top: -50px !important;"><b><%=jugadorActual.getHorasDia()%> horas</b></span>
                             </div>

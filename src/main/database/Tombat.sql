@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `Tombat`.`jugador` (
   `edad` INT NOT NULL,
   `correo` VARCHAR(45) NOT NULL,
   `usuario` VARCHAR(45) NOT NULL,
-  `contrasena` VARCHAR(45) NOT NULL,
+  `contrasena` VARCHAR(256) NOT NULL,
   `horasDelDia` INT NOT NULL,
   `diasDesdeCreacion` INT NOT NULL,
   `estado` VARCHAR(45) NOT NULL DEFAULT 'En paz',
