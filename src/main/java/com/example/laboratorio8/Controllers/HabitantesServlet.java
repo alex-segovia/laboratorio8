@@ -17,18 +17,11 @@ public class HabitantesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         Jugador jugadorActual=(Jugador) request.getSession().getAttribute("jugadorActual");
-        String action = request.getParameter("action") == null ? "listar" : request.getParameter("action");
         DaoHabitante daoHabitante = new DaoHabitante();
         DaoJugador daoJugador = new DaoJugador();
-        switch (action){
-            case "listar":
-                request.setAttribute("listaHabitantes",daoHabitante.listarHabitantes(1));
-                request.getSession().setAttribute("jugadorActual",daoJugador.getJugadorPorId(1));
-                request.getRequestDispatcher("habitantes.jsp").forward(request,response);
-                break;
-            case "exiliar":
-                break;
-        }
+        request.setAttribute("listaHabitantes",daoHabitante.listarHabitantes(1));
+        request.getSession().setAttribute("jugadorActual",daoJugador.getJugadorPorId(1));
+        request.getRequestDispatcher("habitantes.jsp").forward(request,response);
     }
 
     @Override
@@ -41,10 +34,8 @@ public class HabitantesServlet extends HttpServlet {
         switch (action){
             case "crear":
                 String nombreHabitante = request.getParameter("nombreHabitante");
-                if(nombreHabitante.length()>10){
-                    request.setAttribute("listaHabitantes",daoHabitante.listarHabitantes(1));
-                    request.getSession().setAttribute("jugadorActual",daoJugador.getJugadorPorId(1));
-                    request.getRequestDispatcher("habitantes.jsp").forward(request,response);
+                if(nombreHabitante.length()>10 || jugadorActual.getHorasDia()>24){
+                    response.sendRedirect("HabitantesServlet");
                 }else{
                     String generoHabitante = request.getParameter("generoHabitante");
                     String profesionHabitante = request.getParameter("profesionHabitante");
@@ -53,9 +44,19 @@ public class HabitantesServlet extends HttpServlet {
                 }
                 break;
             case "editar":
-
+                String nombreNuevo = request.getParameter("nombreNuevoHabitante");
+                if(nombreNuevo.length()>10){
+                    response.sendRedirect("HabitantesServlet");
+                }else{
+                    int idHabitante = Integer.parseInt(request.getParameter("idHabitante"));
+                    daoHabitante.editarNombreHabitante(nombreNuevo,idHabitante);
+                    response.sendRedirect("HabitantesServlet");
+                }
                 break;
             case "exhiliar":
+                int idHabitante = Integer.parseInt(request.getParameter("idHabitante"));
+                daoHabitante.exhiliarHabitante(idHabitante);
+                response.sendRedirect("HabitantesServlet");
                 break;
         }
     }
