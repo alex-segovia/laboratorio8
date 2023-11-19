@@ -12,7 +12,8 @@
 <%Jugador jugadorActual=(Jugador) request.getSession().getAttribute("jugadorActual");
     ArrayList<Guerra> historialGuerras=(ArrayList<Guerra>) request.getAttribute("historialGuerras");
 Boolean guerraHaceUnDia=(Boolean) request.getAttribute("guerraHaceUnDia");
-ArrayList<Jugador> listaJugadoresGuerra=(ArrayList<Jugador>) request.getAttribute("listaJugadoresGuerra");%>
+ArrayList<Jugador> listaJugadoresGuerra=(ArrayList<Jugador>) request.getAttribute("listaJugadoresGuerra");
+String primeraVez=(String) request.getSession().getAttribute("primeraVez");%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,29 +35,71 @@ ArrayList<Jugador> listaJugadoresGuerra=(ArrayList<Jugador>) request.getAttribut
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
     <style>
         .overlay {
-            display: none;
+            opacity: 0;
+            pointer-events: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.3);
             z-index: 10000;
         }
 
         /* Estilo para el contenido del popup */
         .popup {
-            padding: 20px;
-            display: none;
+            opacity: 0;
+            pointer-events: none;
             position: fixed;
-            top: 50%;
-            left: 50%;
-            border-radius: 12px;
-            transform: translate(-50%, -50%);
-            z-index: 10001;
+            top: 30%;
+            left: 37.5%;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
             width: 100%;
-            max-width: 650px;
-            background-color: rgba(255, 234, 245, 0.8)
+            padding: 30px 20px;
+            border-radius: 24px;
+            background-color: #fff;
+            transition: all 0.3s ease;
+            z-index: 10001;
+        }
+        .popup i {
+            font-size: 70px;
+            color: #4070f4;
+        }
+        .popup h2 {
+            margin-top: 20px;
+            font-size: 25px;
+            font-weight: 500;
+            color: #333;
+        }
+        .popup h3 {
+            font-size: 16px;
+            font-weight: 400;
+            color: #333;
+            text-align: center;
+        }
+        .popup .buttons {
+            margin-top: 25px;
+        }
+        .popup button {
+            font-size: 14px;
+            padding: 6px 12px;
+            margin: 0 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            color: #fff;
+            background-color: #e75e8d;
+            display: inline-block;
+            border-radius: 25px;
+            font-weight: 400;
+            text-transform: capitalize;
+            letter-spacing: 0.5px;
+            transition: all .3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .popup button:hover {
+            background-color: #fff;
+            color: #e75e8d;
         }
 
         /* Estilo para el botón de cerrar */
@@ -210,6 +253,8 @@ ArrayList<Jugador> listaJugadoresGuerra=(ArrayList<Jugador>) request.getAttribut
                                             <div class="row text-center">
                                                 <%if((g.getResultado().equals("Victoria atacante")&&g.getJugadorAtacante().getIdJugador()==jugadorActual.getIdJugador())||(g.getResultado().equals("Victoria defensiva")&&g.getJugadorDefensor().getIdJugador()==jugadorActual.getIdJugador())){%>
                                                 <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center" style="color: greenyellow">Victoria</span></div>
+                                                <%}else if(g.getResultado().equals("Empate")){%>
+                                                <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center" style="color: deepskyblue">Empate</span></div>
                                                 <%}else{%>
                                                 <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center" style="color: red">Derrota</span></div>
                                                 <%}if(g.getJugadorAtacante().getIdJugador()==jugadorActual.getIdJugador()){
@@ -238,7 +283,7 @@ ArrayList<Jugador> listaJugadoresGuerra=(ArrayList<Jugador>) request.getAttribut
                             <%if(guerraHaceUnDia){%>
                             <ul>
                                 <%if((historialGuerras.get(0).getResultado().equals("Victoria atacante")&&historialGuerras.get(0).getJugadorAtacante().getIdJugador()==jugadorActual.getIdJugador())||(historialGuerras.get(0).getResultado().equals("Victoria defensiva")&&historialGuerras.get(0).getJugadorDefensor().getIdJugador()==jugadorActual.getIdJugador())){
-                                if(request.getSession().getAttribute("primeraVez")!=null){%>
+                                if(primeraVez!=null){%>
                                 <script>
                                     document.addEventListener('DOMContentLoaded', function() {
                                         var audio = new Audio('sonidoVictoria.mp3');
@@ -255,14 +300,14 @@ ArrayList<Jugador> listaJugadoresGuerra=(ArrayList<Jugador>) request.getAttribut
                                     </div>
                                 </li>
                                 <%}else{
-                                    if(request.getSession().getAttribute("primeraVez")!=null){%>
+                                    if(primeraVez!=null){%>
                                 <script>
                                     document.addEventListener('DOMContentLoaded', function() {
                                         var audio = new Audio('sonidoDerrota.mp3');
                                         audio.play();
                                     });
                                 </script>
-                                <%request.getSession().removeAttribute("primeraVez");}%>
+                                <%}%>
                                 <li>
                                     <div class="row">
                                         <img src="iconoDerrota.png" style="width: 100%" alt="">
@@ -363,15 +408,18 @@ ArrayList<Jugador> listaJugadoresGuerra=(ArrayList<Jugador>) request.getAttribut
 </footer>
 <%for(Jugador j:listaJugadoresGuerra){%>
 <div class="overlay" id="overlayListaJugadores<%=listaJugadoresGuerra.indexOf(j)%>"></div>
-<div class="popup" style="width: 600px;" id="popupListaJugadores<%=listaJugadoresGuerra.indexOf(j)%>">
+<div class="popup" id="popupListaJugadores<%=listaJugadoresGuerra.indexOf(j)%>">
     <svg class="cerrarPopup" id="cerrarPopupListaJugadores<%=listaJugadoresGuerra.indexOf(j)%>" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M11.4142 10L16.7071 4.70711C17.0976 4.31658 17.0976 3.68342 16.7071 3.29289C16.3166 2.90237 15.6834 2.90237 15.2929 3.29289L10 8.58579L4.70711 3.29289C4.31658 2.90237 3.68342 2.90237 3.29289 3.29289C2.90237 3.68342 2.90237 4.31658 3.29289 4.70711L8.58579 10L3.29289 15.2929C2.90237 15.6834 2.90237 16.3166 3.29289 16.7071C3.68342 17.0976 4.31658 17.0976 4.70711 16.7071L10 11.4142L15.2929 16.7071C15.6834 17.0976 16.3166 17.0976 16.7071 16.7071C17.0976 16.3166 17.0976 15.6834 16.7071 15.2929L11.4142 10Z" fill="black"/>
     </svg>
+    <div class="text-center">
+        <img src="mecha.png" style="width: 20%;" alt="">
+    </div>
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-1"></div>
             <div class="col-sm-10">
-                <h5 style="text-align: center;">¿Está seguro de declarar la guerra a <span style="color: red"><%=j.getUsuario()%></span> con <%if(j.getDiasDesdeCreacion()==1){%><span style="color: #20c997">1 día</span><%}else{%><span style="color: #20c997"><%=j.getDiasDesdeCreacion()%> días</span><%}%> de jugar?</h5>
+                <h2 style="text-align: center;">¿Está seguro de declarar la guerra a <span style="color: red"><%=j.getUsuario()%></span> con <%if(j.getDiasDesdeCreacion()==1){%><span style="color: #20c997">1 día</span><%}else{%><span style="color: #20c997"><%=j.getDiasDesdeCreacion()%> días</span><%}%> de jugar?</h2>
             </div>
             <div class="col-sm-1"></div>
         </div>
@@ -379,27 +427,27 @@ ArrayList<Jugador> listaJugadoresGuerra=(ArrayList<Jugador>) request.getAttribut
     <br>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-6 d-flex justify-content-center" style="margin-top: 5px;">
+            <div class="col-sm-6" style="display: flex;justify-content: center">
                 <form method="post" action="<%=request.getContextPath()%>/GuerraServlet?action=declararGuerra">
                     <input type="hidden" name="idJugadorDefensor" value="<%=j.getIdJugador()%>">
-                    <button type="submit" class="button secondary" style="background-color:rgba(224, 12, 121, 0.8);color:white">Sí</button>
+                    <button type="submit">Declarar</button>
                 </form>
             </div>
-            <div class="col-sm-6 d-flex justify-content-center" style="margin-top: 5px;">
-                <button class="button secondary" id="cerrarPopupListaJugadores<%=listaJugadoresGuerra.indexOf(j)%>aux" style="background-color: rgba(120, 52, 87, 0.8);color: white">Cancelar</button>
+            <div class="col-sm-6" style="display: flex;justify-content: center">
+                <button id="cerrarPopupListaJugadores<%=listaJugadoresGuerra.indexOf(j)%>aux">Cancelar</button>
             </div>
         </div>
     </div>
 </div>
 <%}%>
-<%if(guerraHaceUnDia&&request.getSession().getAttribute("primeraVez")!=null){%>
+<%if(guerraHaceUnDia&&primeraVez!=null){%>
 <div class="overlay" style="display: block" id="overlayUltimaGuerra>"></div>
-<div class="popup" style="width: 600px; display: block" id="popupUltimaGuerra">
+<div class="popup" style="display: block" id="popupUltimaGuerra">
     <svg class="cerrarPopup" id="cerrarPopupUltimaGuerra" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M11.4142 10L16.7071 4.70711C17.0976 4.31658 17.0976 3.68342 16.7071 3.29289C16.3166 2.90237 15.6834 2.90237 15.2929 3.29289L10 8.58579L4.70711 3.29289C4.31658 2.90237 3.68342 2.90237 3.29289 3.29289C2.90237 3.68342 2.90237 4.31658 3.29289 4.70711L8.58579 10L3.29289 15.2929C2.90237 15.6834 2.90237 16.3166 3.29289 16.7071C3.68342 17.0976 4.31658 17.0976 4.70711 16.7071L10 11.4142L15.2929 16.7071C15.6834 17.0976 16.3166 17.0976 16.7071 16.7071C17.0976 16.3166 17.0976 15.6834 16.7071 15.2929L11.4142 10Z" fill="black"/>
     </svg>
     <ul>
-        <%if(historialGuerras.get(0).getResultado().equals("Victoria atacante")&&historialGuerras.get(0).getJugadorAtacante().getIdJugador()==jugadorActual.getIdJugador()){%>
+        <%if((historialGuerras.get(0).getResultado().equals("Victoria atacante")&&historialGuerras.get(0).getJugadorAtacante().getIdJugador()==jugadorActual.getIdJugador())||(historialGuerras.get(0).getResultado().equals("Victoria defensiva")&&historialGuerras.get(0).getJugadorDefensor().getIdJugador()==jugadorActual.getIdJugador())){%>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 var audio = new Audio('sonidoVictoria.mp3');
@@ -441,7 +489,6 @@ ArrayList<Jugador> listaJugadoresGuerra=(ArrayList<Jugador>) request.getAttribut
         </li>
     </ul>
 </div>
-<div id="aux"></div>
 <%}%>
 <script>
     function popupFunc(popupId,abrirId,cerrarClass,overlayId){
@@ -449,14 +496,20 @@ ArrayList<Jugador> listaJugadoresGuerra=(ArrayList<Jugador>) request.getAttribut
         const overlay=document.getElementById(overlayId);
         const popup=document.getElementById(popupId);
         const mostrarPopup = () => {
-            overlay.style.display = 'block';
-            popup.style.display = 'block';
+            overlay.style.opacity='1';
+            overlay.style.pointerEvents='auto';
+            popup.style.opacity='1';
+            popup.style.pointerEvents='auto';
             document.body.style.overflow = 'hidden';
+            popup.style.transform= "scale(1.2)";
         };
         showPopup.addEventListener('click', mostrarPopup);
         const cerrarPopup = () => {
-            overlay.style.display = 'none';
-            popup.style.display = 'none';
+            overlay.style.opacity='0';
+            overlay.style.pointerEvents='none';
+            popup.style.opacity='0';
+            popup.style.pointerEvents='none'
+            popup.style.transform= "scale(1)";
             document.body.style.overflow = 'auto';
 
         };
@@ -481,7 +534,7 @@ ArrayList<Jugador> listaJugadoresGuerra=(ArrayList<Jugador>) request.getAttribut
     popupFunc('popupListaJugadores<%=i%>','mostrarPopupListaJugadores<%=i%>',['cerrarPopupListaJugadores<%=i%>','cerrarPopupListaJugadores<%=i%>aux'],'overlayListaJugadores<%=i%>');
     <%}%>
 
-    <%if(guerraHaceUnDia&&request.getSession().getAttribute("primeraVez")!=null){
+    <%if(guerraHaceUnDia&&primeraVez!=null){
     request.getSession().removeAttribute("primeraVez");%>
         popupFunc('popupUltimaGuerra','aux',['cerrarPopupUltimaGuerra'],'overlayUltimaGuerra');
     <%}%>

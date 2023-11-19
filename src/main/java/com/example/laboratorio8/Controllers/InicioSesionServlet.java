@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.example.laboratorio8.Beans.Jugador;
+import com.example.laboratorio8.Daos.DaoGuerra;
 import com.example.laboratorio8.Daos.DaoJugador;
 import com.example.laboratorio8.Daos.DaoListaNegra;
 import com.mysql.cj.Session;
@@ -43,7 +44,8 @@ public class InicioSesionServlet extends HttpServlet {
         response.setContentType("text/html");
         DaoListaNegra dLN=new DaoListaNegra();
         DaoJugador dJ=new DaoJugador();
-        System.out.println("doPost");
+        DaoGuerra dG=new DaoGuerra();
+        request.getSession().setAttribute("primeraVez","**");
         String action = request.getParameter("action") == null ? "default" : request.getParameter("action");
         switch (action){
             case "logIn":
@@ -76,18 +78,17 @@ public class InicioSesionServlet extends HttpServlet {
                         atributoL+="0";
                         request.getSession().setAttribute("atributo",atributoL);
                         response.sendRedirect(request.getContextPath());
-                    }else if(dJ.estaEnPaz(jugador.getIdJugador())){
-                        request.getSession().setAttribute("jugadorActual",jugador);
-                        response.sendRedirect("HabitantesServlet");
                     }else{
-                        request.getSession().setAttribute("primeraVez","**");
                         request.getSession().setAttribute("jugadorActual",jugador);
-                        response.sendRedirect("GuerraServlet");
+                        if(!dG.guerraHaceUnDia(jugador.getIdJugador())){
+                            response.sendRedirect("HabitantesServlet");
+                        }else{
+                            response.sendRedirect("GuerraServlet");
+                        }
                     }
                 }
                 break;
             case "signIn":
-                System.out.println("signIn");
                 HttpSession s=request.getSession();
                 String nombre=request.getParameter("nombre");
                 request.setAttribute("nombre",nombre);

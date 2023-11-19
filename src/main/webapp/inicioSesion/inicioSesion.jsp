@@ -320,7 +320,7 @@ if(!atributo.equals("*")){
                                         </div>
                                     </div>
                                     <div class="form-wrap form-button">
-                                        <a onclick="enviarForm('signIn')" class="button button-block button-secondary">Registrarse</a>
+                                        <a onclick="enviarForm('signIn')" class="button button-block button-secondary" style="color: white">Registrarse</a>
                                     </div>
                                 </form>
                             </div>

@@ -283,20 +283,4 @@ public class DaoJugador extends DaoBase{
             throw new RuntimeException(e);
         }
     }
-
-    public boolean estaEnPaz(int idJugador){
-        String sql = "select j.idJugador from jugador j, guerra g where (j.idJugador=g.idJugadorAtacante and j.diasDesdeCreacion-g.diasRelativosJugadorAtacante<=1) or (j.idJugador=g.idJugadorDefensor and j.diasDesdeCreacion-g.diasRelativosJugadorDefensor<=1) and j.idJugador=?";
-        try (Connection conn = this.getConection();PreparedStatement pstmt = conn.prepareStatement(sql)){
-            pstmt.setInt(1,idJugador);
-            try(ResultSet rs=pstmt.executeQuery()){
-                if(rs.next()){
-                    return false;
-                }else{
-                    return true;
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
