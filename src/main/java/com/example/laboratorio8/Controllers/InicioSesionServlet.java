@@ -19,9 +19,17 @@ public class InicioSesionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         String action = request.getParameter("action") == null ? "default" : request.getParameter("action");
+        System.out.println("doGet");
         switch (action){
             case "default":
-                request.getRequestDispatcher("inicioSesion/inicioSesion.jsp").forward(request,response);
+                if(request.getSession().getAttribute("jugadorActual")!=null){
+                    response.sendRedirect("HabitantesServlet");
+                }else{
+                    if(request.getSession().getAttribute("atributo")==null){
+                        request.getSession().setAttribute("atributo","*");
+                    }
+                    request.getRequestDispatcher("inicioSesion/inicioSesion.jsp").forward(request,response);
+                }
                 break;
         }
     }
@@ -31,57 +39,51 @@ public class InicioSesionServlet extends HttpServlet {
         response.setContentType("text/html");
         DaoListaNegra dLN=new DaoListaNegra();
         DaoJugador dJ=new DaoJugador();
+        System.out.println("doPost");
         String action = request.getParameter("action") == null ? "default" : request.getParameter("action");
         switch (action){
             case "logIn":
                 String usuarioCorreoLogin=request.getParameter("login");
                 String contrasenaLogin=request.getParameter("password");
                 request.setAttribute("usuarioCorreoLogin",usuarioCorreoLogin);
+                String atributoL="L-";
                 boolean succesfulLogin=true;
                 if(usuarioCorreoLogin.isEmpty()){
-                    try {
-                        Thread.sleep(1);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                    request.getSession().setAttribute("usuarioCorreoLoginVacio","1");
+                    atributoL+="1";
                     succesfulLogin=false;
-                }if(contrasenaLogin.isEmpty()){
-                    try {
-                        Thread.sleep(1);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                    request.getSession().setAttribute("contrasenaLoginVacia","2");
+                }else {
+                    atributoL+="0";
+                }
+                atributoL+="-";
+                if(contrasenaLogin.isEmpty()){
+                    atributoL+="1";
                     succesfulLogin=false;
-                }Jugador jugador= dJ.logIn(usuarioCorreoLogin,contrasenaLogin);
+                }else{
+                    atributoL+="0";
+                }
+                atributoL+="-";
+                Jugador jugador= dJ.logIn(usuarioCorreoLogin,contrasenaLogin);
                 if(jugador==null){
-                    try {
-                        Thread.sleep(1);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                    request.getSession().setAttribute("loginError","3");
+                    atributoL+="1";
+                    request.getSession().setAttribute("atributo",atributoL);
                     response.sendRedirect(request.getContextPath());
                 }else{
                     if(!succesfulLogin) {
-                        try {
-                            Thread.sleep(1);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
+                        atributoL+="0";
+                        request.getSession().setAttribute("atributo",atributoL);
                         response.sendRedirect(request.getContextPath());
                     }else if(dJ.estaEnPaz(jugador.getIdJugador())){
                         request.getSession().setAttribute("jugadorActual",jugador);
                         response.sendRedirect("HabitantesServlet");
                     }else{
-                        request.getSession().setAttribute("primeraVez","1");
+                        request.getSession().setAttribute("primeraVez","**");
                         request.getSession().setAttribute("jugadorActual",jugador);
                         response.sendRedirect("GuerraServlet");
                     }
                 }
                 break;
             case "signIn":
+                System.out.println("signIn");
                 HttpSession s=request.getSession();
                 String nombre=request.getParameter("nombre");
                 request.setAttribute("nombre",nombre);
@@ -94,23 +96,28 @@ public class InicioSesionServlet extends HttpServlet {
                 String contrasena=request.getParameter("contrasena");
                 String repetirContrasena=request.getParameter("repetirContrasena");
                 boolean validacion=true;
-
+                String atributo="";
                 if(usuario.isEmpty()){
-                    s.setAttribute("usuarioVacio","4");
+                    atributo+="1";
                     validacion=false;
                 }else{
+                    atributo+="0";
                     char[] usuarioAux=usuario.toCharArray();
                     if(usuarioAux[0]=='0'||usuarioAux[0]=='1'||usuarioAux[0]=='2'||usuarioAux[0]=='3'||usuarioAux[0]=='4'||usuarioAux[0]=='5'||usuarioAux[0]=='6'||usuarioAux[0]=='7'||usuarioAux[0]=='8'||usuarioAux[0]=='9'){
-                        s.setAttribute("usuarioError","5");
+                        atributo+="1";
                         validacion=false;
                     }else{
+                        atributo+="0";
                         if(usuario.length()>45){
-                            s.setAttribute("usuarioLargo","6");
+                            atributo+="1";
                             validacion=false;
                         }else {
+                            atributo+="0";
                             if(dJ.verifyUsuarioRepetido(usuario)){
-                                s.setAttribute("usuarioRepetido","7");
+                                atributo+="1";
                                 validacion=false;
+                            }else{
+                                atributo+="0";
                             }
                         }
                     }
@@ -120,60 +127,81 @@ public class InicioSesionServlet extends HttpServlet {
 
 
 
-
+                atributo+="-";
                 if(nombre.isEmpty()){
-                    s.setAttribute("nombreVacio","8");
+                    atributo+="1";
                     validacion=false;
                 }else{
+                    atributo+="0";
                     char[] nombreAux=nombre.toCharArray();
                     if(nombreAux[0]=='0'||nombreAux[0]=='1'||nombreAux[0]=='2'||nombreAux[0]=='3'||nombreAux[0]=='4'||nombreAux[0]=='5'||nombreAux[0]=='6'||nombreAux[0]=='7'||nombreAux[0]=='8'||nombreAux[0]=='9'){
-                        s.setAttribute("nombreError","9");
+                        atributo+="1";
                         validacion=false;
                     }else{
+                        atributo+="0";
                         if(nombre.length()>45){
-                            s.setAttribute("nombreLargo","10");
+                            atributo+="1";
                             validacion=false;
+                        }else {
+                            atributo+="0";
                         }
                     }
                 }
 
-
+                atributo+="-";
 
 
                 if(correo.isEmpty()){
-                    s.setAttribute("correoVacio","11");
+                    atributo+="1";
                     validacion=false;
                 }else{
+                    atributo+="0";
                     if(correo.length()>45){
-                        s.setAttribute("correoLargo","12");
+                        atributo+="1";
                         validacion=false;
                     }else{
+                        atributo+="0";
                         if(dLN.verifyCorreo(correo)){
-                            s.setAttribute("correoListaNegra","13");
+                            atributo+="1";
                             validacion=false;
-                        }else if(dJ.verifyCorreoRepetido(correo)){
-                            s.setAttribute("correoRepetido","14");
-                            validacion=false;
+                        }else{
+                            atributo+="0";
+                            if(dJ.verifyCorreoRepetido(correo)){
+                                atributo+="1";
+                                validacion=false;
+                            }else{
+                                atributo+="0";
+                            }
                         }
                     }
                 }
 
-
+                atributo+="-";
 
                 if(contrasena.isEmpty()){
-                    s.setAttribute("contrasenaVacia","15");
-                    validacion=false;
-                }if(repetirContrasena.isEmpty()){
-                    s.setAttribute("repetirContrasenaVacia","16");
-                    validacion=false;
-                }if(!contrasena.equals(repetirContrasena)){
-                    s.setAttribute("contrasenasDiferentes","17");
+                    atributo+="1";
                     validacion=false;
                 }else{
+                    atributo+="0";
+                }
+                atributo+="-";
+                if(repetirContrasena.isEmpty()){
+                    atributo+="1";
+                    validacion=false;
+                }else {
+                    atributo+="0";
+                }
+                atributo+="-";
+                if(!contrasena.equals(repetirContrasena)){
+                    atributo+="1";
+                    validacion=false;
+                }else{
+                    atributo+="0";
                     if(contrasena.length()>45){
-                        s.setAttribute("contrasenaLarga","18");
+                        atributo+="1";
                         validacion=false;
-                    }else{
+                    }else {
+                        atributo+="0";
                         String regexMayuscula = ".*[A-Z].*";
                         String regexNumero = ".*\\d.*";
                         String regexEspecial = ".*[^A-Za-z0-9].*";
@@ -187,25 +215,32 @@ public class InicioSesionServlet extends HttpServlet {
                         boolean contieneNumero = matcherNumero.matches();
                         boolean contieneEspecial = matcherEspecial.matches();
                         if (!(contieneMayuscula && contieneNumero && contieneEspecial)) {
-                            s.setAttribute("contrasenaIncorrecta","19");
+                            atributo+="1";
                             validacion=false;
+                        }else {
+                            atributo+="0";
                         }
                     }
                 }
 
+                atributo+="-";
 
                 if(edad.isEmpty()){
-                    s.setAttribute("edadVacia","20");
+                    atributo+="1";
                     validacion=false;
                 }else{
+                    atributo+="0";
                     try{
                         Integer edadAux=Integer.parseInt(edad);
+                        atributo+="0";
                         if(edadAux<12&&validacion){
+                            atributo+="1";
                             dLN.insertListaNegra(correo);
-                            validacion=false;
+                        }else{
+                            atributo+="0";
                         }
                     }catch (NumberFormatException e){
-                        s.setAttribute("edadError","21");
+                        atributo+="1";
                         validacion=false;
                     }
                 }
@@ -214,8 +249,13 @@ public class InicioSesionServlet extends HttpServlet {
                     dJ.signIn(nombre,usuario,Integer.parseInt(edad),correo,contrasena);
                 }
 
-
+                request.getSession().setAttribute("atributo",atributo);
                 response.sendRedirect(request.getContextPath());
+                break;
+            case "logOut":
+                request.getSession().removeAttribute("jugadorActual");
+                response.sendRedirect(request.getContextPath());
+                break;
         }
     }
 }

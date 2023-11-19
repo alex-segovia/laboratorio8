@@ -1,71 +1,99 @@
+<%@ page import="java.util.Random" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%String nombreVacio=(String) request.getSession().getAttribute("nombreVacio");
-String nombreError=(String) request.getSession().getAttribute("nombreError");
-String nombreLargo=(String) request.getSession().getAttribute("nombreLargo");
-String usuarioVacio=(String) request.getSession().getAttribute("usuarioVacio");
-    String usuarioError=(String) request.getSession().getAttribute("usuarioError");
-    String usuarioLargo=(String) request.getSession().getAttribute("usuarioLargo");
-    String usuarioRepetido=(String) request.getSession().getAttribute("usuarioRepetido");
-    String correoVacio=(String) request.getSession().getAttribute("correoVacio");
-    String correoLargo=(String) request.getSession().getAttribute("correoLargo");
-    String correoListaNegra=(String) request.getSession().getAttribute("correoListaNegra");
-    String correoRepetido=(String) request.getSession().getAttribute("correoRepetido");
-    String edadVacia=(String) request.getSession().getAttribute("edadVacia");
-    String edadError=(String) request.getSession().getAttribute("edadError");
-    String contrasenaVacia=(String) request.getSession().getAttribute("contrasenaVacia");
-    String repetirContrasenaVacia=(String) request.getSession().getAttribute("repetirContrasenaVacia");
-    String contrasenasDiferentes=(String) request.getSession().getAttribute("contrasenasDiferentes");
-    String contrasenaLarga=(String) request.getSession().getAttribute("contrasenaLarga");
-    String contrasenaIncorrecta=(String) request.getSession().getAttribute("contrasenaIncorrecta");
-    String nombre=(String) request.getAttribute("nombre");
-    String usuario=(String) request.getAttribute("usuario");
-    String edad=(String) request.getAttribute("edad");
-    String correo=(String) request.getAttribute("correo");
-    String usuarioCorreoLoginVacio=(String) request.getSession().getAttribute("usuarioCorreoLoginVacio");
-    String contrasenaLoginVacia=(String) request.getSession().getAttribute("contrasenaLoginVacia");
-    String loginError=(String) request.getSession().getAttribute("loginError");
-    String usuarioCorreoLogin=(String) request.getAttribute("usuarioCorreoLogin");
-    if(nombreVacio!=null){
-        request.getSession().removeAttribute("nombreVacio");
-    }if(nombreError!=null){
-        request.getSession().removeAttribute("nombreError");
-    }if(nombreLargo!=null){
-        request.getSession().removeAttribute("nombreLargo");
-    }if(usuarioVacio!=null){
-        request.getSession().removeAttribute("usuarioVacio");
-    }if(usuarioError!=null){
-        request.getSession().removeAttribute("usuarioError");
-    }if(usuarioLargo!=null){
-        request.getSession().removeAttribute("usuarioLargo");
-    }if(correoVacio!=null){
-        request.getSession().removeAttribute("correoVacio");
-    }if(correoLargo!=null){
-        request.getSession().removeAttribute("correoLargo");
-    }if(correoListaNegra!=null){
-        request.getSession().removeAttribute("correoListaNegra");
-    }if(correoRepetido!=null){
-        request.getSession().removeAttribute("correoRepetido");
-    }if(edadVacia!=null){
-        request.getSession().removeAttribute("edadVacia");
-    }if(edadError!=null){
-        request.getSession().removeAttribute("edadError");
-    }if(contrasenaVacia!=null){
-        request.getSession().removeAttribute("contrasenaVacia");
-    }if(repetirContrasenaVacia!=null){
-        request.getSession().removeAttribute("repetirContrasenaVacia");
-    }if(contrasenasDiferentes!=null){
-        request.getSession().removeAttribute("contrasenasDiferentes");
-    }if(contrasenaLarga!=null){
-        request.getSession().removeAttribute("contrasenaLarga");
-    }if(contrasenaIncorrecta!=null){
-        request.getSession().removeAttribute("contrasenaIncorrecta");
-    }if(usuarioCorreoLoginVacio!=null){
-        request.getSession().removeAttribute("usuarioCorreoLoginVacio");
-    }if(contrasenaLoginVacia!=null){
-        request.getSession().removeAttribute("contrasenaLoginVacia");
-    }if(loginError!=null){
-        request.getSession().removeAttribute("loginError");
+<%String atributo=(String)request.getSession().getAttribute("atributo");
+    String nombreVacio="0";
+    String nombreError="0";
+    String nombreLargo="0";
+    String usuarioVacio="0";
+    String usuarioError="0";
+    String usuarioLargo="0";
+    String usuarioRepetido="0";
+    String correoVacio="0";
+    String correoLargo="0";
+    String correoListaNegra="0";
+    String correoRepetido="0";
+    String edadVacia="0";
+    String edadError="0";
+    String edadListaNegra="0";
+    String contrasenaVacia="0";
+    String repetirContrasenaVacia="0";
+    String contrasenasDiferentes="0";
+    String contrasenaLarga="0";
+    String contrasenaIncorrecta="0";
+    String nombre=request.getAttribute("nombre")==null?"":(String) request.getAttribute("nombre");
+    String usuario=request.getAttribute("usuario")==null?"":(String) request.getAttribute("usuario");
+    String edad=request.getAttribute("edad")==null?"":(String) request.getAttribute("edad");
+    String correo=request.getAttribute("correo")==null?"":(String) request.getAttribute("correo");
+    String usuarioCorreoLoginVacio="0";
+    String contrasenaLoginVacia="0";
+    String loginError="0";
+    String usuarioCorreoLogin=request.getAttribute("usuarioCorreoLogin")==null?"":(String) request.getAttribute("usuarioCorreoLogin");
+if(!atributo.equals("*")){
+
+    String atributoAux[]=atributo.split("-");
+
+    if(atributoAux[0].equals("L")){
+        if(atributoAux[1].equals("1")){
+            usuarioCorreoLoginVacio="1";
+        }
+        if(atributoAux[2].equals("1")){
+            contrasenaLoginVacia="1";
+        }
+        if(atributoAux[3].equals("1")){
+            loginError="1";
+        }
+    }else {
+        String nombreAux=atributoAux[1];
+
+        switch (nombreAux) {
+            case "1" : nombreVacio = "1"; break;
+            case "01" : nombreError = "1"; break;
+            case "001" : nombreLargo = "1"; break;
+        }
+        String usuarioAux=atributoAux[0];
+
+        switch (usuarioAux){
+            case "1" : usuarioVacio = "1"; break;
+            case "01" : usuarioError = "1"; break;
+            case "001" : usuarioLargo = "1"; break;
+            case "0001" : usuarioRepetido = "1"; break;
+        }
+
+        String correoAux=atributoAux[2];
+
+        switch (correoAux){
+            case "1" : correoVacio = "1"; break;
+            case "01" : correoLargo = "1"; break;
+            case "001" : correoListaNegra = "1"; break;
+            case "0001" : correoRepetido = "1"; break;
+        }
+
+        if(atributoAux[3].equals("1")){
+            contrasenaVacia = "1";
+        }
+
+        if(atributoAux[4].equals("1")){
+            repetirContrasenaVacia = "1";
+        }
+
+        String contrasenaAux=atributoAux[5];
+
+        switch (contrasenaAux){
+            case "1" : contrasenasDiferentes = "1"; break;
+            case "01" : contrasenaLarga = "1"; break;
+            case "001" : contrasenaIncorrecta = "1"; break;
+        }
+
+        String edadAux=atributoAux[6];
+
+        switch (edadAux){
+            case "1" : edadVacia = "1"; break;
+            case "01" : edadError = "1"; break;
+            case "001" : edadListaNegra = "1"; break;
+        }
     }
+}
+    request.getSession().removeAttribute("atributo");
 %>
 <!DOCTYPE html>
 <html>
@@ -267,32 +295,32 @@ String usuarioVacio=(String) request.getSession().getAttribute("usuarioVacio");
                                     <label for="chk" class="labelAux" aria-hidden="true">Registrarse</label>
                                     <div class="row row-20 row-fix">
                                         <div class="col-sm-12">
-                                            <label for="nombreSignIn" class="form-label-outside" style="cursor: auto !important;">Nombre <a style="color: red"><%if(nombreVacio!=null){%>Ingrese un nombre<%} else if (nombreError!=null){%>La primera letra no puede ser un número<%}else if(nombreLargo!=null){%>El nombre es muy largo<%}%></a></label>
-                                            <input class="form-input" name="nombre" type="text" <%if(nombre!=null){%>value="<%=nombre%>"<%}%> id="nombreSignIn">
+                                            <label for="nombreSignIn" class="form-label-outside" style="cursor: auto !important;">Nombre <%if(nombreVacio.equals("1")){%><a style="color: red">Ingrese un nombre<%} else if (nombreError.equals("1")){%>La primera letra no puede ser un número<%}else if(nombreLargo.equals("1")){%>El nombre es muy largo<%}%></a></label>
+                                            <input class="form-input" name="nombre" type="text" value="<%=nombre%>" id="nombreSignIn">
                                         </div>
                                         <div class="col-sm-6">
-                                            <label for="usuarioSignIn" class="form-label-outside" style="cursor: auto !important;">Usuario <a style="color: red"><%if(usuarioVacio!=null){%>Ingrese un usuario<%} else if (usuarioError!=null){%>La primera letra no puede ser un número<%}else if(usuarioLargo!=null){%>El usuario es muy largo<%}else if(usuarioRepetido!=null){%>El usuario ya se encuentra registrado<%}%></a></label>
-                                            <input class="form-input" name="usuario" type="text" <%if(usuario!=null){%>value="<%=usuario%>"<%}%> id="usuarioSignIn">
+                                            <label for="usuarioSignIn" class="form-label-outside" style="cursor: auto !important;">Usuario <a style="color: red"><%if(usuarioVacio.equals("1")){%>Ingrese un usuario<%} else if (usuarioError.equals("1")){%>La primera letra no puede ser un número<%}else if(usuarioLargo.equals("1")){%>El usuario es muy largo<%}else if(usuarioRepetido.equals("1")){%>El usuario ya se encuentra registrado<%}%></a></label>
+                                            <input class="form-input" name="usuario" type="text" value="<%=usuario%>" id="usuarioSignIn">
                                         </div>
                                         <div class="col-sm-6">
-                                            <label for="edadSignIn" class="form-label-outside" style="cursor: auto !important;">Edad <a style="color: red"><%if(edadVacia!=null){%>Ingrese una edad<%} else if (edadError!=null){%>La edad tiene que ser un número<%}%></a></label>
-                                            <input class="form-input" name="edad" type="number" <%if(edad!=null){%>value="<%=edad%>"<%}%> id="edadSignIn">
+                                            <label for="edadSignIn" class="form-label-outside" style="cursor: auto !important;">Edad <a style="color: red"><%if(edadVacia.equals("1")){%>Ingrese una edad<%} else if (edadError.equals("1")){%>La edad tiene que ser un número<%}else if(edadListaNegra.equals("1")){%>La edad tiene que ser mayor a 12<%}%></a></label>
+                                            <input class="form-input" name="edad" type="number" value="<%=edad%>" id="edadSignIn">
                                         </div>
                                         <div class="col-sm-12">
-                                            <label for="correoSignIn" class="form-label-outside" style="cursor: auto !important;">Correo electrónico <a style="color: red"><%if(correoVacio!=null){%>Ingrese un correo<%} else if (correoLargo!=null){%>El correo es muy largo<%}else if(correoListaNegra!=null){%>El correo se encuentra en lista negra<%}else if(correoRepetido!=null){%>El correo ya se encuentra registrado<%}%></a></label>
-                                            <input class="form-input" name="correo" type="email" <%if(correo!=null){%>value="<%=correo%>"<%}%> id="correoSignIn">
+                                            <label for="correoSignIn" class="form-label-outside" style="cursor: auto !important;">Correo electrónico <a style="color: red"><%if(correoVacio.equals("1")){%>Ingrese un correo<%} else if (correoLargo.equals("1")){%>El correo es muy largo<%}else if(correoListaNegra.equals("1")){%>El correo se encuentra en lista negra<%}else if(correoRepetido.equals("1")){%>El correo ya se encuentra registrado<%}%></a></label>
+                                            <input class="form-input" name="correo" type="email" value="<%=correo%>" id="correoSignIn">
                                         </div>
                                         <div class="col-sm-12">
-                                            <label for="contrasenaSignIn" class="form-label-outside" style="cursor: auto !important;">Contraseña <a style="color: red"><%if(contrasenaVacia!=null){%>Ingrese una contraseña<%} else if (contrasenasDiferentes!=null){%>Las contraseñas no coinciden<%}else if(contrasenaLarga!=null){%>La contraseña es muy larga<%}else if(contrasenaIncorrecta!=null){%>La contraseña debe contener por lo menos una mayúscula, un número y un carácter especial<%}%></a></label>
+                                            <label for="contrasenaSignIn" class="form-label-outside" style="cursor: auto !important;">Contraseña <a style="color: red"><%if(contrasenaVacia.equals("1")){%>Ingrese una contraseña<%} else if (contrasenasDiferentes.equals("1")){%>Las contraseñas no coinciden<%}else if(contrasenaLarga.equals("1")){%>La contraseña es muy larga<%}else if(contrasenaIncorrecta.equals("1")){%>La contraseña debe contener por lo menos una mayúscula, un número y un carácter especial<%}%></a></label>
                                             <input class="form-input" name="contrasena" type="password" id="contrasenaSignIn">
                                         </div>
                                         <div class="col-sm-12">
-                                            <label for="repetirContrasenaSignIn" class="form-label-outside" style="cursor: auto !important;">Repetir contraseña <a style="color: red"><%if(repetirContrasenaVacia!=null){%>Ingrese una contraseña<%}%></a></label>
+                                            <label for="repetirContrasenaSignIn" class="form-label-outside" style="cursor: auto !important;">Repetir contraseña <a style="color: red"><%if(repetirContrasenaVacia.equals("1")){%>Ingrese una contraseña<%}%></a></label>
                                             <input class="form-input" name="repetirContrasena" type="password" id="repetirContrasenaSignIn">
                                         </div>
                                     </div>
                                     <div class="form-wrap form-button">
-                                        <button onclick="enviarForm('signIn')" class="button button-block button-secondary">Registrarse</button>
+                                        <a onclick="enviarForm('signIn')" class="button button-block button-secondary">Registrarse</a>
                                     </div>
                                 </form>
                             </div>
@@ -301,18 +329,18 @@ String usuarioVacio=(String) request.getSession().getAttribute("usuarioVacio");
                                     <label class="labelAux" for="chk" aria-hidden="true" style="color: white">Iniciar sesión</label>
                                     <div class="row row-20 row-fix">
                                         <div class="col-sm-12">
-                                            <label for="usuarioLogin" style="color: white;cursor: auto !important;" class="form-label-outside">Usuario/Correo electrónico <a style="color: red"><%if(usuarioCorreoLoginVacio!=null){%>Ingrese un correo/usuario<%}%></a></label>
-                                            <input class="form-input" name="login" type="text" <%if(usuarioCorreoLogin!=null){%>value="<%=usuarioCorreoLogin%>"<%}%> id="usuarioLogin">
+                                            <label for="usuarioLogin" style="color: white;cursor: auto !important;" class="form-label-outside">Usuario/Correo electrónico <a style="color: red"><%if(usuarioCorreoLoginVacio.equals("1")){%>Ingrese un correo/usuario<%}%></a></label>
+                                            <input class="form-input" name="login" type="text" value="<%=usuarioCorreoLogin%>" id="usuarioLogin">
                                         </div>
                                         <div class="col-sm-12">
-                                            <label for="contrasenaLogin" style="color: white;cursor: auto !important;" class="form-label-outside">Contraseña <a style="color: red"><%if(contrasenaLoginVacia!=null){%>Ingrese una contraseña<%}%></a></label>
+                                            <label for="contrasenaLogin" style="color: white;cursor: auto !important;" class="form-label-outside">Contraseña <a style="color: red"><%if(contrasenaLoginVacia.equals("1")){%>Ingrese una contraseña<%}%></a></label>
                                             <input class="form-input" name="password" type="password" id="contrasenaLogin">
                                         </div>
                                     </div>
                                     <div class="form-wrap form-button">
-                                        <button onclick="enviarForm('logIn')" class="button button-block button-secondary" style="background: rgba(255, 234, 245, 0.8);color: rgba(120, 52, 87, 1)">Iniciar sesión</button>
+                                        <a onclick="enviarForm('logIn')" class="button button-block button-secondary" style="background: rgba(255, 234, 245, 0.8);color: rgba(120, 52, 87, 1)">Iniciar sesión</a>
                                     </div>
-                                    <%if(loginError!=null){%>
+                                    <%if(loginError.equals("1")){%>
                                     <a style="color: red">Las credenciales no son correctas</a>
                                     <%}%>
                                 </form>
@@ -329,7 +357,6 @@ String usuarioVacio=(String) request.getSession().getAttribute("usuarioVacio");
         </div>
     </section>
 </div>
-<!-- Javascript-->
 <script>
     function enviarForm(idForm){
         let form=document.getElementById(idForm);
