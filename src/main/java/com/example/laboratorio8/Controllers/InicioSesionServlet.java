@@ -23,6 +23,11 @@ public class InicioSesionServlet extends HttpServlet {
             case "default":
                 request.getRequestDispatcher("inicioSesion/inicioSesion.jsp").forward(request,response);
                 break;
+            case "logOut":
+                request.getSession().removeAttribute("jugadorActual");
+                request.getSession().invalidate();
+                response.sendRedirect(request.getContextPath());
+                break;
         }
     }
 
@@ -216,6 +221,7 @@ public class InicioSesionServlet extends HttpServlet {
 
 
                 response.sendRedirect(request.getContextPath());
+
         }
     }
 }
