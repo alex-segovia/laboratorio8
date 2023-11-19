@@ -172,7 +172,7 @@ if(!atributo.equals("*")){
         }
     </style>
 </head>
-<body style="overflow: hidden">
+<body style="overflow: hidden;">
 <!-- Page preloader-->
 <div class="page-loader">
     <div class="page-loader-body">
@@ -239,7 +239,16 @@ if(!atributo.equals("*")){
                                         <h3 style="font-family: 'Macondo', cursive !important;"><b>Crea tu propia civilización!</b></h3>
                                         <div class="divider divider-decorate"></div>
                                         <p class="text-spacing-sm" style="font-family: 'Macondo', cursive !important;">
-                                            ¡Descubre el poder de dar forma a la historia desde los cimientos mismos de una civilización! En este emocionante juego, serás el arquitecto de un mundo completamente nuevo, donde cada decisión que tomes moldeará el destino y la grandeza de tu pueblo.</p>
+                                            En este juego tienes la posibilidad de reclutar habitantes para tu civilización. Algunos de estos tendrán profesiones que mantienen viva a tu civilización.
+                                            <br>
+                                            Los granjeros producen alimentos para el pueblo. Ellos son muy importantes, ya que evitan que las personas muera de hambre.
+                                            <br>
+                                            Los constructores producen moral para tu pueblo, la cual evita que tus habitantes mueran por depresión; además, participan en la defensa de las guerras.
+                                            <br>
+                                            Los soldados producen moral para el pueblo y suelen poseer una fuerza mayor que los constructores, por lo que son enviados a luchar en las guerras.
+                                            <br>
+                                            Si la cantidad de habitantes de tu civilización es menor a cuatro veces la cantidad de días que llevas jugando, tu población entrará en desesperación, lo cual provocará que su moral baje.
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -252,7 +261,17 @@ if(!atributo.equals("*")){
                                     <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-5">
                                         <h3 style="font-family: 'Macondo', cursive !important;"><b>Lucha para ser el dominante en las tierras!</b></h3>
                                         <div class="divider divider-decorate"></div>
-                                        <p class="text-spacing-sm" style="font-family: 'Macondo', cursive !important;">¡Adéntrate en un mundo de estrategia, donde la supervivencia y la gloria se entrelazan en cada movimiento! Confronta a otras civilizaciones en una batalla épica por el dominio y la supremacía. Desarrolla tu sociedad y fortalece tus defensas para defender tus fronteras y expandir tu influencia.</p>
+                                        <p class="text-spacing-sm" style="font-family: 'Macondo', cursive !important;">
+                                            ¡Adéntrate en un mundo de estrategia, donde la supervivencia y la gloria se entrelazan en cada movimiento!
+                                            <br>
+                                            Confronta a otras civilizaciones en guerras por el dominio y la supremacía de las tierras.
+                                            <br>
+                                            Recluta soldados para obtener una mayor fuerza y atacar a otras civilizaciones que tengan una cantidad de días en el juego mayor o igual a la tuya.
+                                            <br>
+                                            Recluta constructores para fortalecer la defensa de tus fronteras y evitar que tu civilización muera ante los ataques de otras civilizaciones.
+                                            <br>
+                                            Pero sobre todo ten cuidado con los traidores, ya que ante el ataque de una civilización tus soldados pueden unirse al enemigo.
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -263,9 +282,17 @@ if(!atributo.equals("*")){
                             <div class="container container-bigger swiper-main-section">
                                 <div class="row row-fix justify-content-sm-center justify-content-md-start">
                                     <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-5">
-                                        <h3 style="font-family: 'Macondo', cursive !important;"><b>Guia a tu civilización a un destino lleno de riquezas y aventuras!</b></h3>
+                                        <h3 style="font-family: 'Macondo', cursive !important;"><b>Guia a tu civilización a un destino lleno de riquezas!</b></h3>
                                         <div class="divider divider-decorate"></div>
-                                        <p class="text-spacing-sm" style="font-family: 'Macondo', cursive !important;">¡Bienvenido al juego donde tu visión construye no solo una civilización, ¡sino un imperio de riqueza sin igual! En este viaje épico, tendrás el poder de erigir una sociedad próspera, donde la abundancia y la opulencia son más que metas, ¡son tu legado!</p>
+                                        <p class="text-spacing-sm" style="font-family: 'Macondo', cursive !important;">
+                                            En este viaje épico tendrás la posibilidad de gestionar los recursos de tu civilización que te pueden llevarán por un camino de abundancia y opulencia o por un camino de muerte y desesperación para tus habitantes
+                                            <br>
+                                            El alimento que producen tus granjeros debe solventar a todos los habitantes de tu civilización, ya que de lo contrario algunos pueden morir de hambre.
+                                            <br>
+                                            Este hecho puede provocar que los demás habitantes mueran por depresión. Por ello, también es importante tener soldados y constructores que le brinden moral a la población.
+                                            <br>
+                                            Si tu civilización es próspera, la comida restante en el día se llevará al almacén para ser utilizada al día siguiente. Sin embargo, solo puede permanecer un día allí, ya que luego se descompondrá.
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -273,7 +300,7 @@ if(!atributo.equals("*")){
                     </div>
                 </div>
                 <!-- Swiper controls-->
-                <div class="swiper-pagination-wrap">
+                <div class="swiper-pagination-wrap" style="margin-bottom: 150px !important;">
                     <div class="container container-bigger">
                         <div class="row">
                             <div class="col-sm-12">
@@ -289,7 +316,7 @@ if(!atributo.equals("*")){
                     <div class="col-lg-6 col-xxl-5" style="align-items: center">
                         <div class="form-request form-request-modern bloqueuwu">
                             <!-- RD Mailform-->
-                            <input type="checkbox" id="chk" style="display: none" aria-hidden="true">
+                            <input type="checkbox" id="chk" style="display: none" aria-hidden="true" checked>
                             <div class="signInAux">
                                 <form method="post" id="signIn" action="?action=signIn" class="rd-mailform form-fix">
                                     <label for="chk" class="labelAux" aria-hidden="true">Registrarse</label>
