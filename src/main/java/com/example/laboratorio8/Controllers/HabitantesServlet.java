@@ -18,11 +18,20 @@ public class HabitantesServlet extends HttpServlet {
         response.setContentType("text/html");
         Jugador jugadorActual=(Jugador) request.getSession().getAttribute("jugadorActual");
         if(jugadorActual!=null) {
+            String tipoLista = request.getParameter("mostrar")==null?"Todos":request.getParameter("mostrar");
             DaoHabitante daoHabitante = new DaoHabitante();
             DaoJugador daoJugador = new DaoJugador();
-            request.setAttribute("listaHabitantes", daoHabitante.listarHabitantes(jugadorActual.getIdJugador()));
-            request.getSession().setAttribute("jugadorActual", daoJugador.getJugadorPorId(jugadorActual.getIdJugador()));
-            request.getRequestDispatcher("habitantes.jsp").forward(request, response);
+            if(!tipoLista.equals("Vivos")) {
+                request.setAttribute("listaHabitantes", daoHabitante.listarHabitantes(jugadorActual.getIdJugador()));
+                request.setAttribute("tipoLista",tipoLista);
+                request.getSession().setAttribute("jugadorActual", daoJugador.getJugadorPorId(jugadorActual.getIdJugador()));
+                request.getRequestDispatcher("habitantes.jsp").forward(request, response);
+            }else{
+                request.setAttribute("listaHabitantes", daoHabitante.listarHabitantesSoloVivos(jugadorActual.getIdJugador()));
+                request.setAttribute("tipoLista",tipoLista);
+                request.getSession().setAttribute("jugadorActual", daoJugador.getJugadorPorId(jugadorActual.getIdJugador()));
+                request.getRequestDispatcher("habitantes.jsp").forward(request, response);
+            }
         }else{
             response.sendRedirect(request.getContextPath());
         }

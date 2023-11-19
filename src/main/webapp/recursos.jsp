@@ -238,13 +238,13 @@
                             </div>
                             <div class="row text-center mb-3">
                                 <div class="col-4 text-center">
-                                    <span style="font-size: 18px; color: white"><%=alimentoProduccionVsConsumo.get(1)%></span>
+                                    <span style="font-size: 18px; color: white"><%=Math.round(alimentoProduccionVsConsumo.get(1)*100)/100.0%></span>
                                 </div>
                                 <div class="col-4 text-center">
-                                    <span style="font-size: 18px; color: white"><%=alimentoProduccionVsConsumo.get(0)%></span>
+                                    <span style="font-size: 18px; color: white"><%=Math.round(alimentoProduccionVsConsumo.get(0)*100)/100.0%></span>
                                 </div>
                                 <div class="col-4 text-center">
-                                    <span style="font-size: 18px; color: white" title="Recuerda que la comida acumulada se pudre después de un día."><%=jugadorActual.getAlimentoTotal()%></span>
+                                    <span style="font-size: 18px; color: white" title="Recuerda que la comida acumulada se pudre después de un día."><%=Math.round(jugadorActual.getAlimentoTotal()*100)/100.0%></span>
                                 </div>
                             </div>
                             <div class="row text-center mb-4">
@@ -286,7 +286,7 @@
                                                 <h2><%=porcentaje%><span>%</span><h5><%=visual%></h5></h2>
                                             </div>
                                             <div class="number mt-2">
-                                                <h2 style="font-size: 10px; color: white"title="Representa la porción de comida que tus ciudadanos requieren respecto al alimento disponible.">Demanda Vs Almacén</h2>
+                                                <h2 style="font-size: 14px; color: white"title="Representa la porción de comida que tus ciudadanos requieren respecto al alimento disponible.">Demanda Vs Almacén</h2>
                                             </div>
                                         </div>
                                     </div>
@@ -339,8 +339,8 @@
                                     <tr class="my-4">
                                         <td  style="font-size: 14px; color: white"><%=habitante.getIdHabitante()%></td>
                                         <td  style="font-size: 14px; color: white"><%=habitante.getNombre()%></td>
-                                        <td  style="font-size: 14px; color: white"><%=habitante.getAlimentacionDiaria()%></td>
-                                        <td  style="font-size: 14px; color: white"><%=habitante.getMoral()%></td>
+                                        <td  style="font-size: 14px; color: white"><%=Math.round(habitante.getAlimentacionDiaria()*100)/100.0%></td>
+                                        <td  style="font-size: 14px; color: white"><%=Math.round(habitante.getMoral()*100)/100.0%></td>
                                         <td  style="font-size: 14px; color: white"><%=habitante.getDiasVivo()%></td>
                                         <td  style="font-size: 14px; color: white">
                                             <% if(habitante instanceof Constructor){%><%if(habitante.getGenero().equals("F")){%>Constructora<%}else{%>Constructor<%}

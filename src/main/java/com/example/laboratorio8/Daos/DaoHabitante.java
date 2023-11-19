@@ -284,6 +284,72 @@ public class DaoHabitante extends DaoBase{
         return habitante;
     }
 
+    public ArrayList<Habitante> listarHabitantesSoloVivos(int idJugador){
+        ArrayList<Habitante> listaHabitantes = new ArrayList<>();
+        String sql = "select * from habitante where idjugador=? and estaMuerto=false and estaExiliado=false";
+        try(Connection conn = getConection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1,idJugador);
+            try(ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    if (rs.getString(4).equals("Granjero")) {
+                        Granjero granjero = new Granjero();
+                        granjero.setIdHabitante(rs.getInt(1));
+                        granjero.setNombre(rs.getString(3));
+                        granjero.setGenero(rs.getString(5));
+                        granjero.setDiasVivo(rs.getInt(7));
+                        granjero.setEstaExiliado(rs.getBoolean(8));
+                        granjero.setEstaMuerto(rs.getBoolean(9));
+                        granjero.setAlimentacionDiaria(rs.getFloat(10));
+                        granjero.setMoral(rs.getFloat(11));
+                        granjero.setProduccionAlimento(rs.getFloat(13));
+                        listaHabitantes.add(granjero);
+                    } else if (rs.getString(4).equals("Constructor")) {
+                        Constructor constructor = new Constructor();
+                        constructor.setIdHabitante(rs.getInt(1));
+                        constructor.setNombre(rs.getString(3));
+                        constructor.setGenero(rs.getString(5));
+                        constructor.setDiasVivo(rs.getInt(7));
+                        constructor.setEstaExiliado(rs.getBoolean(8));
+                        constructor.setEstaMuerto(rs.getBoolean(9));
+                        constructor.setAlimentacionDiaria(rs.getFloat(10));
+                        constructor.setMoral(rs.getFloat(11));
+                        constructor.setFuerza(rs.getFloat(12));
+                        constructor.setProduccionMoral(rs.getFloat(14));
+                        listaHabitantes.add(constructor);
+                    } else if (rs.getString(4).equals("Soldado")) {
+                        Soldado soldado = new Soldado();
+                        soldado.setIdHabitante(rs.getInt(1));
+                        soldado.setNombre(rs.getString(3));
+                        soldado.setGenero(rs.getString(5));
+                        soldado.setDiasVivo(rs.getInt(7));
+                        soldado.setEstaExiliado(rs.getBoolean(8));
+                        soldado.setEstaMuerto(rs.getBoolean(9));
+                        soldado.setAlimentacionDiaria(rs.getFloat(10));
+                        soldado.setMoral(rs.getFloat(11));
+                        soldado.setFuerza(rs.getFloat(12));
+                        soldado.setProduccionMoral(rs.getFloat(14));
+                        listaHabitantes.add(soldado);
+                    } else {
+                        Habitante habitante = new Habitante();
+                        habitante.setIdHabitante(rs.getInt(1));
+                        habitante.setNombre(rs.getString(3));
+                        habitante.setGenero(rs.getString(5));
+                        habitante.setDiasVivo(rs.getInt(7));
+                        habitante.setEstaExiliado(rs.getBoolean(8));
+                        habitante.setEstaMuerto(rs.getBoolean(9));
+                        habitante.setAlimentacionDiaria(rs.getFloat(10));
+                        habitante.setMoral(rs.getFloat(11));
+                        listaHabitantes.add(habitante);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaHabitantes;
+    }
+
     public ArrayList<Habitante> listarHabitantes(int idJugador){
         ArrayList<Habitante> listaHabitantes = new ArrayList<>();
         String sql = "select * from habitante where idjugador=? order by IF(estaMuerto=false AND estaExiliado=false,0,1)";
