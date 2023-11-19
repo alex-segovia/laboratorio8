@@ -133,7 +133,7 @@
                     <div class="row">
                         <div class="col-lg-7">
                             <div class="header-text">
-                                <h6>Enriquécete</h6>
+                                <h6><em>Enriquécete</em></h6>
                                 <h4><em style="color: #ec6090 !important;">Gestión</em> de Recursos</h4>
                                 <p style="color: white !important; font-size: 100%">Organiza y gestiona tanto la producción como demanda de recursos de todos los habitantes. Visualiza el estado de los pobladores con moral criticamente baja y aquellos caídos el dia anterior para plantear una estrategia que lleve adelante tu civilización.</p>
 

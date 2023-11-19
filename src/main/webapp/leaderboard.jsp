@@ -184,7 +184,7 @@
                     <div class="row">
                         <div class="col-lg-7">
                             <div class="header-text mt-4">
-                                <h6>Compite</h6>
+                                <h6><em>Compite</em></h6>
                                 <h4><em style="color: #ff97bb !important;">Tabla</em> de clasificación</h4>
                                 <p style="color: white !important; font-size: 100%">¿Serás el líder que guíe a tu pueblo hacia la grandeza? Echa un vistazo a los líderes más poderosos, mide tu progreso y ¡prepárate para conquistar la historia!</p>
                             </div>

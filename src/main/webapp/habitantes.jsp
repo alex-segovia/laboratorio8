@@ -226,7 +226,7 @@
                     <div class="row">
                         <div class="col-lg-7">
                             <div class="header-text">
-                                <h6>Establécete</h6>
+                                <h6><em>Establécete</em></h6>
                                 <h4><em style="color: darkmagenta !important;">Gestión</em> de Habitantes</h4>
                                 <p style="color: white !important; font-size: 100%">Mantén un registro de todos los habitantes. Tu rol como líder se centra en el cuidado y crecimiento de tus habitantes. Desde asignar roles estratégicos hasta garantizar su bienestar y felicidad.</p>
                                 <div class="main-button mt-5">

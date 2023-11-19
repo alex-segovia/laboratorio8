@@ -164,7 +164,6 @@ public class DaoJugador extends DaoBase{
                     if((alimentoAcumulado-alimentoAConsumir)>0.0f){
                         alimentoAcumulado = alimentoAcumulado - alimentoAConsumir;
                     }else{
-                        alimentoAcumulado = 0.0f;
                         moralPerdida = habitante.getMoral() - (alimentoAConsumir - alimentoAcumulado);
                         if(moralPerdida <= 0.0f){
                             daoHabitante.updateMoral(habitante.getIdHabitante(), 0.0f);
@@ -172,6 +171,7 @@ public class DaoJugador extends DaoBase{
                         }else {
                             daoHabitante.updateMoral(habitante.getIdHabitante(), moralPerdida);
                         }
+                        alimentoAcumulado = 0.0f;
                     }
                 }else{
                     alimentoAcumulado = 0.0f;

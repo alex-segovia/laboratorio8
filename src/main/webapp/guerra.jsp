@@ -174,7 +174,7 @@ ArrayList<Jugador> listaJugadoresGuerra=(ArrayList<Jugador>) request.getAttribut
                     <div class="row">
                         <div class="col-lg-7">
                             <div class="header-text">
-                                <h6>Desafíate</h6>
+                                <h6><em>Desafíate</em></h6>
                                 <h4><em>Guerras</em> de civilizaciones</h4>
                                 <h6>¡Declara la guerra a otro usuario y potencia tu civilización!</h6>
                                 <h6 style="font-size: 75%">Para poder ser victorioso en una guerra, tus soldados tienen que tener más fuerza que los soldados y constructores del defensor después de haber cumplido el ciclo de un día en consumo de recursos.</h6>
