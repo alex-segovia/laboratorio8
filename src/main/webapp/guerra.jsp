@@ -121,6 +121,40 @@ String primeraVez=(String) request.getSession().getAttribute("primeraVez");%>
             transition: background-color .2s ease-in-out;
         }
     </style>
+
+    <style>
+        @keyframes cambioColorUsuario{
+            0% { color: #fafa6e; }
+            4.5% { color: #ffe762; }
+            9.1% { color: #ffd35c; }
+            13.6% { color: #ffc05c; }
+            18.1% { color: #ffac61; }
+            22.7% { color: #ff9a68; }
+            27.27% { color: #ff8871; }
+            31.8% { color: #ff787c; }
+            36.36% { color: #fd82aa; }
+            40.9% { color: #fc5b92; }
+            45.45% { color: #ec6090; }
+            50% { color: #fc5b92; }
+            54.54% { color: #fd82aa; }
+            59.1% { color: #ff787c; }
+            63.63% { color: #ff8871; }
+            68.2% { color: #ff9a68; }
+            72.72% { color: #ffac61; }
+            77.3% { color: #ffc05c; }
+            81.81% { color: #ffd35c; }
+            86.36% { color: #ffe762; }
+            100% { color: #fafa6e; }
+        }
+
+        .animacionUsuario {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            display: inline-block;
+            animation: cambioColorUsuario 5s infinite;
+        }
+    </style>
 </head>
 <body>
 <div class="page-loader">
@@ -185,7 +219,7 @@ String primeraVez=(String) request.getSession().getAttribute("primeraVez");%>
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
                     <a class="logo d-flex align-items-center justify-content-center">
-                        <h4 style="color: #ff90b7">Bienvenido, <%=jugadorActual.getUsuario()%></h4>
+                        <h4 style="color: white">Bienvenido, <div class="animacionUsuario"><%=jugadorActual.getUsuario()%></div></h4>
                     </a>
                     <ul class="nav">
                         <li><a href="<%=request.getContextPath()%>/HabitantesServlet">Habitantes<img src="assets/images/logoHabitante.jpg" alt=""></a></li>

@@ -151,7 +151,7 @@
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
                     <a class="logo d-flex align-items-center justify-content-center">
-                        <h4 style="color: #ff90b7">Bienvenido, <%=jugadorActual.getUsuario()%></h4>
+                        <h4 style="color: white">Bienvenido, <div class="animacionTextoTipo"><%=jugadorActual.getUsuario()%></div></h4>
                     </a>
                     <ul class="nav">
                         <li><a href="<%=request.getContextPath()%>/HabitantesServlet">Habitantes<img src="assets/images/logoHabitante.jpg" alt=""></a></li>
@@ -198,7 +198,7 @@
                     <div class="col-lg-12">
                         <div class="heading-section">
                             <div class ="row text-center">
-                                <span style="color: #ec6090; font-size: 34px; text-decoration: none; margin-bottom: 30px; text-shadow: 10px 15px 7px #333333" class="animacionTextoUsuario"><b>Tabla de Clasificación</b></span>
+                                <span style="color: #ec6090; font-size: 34px; text-decoration: none; margin-bottom: 30px; text-shadow: 10px 15px 7px #333333" class="animacionTextoUsuario"><b>Top 10 mejores jugadores</b></span>
                             </div>
                         </div>
                         <div class="item">

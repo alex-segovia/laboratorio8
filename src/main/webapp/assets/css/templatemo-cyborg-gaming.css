@@ -133,6 +133,7 @@ body .page-content {
   margin-top: 110px;
   background-color: #27292a;
   padding: 60px;
+  opacity: 0.93;
   border-radius: 23px;
 }
 
@@ -880,6 +881,7 @@ Gaming Library Style
   margin-top: 60px;
   padding: 30px;
   background-color: #1f2122;
+  opacity: 0.93;
   border-radius: 23px;
 }
 
