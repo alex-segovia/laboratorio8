@@ -286,7 +286,7 @@ public class DaoHabitante extends DaoBase{
 
     public ArrayList<Habitante> listarHabitantes(int idJugador){
         ArrayList<Habitante> listaHabitantes = new ArrayList<>();
-        String sql = "select * from habitante where idjugador=?";
+        String sql = "select * from habitante where idjugador=? order by IF(estaMuerto=false AND estaExiliado=false,0,1)";
         try(Connection conn = getConection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setInt(1,idJugador);

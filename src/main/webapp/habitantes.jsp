@@ -226,6 +226,7 @@
                     <div class="row">
                         <div class="col-lg-7">
                             <div class="header-text">
+                                <h6>Establécete</h6>
                                 <h4><em style="color: darkmagenta !important;">Gestión</em> de Habitantes</h4>
                                 <p style="color: white !important; font-size: 100%">Mantén un registro de todos los habitantes. Tu rol como líder se centra en el cuidado y crecimiento de tus habitantes. Desde asignar roles estratégicos hasta garantizar su bienestar y felicidad.</p>
                                 <div class="main-button mt-5">
@@ -243,7 +244,7 @@
                         <div class="heading-section">
                             <div class ="row">
                                 <span style="color: #ec6090; font-size: 34px; text-decoration: none; margin-bottom: -10px;"><b>Mis habitantes</b></span>
-                                <span style="color: #e369e3 !important; text-align: end; position: relative; top: -50px !important;"><b><%if(jugadorActual.getDiasDesdeCreacion()!=1){%><%=jugadorActual.getDiasDesdeCreacion()%>días<%}else{%><%=jugadorActual.getDiasDesdeCreacion()%>día<%}%></b></span>
+                                <span style="color: #e369e3 !important; text-align: end; position: relative; top: -50px !important;"><b><%if(jugadorActual.getDiasDesdeCreacion()!=1){%><%=jugadorActual.getDiasDesdeCreacion()%> días<%}else{%><%=jugadorActual.getDiasDesdeCreacion()%> día<%}%></b></span>
                                 <span style="color: #e369e3 !important; text-align: end; position: relative; top: -50px !important;"><b><%=jugadorActual.getHorasDia()%> horas</b></span>
                             </div>
                         </div>

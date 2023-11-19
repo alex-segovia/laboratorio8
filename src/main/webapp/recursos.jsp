@@ -129,11 +129,12 @@
             <div class="page-content">
 
                 <!-- ***** Banner Start ***** -->
-                <div class="main-banner">
+                <div class="main-banner" style="background-image: url(assets/images/bannerRecursos.png) !important;">
                     <div class="row">
                         <div class="col-lg-7">
                             <div class="header-text">
-                                <h4><em style="color: darkmagenta !important;">Gestión</em> de Recursos</h4>
+                                <h6>Enriquécete</h6>
+                                <h4><em style="color: #ec6090 !important;">Gestión</em> de Recursos</h4>
                                 <p style="color: white !important; font-size: 100%">Organiza y gestiona tanto la producción como demanda de recursos de todos los habitantes. Visualiza el estado de los pobladores con moral criticamente baja y aquellos caídos el dia anterior para plantear una estrategia que lleve adelante tu civilización.</p>
 
                                 <% if(!habitantesMoralBaja.isEmpty()){%>
@@ -248,7 +249,7 @@
                                                 <h2><%=porcentaje%><span>%</span><h5><%=visual%></h5></h2>
                                             </div>
                                             <div class="number mt-2">
-                                                <h2 style="font-size: 10px; color: white"title="Representa la porción de comida que tus ciudadanos requieren respecto al alimento disponible.">DemandaVsAlmacén</h2>
+                                                <h2 style="font-size: 10px; color: white"title="Representa la porción de comida que tus ciudadanos requieren respecto al alimento disponible.">Demanda Vs Almacén</h2>
                                             </div>
                                         </div>
                                     </div>

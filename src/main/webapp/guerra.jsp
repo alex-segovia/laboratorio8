@@ -208,7 +208,7 @@ ArrayList<Jugador> listaJugadoresGuerra=(ArrayList<Jugador>) request.getAttribut
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="row text-center">
-                                                <%if(g.getResultado().equals("Victoria atacante")&&g.getJugadorAtacante().getIdJugador()==jugadorActual.getIdJugador()){%>
+                                                <%if((g.getResultado().equals("Victoria atacante")&&g.getJugadorAtacante().getIdJugador()==jugadorActual.getIdJugador())||(g.getResultado().equals("Victoria defensiva")&&g.getJugadorDefensor().getIdJugador()==jugadorActual.getIdJugador())){%>
                                                 <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center" style="color: greenyellow">Victoria</span></div>
                                                 <%}else{%>
                                                 <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center" style="color: red">Derrota</span></div>
@@ -237,7 +237,7 @@ ArrayList<Jugador> listaJugadoresGuerra=(ArrayList<Jugador>) request.getAttribut
                             </div>
                             <%if(guerraHaceUnDia){%>
                             <ul>
-                                <%if(historialGuerras.get(0).getResultado().equals("Victoria atacante")&&historialGuerras.get(0).getJugadorAtacante().getIdJugador()==jugadorActual.getIdJugador()){
+                                <%if((historialGuerras.get(0).getResultado().equals("Victoria atacante")&&historialGuerras.get(0).getJugadorAtacante().getIdJugador()==jugadorActual.getIdJugador())||(historialGuerras.get(0).getResultado().equals("Victoria defensiva")&&historialGuerras.get(0).getJugadorDefensor().getIdJugador()==jugadorActual.getIdJugador())){
                                 if(request.getSession().getAttribute("primeraVez")!=null){%>
                                 <audio src="sonidoVictoria.mp3" controls autoplay style="display: none"></audio>
                                 <%}%>
