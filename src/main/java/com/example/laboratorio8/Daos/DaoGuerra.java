@@ -35,7 +35,7 @@ public class DaoGuerra extends DaoBase{
     }
 
     public boolean guerraHaceUnDia(int idJugador){
-        String sql="select  g.idGuerra from guerra g inner join jugador j1 on g.idJugadorAtacante=j1.idJugador inner join jugador j2 on g.idJugadorDefensor=j2.idJugador where (j1.diasDesdeCreacion-g.diasRelativosJugadorAtacante<=1) or (j2.diasDesdeCreacion-g.diasRelativosJugadorDefensor<=1) and j1.idJugador=?";
+        String sql="select g.idGuerra from guerra g inner join jugador j on ((g.idJugadorAtacante=j.idJugador and j.diasDesdeCreacion-g.diasRelativosJugadorAtacante<=1) or (g.idJugadorDefensor=j.idJugador and j.diasDesdeCreacion-g.diasRelativosJugadorDefensor<=1)) and j.idJugador=?";
         try(Connection conn=this.getConection(); PreparedStatement pstmt= conn.prepareStatement(sql)){
             pstmt.setInt(1,idJugador);
             try(ResultSet rs=pstmt.executeQuery()){
