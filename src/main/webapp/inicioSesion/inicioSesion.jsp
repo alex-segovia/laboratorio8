@@ -116,7 +116,7 @@ if(!atributo.equals("*")){
     <style>
         .bloqueuwu{
             position: relative;
-            top: -30px;
+            top: -60px;
             height: 900px;background-color: rgba(255, 234, 245, 0.8);box-shadow: 5px 20px 50px #000;padding: 0 !important;
             overflow: hidden;
         }
@@ -285,13 +285,13 @@ if(!atributo.equals("*")){
                                         <h3 style="font-family: 'Macondo', cursive !important;"><b>Guia a tu civilización a un destino lleno de riquezas!</b></h3>
                                         <div class="divider divider-decorate"></div>
                                         <p class="text-spacing-sm" style="font-family: 'Macondo', cursive !important;">
-                                            En este viaje épico tendrás la posibilidad de gestionar los recursos de tu civilización que te pueden llevarán por un camino de abundancia y opulencia o por un camino de muerte y desesperación para tus habitantes
+                                            En este viaje épico tendrás que gestionar los recursos de tu civilización en busca de un camino de abundancia.
                                             <br>
-                                            El alimento que producen tus granjeros debe solventar a todos los habitantes de tu civilización, ya que de lo contrario algunos pueden morir de hambre.
+                                            El alimento que producen tus granjeros debe solventar a todos los habitantes de tu civilización; de lo contrario algunos morirán de hambre.
                                             <br>
-                                            Este hecho puede provocar que los demás habitantes mueran por depresión. Por ello, también es importante tener soldados y constructores que le brinden moral a la población.
+                                            Esto puede provocar que otros habitantes mueran de depresión. Por ello, es importante tener soldados y constructores que brinden moral a la población.
                                             <br>
-                                            Si tu civilización es próspera, la comida restante en el día se llevará al almacén para ser utilizada al día siguiente. Sin embargo, solo puede permanecer un día allí, ya que luego se descompondrá.
+                                            Si tu civilización es próspera, la comida restante en el día se llevará al almacén para ser utilizada al día siguiente. Sin embargo, solo permanece un día allí, ya que luego se descompone y debe ser desechada.
                                         </p>
                                     </div>
                                 </div>
