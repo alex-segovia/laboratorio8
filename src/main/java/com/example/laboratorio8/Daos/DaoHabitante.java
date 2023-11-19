@@ -461,13 +461,13 @@ public class DaoHabitante extends DaoBase{
         }
     }
 
-    public void exhiliarHabitante(int idHabitante){
+    public void exiliarHabitante(int idHabitante){
         String sql = "update habitante set estaExiliado=true where idHabitante=?";
         try(Connection conn = getConection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setInt(1,idHabitante);
             pstmt.executeUpdate();
-            String sql2= "update habitante set moral=moral-? where idHabitante!=?";
+            String sql2= "update habitante set moral=moral-? where idHabitante!=? and estaExiliado!=true and estaMuerto!=true";
             try(Connection conn2 = getConection();
                 PreparedStatement pstmt2 = conn2.prepareStatement(sql2)){
                 pstmt2.setFloat(1,new Random().nextFloat()*(this.obtenerMoralPorId(idHabitante)/2));

@@ -60,9 +60,9 @@ public class HabitantesServlet extends HttpServlet {
                         response.sendRedirect("HabitantesServlet");
                     }
                     break;
-                case "exhiliar":
+                case "exiliar":
                     int idHabitante = Integer.parseInt(request.getParameter("idHabitante"));
-                    daoHabitante.exhiliarHabitante(idHabitante);
+                    daoHabitante.exiliarHabitante(idHabitante);
                     response.sendRedirect("HabitantesServlet");
                     break;
             }
