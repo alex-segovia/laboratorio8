@@ -475,8 +475,10 @@ String primeraVez=(String) request.getSession().getAttribute("primeraVez");%>
 </div>
 <%}%>
 <%if(guerraHaceUnDia&&primeraVez!=null){%>
-<div class="overlay" style="display: block" id="overlayUltimaGuerra>"></div>
-<div class="popup" style="display: block" id="popupUltimaGuerra">
+<div id="auxa">
+</div>
+<div class="overlay" style="opacity: 1;pointer-events: auto" id="overlayUltimaGuerra"></div>
+<div class="popup" style="opacity: 1;pointer-events: auto;transform: translateY(-15%);background-image: url('fondoBatalla.png') !important;background-size:cover;background-position:center;background-repeat:no-repeat;" id="popupUltimaGuerra">
     <svg class="cerrarPopup" id="cerrarPopupUltimaGuerra" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M11.4142 10L16.7071 4.70711C17.0976 4.31658 17.0976 3.68342 16.7071 3.29289C16.3166 2.90237 15.6834 2.90237 15.2929 3.29289L10 8.58579L4.70711 3.29289C4.31658 2.90237 3.68342 2.90237 3.29289 3.29289C2.90237 3.68342 2.90237 4.31658 3.29289 4.70711L8.58579 10L3.29289 15.2929C2.90237 15.6834 2.90237 16.3166 3.29289 16.7071C3.68342 17.0976 4.31658 17.0976 4.70711 16.7071L10 11.4142L15.2929 16.7071C15.6834 17.0976 16.3166 17.0976 16.7071 16.7071C17.0976 16.3166 17.0976 15.6834 16.7071 15.2929L11.4142 10Z" fill="black"/>
     </svg>
@@ -493,7 +495,7 @@ String primeraVez=(String) request.getSession().getAttribute("primeraVez");%>
                 <img src="iconoVictoria.png" style="width:60%" alt="">
             </div>
             <div class="row text-center" style="margin-top: 20px">
-                <h2 style="font-size: 300%;color: greenyellow">Victoria</h2>
+                <h2 style="color: green">Victoria</h2>
             </div>
         </li>
         <%}else{%>
@@ -508,16 +510,16 @@ String primeraVez=(String) request.getSession().getAttribute("primeraVez");%>
                 <img src="iconoDerrota.png" style="width: 100%" alt="">
             </div>
             <div class="row text-center" style="margin-top: 20px">
-                <h2 style="font-size: 300%;color: red">Derrota</h2>
+                <h2 style="color: red">Derrota</h2>
             </div>
         </li>
         <%}%>
         <li>
             <div>
                 <%if(historialGuerras.get(0).getJugadorAtacante().getIdJugador()==jugadorActual.getIdJugador()){%>
-                <h6>Durante el último día se ha registrado una guerra con <span style="color: darkmagenta;font-size:150%"><%=historialGuerras.get(0).getJugadorDefensor().getUsuario()%></span></h6>
+                <h3>El último día conseguimos vencer a <span style="color: darkmagenta"><%=historialGuerras.get(0).getJugadorDefensor().getUsuario()%></span></h3>
                 <%}else{%>
-                <h6>Durante el último día se ha registrado una guerra con <span style="color: darkmagenta;font-size:150%"><%=historialGuerras.get(0).getJugadorAtacante().getUsuario()%></span></h6>
+                <h3>El último día fuimos vencidos por <span style="color: darkmagenta"><%=historialGuerras.get(0).getJugadorAtacante().getUsuario()%></span></h3>
                 <%}%>
             </div>
         </li>
@@ -526,9 +528,9 @@ String primeraVez=(String) request.getSession().getAttribute("primeraVez");%>
 <%}%>
 <script>
     function popupFunc(popupId,abrirId,cerrarClass,overlayId){
-        const showPopup=document.getElementById(abrirId);
-        const overlay=document.getElementById(overlayId);
-        const popup=document.getElementById(popupId);
+        let showPopup=document.getElementById(abrirId);
+        let overlay=document.getElementById(overlayId);
+        let popup=document.getElementById(popupId);
         const mostrarPopup = () => {
             overlay.style.opacity='1';
             overlay.style.pointerEvents='auto';
@@ -570,7 +572,7 @@ String primeraVez=(String) request.getSession().getAttribute("primeraVez");%>
 
     <%if(guerraHaceUnDia&&primeraVez!=null){
     request.getSession().removeAttribute("primeraVez");%>
-        popupFunc('popupUltimaGuerra','aux',['cerrarPopupUltimaGuerra'],'overlayUltimaGuerra');
+        popupFunc('popupUltimaGuerra','auxa',['cerrarPopupUltimaGuerra'],'overlayUltimaGuerra');
     <%}%>
 </script>
 
