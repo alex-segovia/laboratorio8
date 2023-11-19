@@ -22,7 +22,7 @@
     <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <%Jugador jugadorActual = (Jugador) request.getSession().getAttribute("jugadorActual");%>
-
+    <%String tipoLista = (String) request.getAttribute("tipoLista");%>
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="assets/css/fontawesome.css">
     <link rel="stylesheet" href="assets/css/templatemo-cyborg-gamingHabitante.css">
@@ -230,7 +230,7 @@
                                 <h4><em style="color: darkmagenta !important;">Gestión</em> de Habitantes</h4>
                                 <p style="color: white !important; font-size: 100%">Mantén un registro de todos los habitantes. Tu rol como líder se centra en el cuidado y crecimiento de tus habitantes. Desde asignar roles estratégicos hasta garantizar su bienestar y felicidad.</p>
                                 <div class="main-button mt-5">
-                                    <a class="crearBoton" style="cursor: pointer; font-size: 17px !important; color: white !important" id="mostrarPopupCrear"><b>Crear habitante</b></a>
+                                    <a class="crearBoton" style="cursor: pointer; font-size: 17px !important; color: white !important" id="mostrarPopupCrear"><b>Reclutar habitante</b></a>
                                 </div>
                             </div>
                         </div>
@@ -238,15 +238,25 @@
                 </div>
                 <!-- ***** Banner End ***** -->
 
+                <%if(request.getAttribute("listaHabitantes")!=null){
+                if(((ArrayList<Habitante>) request.getAttribute("listaHabitantes")).isEmpty()){%>
+                <div class ="row mt-5 text-center">
+                    <p style="color: #ec6090 !important; font-size: 24px">Tu civilización está vacía. Recluta a tu primer habitante!</p>
+                </div>
+                <%}else{%>
                 <!-- ***** Gaming Library Start ***** -->
                 <div class="gaming-library">
                     <div class="col-lg-12">
-                        <div class="heading-section">
-                            <div class ="row">
-                                <span style="color: #ec6090; font-size: 34px; text-decoration: none; margin-bottom: -10px;"><b>Mis habitantes</b></span>
-                                <span style="color: #e369e3 !important; text-align: end; position: relative; top: -50px !important;"><b><%if(jugadorActual.getDiasDesdeCreacion()!=1){%><%=jugadorActual.getDiasDesdeCreacion()%> días<%}else{%><%=jugadorActual.getDiasDesdeCreacion()%> día<%}%></b></span>
-                                <span style="color: #e369e3 !important; text-align: end; position: relative; top: -50px !important;"><b><%=jugadorActual.getHorasDia()%> horas</b></span>
-                            </div>
+                        <div class="heading-section mb-4 mt-2" style="position: relative; width: 100%;display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap">
+                            <div class ="row" style="display: flex; align-items: baseline">
+                                <span style="color: #ec6090; font-size: 34px; text-decoration: none;"><b>Mis habitantes</b></span></div>
+                                <%if(tipoLista.equals("Todos")){%>
+                                <span><button type="submit" style="width: 20vh" class="btn btn-dark"><a href="<%=request.getContextPath()%>/HabitantesServlet?mostrar=Vivos">Mostrar solo vivos</a></button></span>
+                                <%}else{%>
+                                <span><button type="submit" style="width: 20vh" class="btn btn-dark"><a href="<%=request.getContextPath()%>/HabitantesServlet?mostrar=Todos">Mostrar a todos</a></button></span>
+                                <%}%>
+                                <span style="color: #e369e3 !important; text-align: end;"><b><%if(jugadorActual.getDiasDesdeCreacion()!=1){%><%=jugadorActual.getDiasDesdeCreacion()%> días<%}else{%><%=jugadorActual.getDiasDesdeCreacion()%> día<%}%></b></span>
+                                <span style="color: #e369e3 !important; text-align: end;"><b><%=jugadorActual.getHorasDia()%> horas</b></span>
                         </div>
                         <div class="item">
                             <ul>
@@ -281,11 +291,11 @@
                                             <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=habitante.getNombre()%></span></span>
                                             <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%if(habitante.getGenero().equals("M")){%>Masculino<%}else if(habitante.getGenero().equals("F")){%>Femenino<%}else{%>Otro<%}%></span></span>
                                             <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=habitante.getAlimentacionDiaria()%></span></span>
-                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=Math.round(habitante.getMoral()*100)/100%></span></span>
+                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=Math.round(habitante.getMoral()*100)/100.0%></span></span>
                                             <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%=habitante.getDiasVivo()%> día<%if(habitante.getDiasVivo()>1){%>s<%}%></span></span>
                                             <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%if(habitante.getGenero().equals("F")){%><%if(habitante instanceof Granjero){%>Granjera<%}else if(habitante instanceof Constructor){%>Constructora<%}else if(habitante instanceof Soldado){%>Soldada<%}else{%>Ninguna<%}}else{%><%if(habitante instanceof Granjero){%>Granjero<%}else if(habitante instanceof Constructor){%>Constructor<%}else if(habitante instanceof Soldado){%>Soldado<%}else{%>Ninguna<%}}%></span></span>
-                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%if(habitante instanceof Constructor){%><%=Math.round(((Constructor) habitante).getFuerza()*100)/100%><%}else if(habitante instanceof Soldado){%><%=Math.round(((Soldado) habitante).getFuerza()*100)/100%><%}else{%>No tiene<%}%></span></span>
-                                            <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 13px; color: white;"><%if(habitante instanceof Granjero){%><%=Math.round(((Granjero) habitante).getProduccionAlimento()*100)/100%> (A)<%}else if(habitante instanceof Constructor){%><%=Math.round(((Constructor) habitante).getProduccionMoral()*100)/100%> (M)<%}else if(habitante instanceof Soldado){%><%=Math.round(((Soldado) habitante).getProduccionMoral()*100)/100%> (M)<%}else{%>No produce<%}%></span></span>
+                                            <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%if(habitante instanceof Constructor){%><%=Math.round(((Constructor) habitante).getFuerza()*100)/100.0%><%}else if(habitante instanceof Soldado){%><%=Math.round(((Soldado) habitante).getFuerza()*100)/100.0%><%}else{%>No tiene<%}%></span></span>
+                                            <span style="width: 9% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 13px; color: white;"><%if(habitante instanceof Granjero){%><%=Math.round(((Granjero) habitante).getProduccionAlimento()*100)/100.0%> (A)<%}else if(habitante instanceof Constructor){%><%=Math.round(((Constructor) habitante).getProduccionMoral()*100)/100.0%> (M)<%}else if(habitante instanceof Soldado){%><%=Math.round(((Soldado) habitante).getProduccionMoral()*100)/100.0%> (M)<%}else{%>No produce<%}%></span></span>
                                             <span style="width: 8% !important" class="d-flex justify-content-center pt-3"><span style="font-size: 14px; color: white;"><%if(habitante.getGenero().equals("F")){%><%if(habitante.isEstaExiliado()){%>Exiliada<%}else{%><%if(habitante.isEstaMuerto()){%>Muerta<%}else{%>Viva<%}}}else{%><%if(habitante.isEstaExiliado()){%>Exiliado<%}else{%><%if(habitante.isEstaMuerto()){%>Muerto<%}else{%>Vivo<%}}%><%}%></span></span>
                                             <span style="width: 10% !important"><button class="btn btn-dark" style="font-size: 15px; color: white" id="mostrarPopupEditar<%=listaHabitantes.indexOf(habitante)%>"<%if(habitante.isEstaExiliado() || habitante.isEstaMuerto()){%>disabled<%}%>><a>Editar</a></button></span>
                                             <span style="width: 10% !important">
@@ -299,7 +309,7 @@
                                 </div>
                             </ul>
                         </div>
-                        <%}}%>
+                        <%}}}}%>
                     </div>
                 </div>
                 <!-- ***** Gaming Library End ***** -->
@@ -311,7 +321,7 @@
 <!-- Popup para crear habitante -->
 <div class="overlay" id="overlayCrear"></div>
 <div class="popup contenedorCrear" style="width: 500px;" id="popupCrear">
-    <h5 style="text-align: center; color: #ffa6c3; font-size: 25px"><b>Crear habitante</b></h5>
+    <h5 style="text-align: center; color: #ffa6c3; font-size: 25px"><b>Reclutar habitante</b></h5>
     <svg class="cerrarPopup" id="cerrarPopupCrear" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M11.4142 10L16.7071 4.70711C17.0976 4.31658 17.0976 3.68342 16.7071 3.29289C16.3166 2.90237 15.6834 2.90237 15.2929 3.29289L10 8.58579L4.70711 3.29289C4.31658 2.90237 3.68342 2.90237 3.29289 3.29289C2.90237 3.68342 2.90237 4.31658 3.29289 4.70711L8.58579 10L3.29289 15.2929C2.90237 15.6834 2.90237 16.3166 3.29289 16.7071C3.68342 17.0976 4.31658 17.0976 4.70711 16.7071L10 11.4142L15.2929 16.7071C15.6834 17.0976 16.3166 17.0976 16.7071 16.7071C17.0976 16.3166 17.0976 15.6834 16.7071 15.2929L11.4142 10Z" fill="black"/>
     </svg>
@@ -361,7 +371,7 @@
                 <div class="row text-center">
                     <div class="col-sm-6" style="margin-top: 5px;">
                         <div class="main-button">
-                            <button style="background: none; color: inherit; border:0; opacity: 0.5" type="submit" id="cerrarPopupCrear1" disabled><a class="boton1" style="color: black !important"><b>Crear</b></a></button>
+                            <button style="background: none; color: inherit; border:0; opacity: 0.5" type="submit" id="cerrarPopupCrear1" disabled><a class="boton1" style="color: black !important"><b>Reclutar</b></a></button>
                         </div>
                     </div>
                     <div class="col-sm-6" style="margin-top: 5px;">
