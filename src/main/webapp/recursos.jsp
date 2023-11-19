@@ -213,7 +213,11 @@
                 <% if(habitantesMoralBaja.isEmpty()){%>
 
                 <div class ="row mt-5 text-center">
-                    <p style="color: #ec6090 !important; font-size: 24px">Tu civilización está vacía, ve y recluta a tu próxima población! </p>
+                    <% if(!habitantesMuertos.isEmpty()){%>
+                    <p style="color: #ec6090 !important; font-size: 24px">Toda tu civilización ha muerto. Que no te afecte y sigue buscando nuevas víctimas/pobladores :D </p>
+                    <%}else{%>
+                    <p style="color: #ec6090 !important; font-size: 24px">Tu civilización está vacía, ve y recluta a personas para formar tu próxima población! </p>
+                    <%}%>
                 </div>
                 <%}else{%>
                 <div class="row mt-5">
