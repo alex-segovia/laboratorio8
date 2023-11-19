@@ -19,7 +19,6 @@ public class InicioSesionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         String action = request.getParameter("action") == null ? "default" : request.getParameter("action");
-        System.out.println("doGet");
         switch (action){
             case "default":
                 if(request.getSession().getAttribute("jugadorActual")!=null){
@@ -30,6 +29,11 @@ public class InicioSesionServlet extends HttpServlet {
                     }
                     request.getRequestDispatcher("inicioSesion/inicioSesion.jsp").forward(request,response);
                 }
+                break;
+            case "logOut":
+                request.getSession().removeAttribute("jugadorActual");
+                request.getSession().invalidate();
+                response.sendRedirect(request.getContextPath());
                 break;
         }
     }
@@ -251,11 +255,6 @@ public class InicioSesionServlet extends HttpServlet {
 
                 request.getSession().setAttribute("atributo",atributo);
                 response.sendRedirect(request.getContextPath());
-                break;
-            case "logOut":
-                request.getSession().removeAttribute("jugadorActual");
-                response.sendRedirect(request.getContextPath());
-                break;
         }
     }
 }
