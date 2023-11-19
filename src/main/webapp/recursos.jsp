@@ -380,6 +380,9 @@
                         </div>
 
                     <div class="col-lg-12 d-flex justify-content-center">
+                        <% if(habitantesMuertos.isEmpty()){%>
+                        <p style="color: white !important; font-size: 100%">Ninguno!</p>
+                        <%}else{%>
                         <table class="table table-responsive table-hover">
                             <thead>
                             <tr>
@@ -428,7 +431,7 @@
                             <%}%>
                             </tbody>
                         </table>
-
+                        <%}%>
                     </div>
                 </div>
                 <!-- ***** Gaming Library End ***** -->
