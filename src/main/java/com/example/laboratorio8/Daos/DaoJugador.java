@@ -168,9 +168,10 @@ public class DaoJugador extends DaoBase{
                         moralPerdida = habitante.getMoral() - (alimentoAConsumir - alimentoAcumulado);
                         if(moralPerdida <= 0.0f){
                             daoHabitante.updateMoral(habitante.getIdHabitante(), 0.0f);
-                            daoHabitante.killHabitante(habitante.getIdHabitante(),"Hambre",jugador.getDiasDesdeCreacion());
+                            daoHabitante.killHabitante(habitante.getIdHabitante(),"Hambre",jugador.getDiasDesdeCreacion(), jugador.getIdJugador());
+                        }else {
+                            daoHabitante.updateMoral(habitante.getIdHabitante(), moralPerdida);
                         }
-                        daoHabitante.updateMoral(habitante.getIdHabitante(), moralPerdida);
                     }
                 }else{
                     alimentoAcumulado = 0.0f;

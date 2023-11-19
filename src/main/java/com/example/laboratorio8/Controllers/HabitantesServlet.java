@@ -62,7 +62,7 @@ public class HabitantesServlet extends HttpServlet {
                     break;
                 case "exiliar":
                     int idHabitante = Integer.parseInt(request.getParameter("idHabitante"));
-                    daoHabitante.exiliarHabitante(idHabitante);
+                    daoHabitante.exiliarHabitante(idHabitante, jugadorActual.getDiasDesdeCreacion());
                     response.sendRedirect("HabitantesServlet");
                     break;
             }

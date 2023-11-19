@@ -70,8 +70,8 @@ public class DaoHabitante extends DaoBase{
         return habitantesMuertos;
     }
 
-    public void killHabitante(int idHabitante, String motivoMuerte, int diaMuerte){
-        String sql = "UPDATE habitante SET estaMuerto = true, motivoMuerte = ?, diaMuerte = ? WHERE idHabitante = ?;";
+    public void killHabitante(int idHabitante, String motivoMuerte, int diaMuerte, int idJugador){
+        String sql = "UPDATE habitante SET estaMuerto = true, motivoMuerte = ?, diaMuerte = ?, moral=0 WHERE idHabitante = ?;";
 
         try (Connection conn = this.getConection();
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
@@ -79,6 +79,65 @@ public class DaoHabitante extends DaoBase{
             pstmt.setInt(2,diaMuerte);
             pstmt.setInt(3,idHabitante);
             pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        ArrayList<Integer> idsHabitantesVivos = obtenerIdsVivos(idJugador);
+        for(int id: idsHabitantesVivos){
+            reducirMoralPorMuerte(id,obtenerTiempoVivo(idHabitante));
+        }
+
+        ArrayList<Integer> listaIDs = habitantesConMoralMenorACero(idJugador);
+        while(listaIDs.size()>0){
+            for(int h: listaIDs){
+                killHabitante(h,"Depresión",diaMuerte,idJugador);
+            }
+            listaIDs = habitantesConMoralMenorACero(idJugador);
+        }
+    }
+
+    public ArrayList<Integer> obtenerIdsVivos(int idJugador){
+        ArrayList<Integer> listaIDs = new ArrayList<>();
+        String sql = "select idHabitante from habitante where idjugador=? and estaMuerto=false";
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setInt(1,idJugador);
+            try(ResultSet rs = pstmt.executeQuery()){
+                while(rs.next()){
+                    listaIDs.add(rs.getInt(1));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaIDs;
+    }
+
+    public void reducirMoralPorMuerte(int idHabitante, int tiempoMuerto){
+        String sql = "update habitante set moral=moral-? where idHabitante=? and estaMuerto=false and estaExiliado=false";
+        try(Connection conn = getConection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setFloat(1,new Random().nextFloat()*(tiempoMuerto+obtenerTiempoVivo(idHabitante)));
+            pstmt.setInt(2,idHabitante);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public int obtenerTiempoVivo(int idHabitante){
+        String sql = "select diasVivo from habitante where idHabitante=?";
+        try(Connection conn = getConection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1,idHabitante);
+            try(ResultSet rs = pstmt.executeQuery()){
+                if(rs.next()){
+                    return rs.getInt(1);
+                }else{
+                    return 0;
+                }
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -133,7 +192,7 @@ public class DaoHabitante extends DaoBase{
             throw new RuntimeException(e);
         }
 
-        String sql2 = "UPDATE habitante SET moral = moral + ? WHERE idJugador = ?";
+        String sql2 = "UPDATE habitante SET moral = moral + ? WHERE idJugador = ? AND estaMuerto=false AND estaExiliado=false";
 
         try (Connection conn2 = this.getConection();
              PreparedStatement pstmt2 = conn2.prepareStatement(sql2);) {
@@ -461,7 +520,7 @@ public class DaoHabitante extends DaoBase{
         }
     }
 
-    public void exiliarHabitante(int idHabitante){
+    public void exiliarHabitante(int idHabitante, int diaMuerte){
         String sql = "update habitante set estaExiliado=true where idHabitante=?";
         try(Connection conn = getConection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -475,6 +534,49 @@ public class DaoHabitante extends DaoBase{
                 pstmt2.executeUpdate();
             }
         }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        int idJugador = obtenerIdJugadorPorHabitante(idHabitante);
+        ArrayList<Integer> listaIDs = habitantesConMoralMenorACero(idJugador);
+        while(listaIDs.size()>0){
+            for(int h: listaIDs){
+                killHabitante(h,"Depresión",diaMuerte,idJugador);
+            }
+            listaIDs = habitantesConMoralMenorACero(idJugador);
+        }
+    }
+
+    public int obtenerIdJugadorPorHabitante(int idHabitante){
+        String sql = "select idjugador from habitante where idHabitante=?";
+        try(Connection conn = getConection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1,idHabitante);
+            try(ResultSet rs = pstmt.executeQuery()){
+                if(rs.next()){
+                    return rs.getInt(1);
+                }else{
+                    return 0;
+                }
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Integer> habitantesConMoralMenorACero(int idJugador){
+        ArrayList<Integer> listaMuertos = new ArrayList<>();
+        String sql = "select moral from habitante where moral<0 and idjugador=?";
+        try(Connection conn = getConection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1,idJugador);
+            try(ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    listaMuertos.add(rs.getInt(1));
+                }
+                return listaMuertos;
+            }
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }

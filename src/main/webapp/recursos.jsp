@@ -237,7 +237,7 @@
                                 <div class="col-12 d-flex justify-content-center">
                                     <div class="d-flex justify-content-center box">
                                         <div class="content text-center">
-                                            <div class="percent" data-text="uwu" style="--num: <%=porcentaje%>">
+                                            <div class="percent" data-text="%" style="--num: <%=porcentaje%>">
                                                 <div class="dot"></div>
                                                 <svg>
                                                     <circle cx="70" cy="70" r="70"></circle>

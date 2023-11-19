@@ -51,11 +51,11 @@ public class DaoLeaderboard extends DaoBase {
                 "\n" +
                 "(SELECT ja.usuario AS `u4`, IFNULL(100*(sum(IF((g.resultado=\"VictoriaA\" and ja.idJugador=g.idJugadorAtacante) OR (g.resultado=\"VictoriaD\" and ja.idJugador=g.idJugadorDefensor),1,0))/count(g.idGuerra)),-1) AS `% Guerras ganadas0` FROM jugador ja LEFT JOIN guerra g ON (ja.idJugador=g.idJugadorAtacante OR ja.idJugador=g.idJugadorDefensor) GROUP BY ja.usuario) q4 ON (ja.usuario=q4.`u4`) INNER JOIN\n" +
                 "\n" +
-                "(SELECT ja.usuario AS `u5`, IFNULL(sum(pa.fuerza),0) AS `Fuerza Total0` FROM jugador ja LEFT JOIN habitante pa  ON (ja.idjugador = pa.idJugador) GROUP BY ja.usuario) q5 ON (ja.usuario=q5.`u5`) INNER JOIN\n" +
+                "(SELECT ja.usuario AS `u5`, IFNULL(sum(pa.fuerza),0) AS `Fuerza Total0` FROM jugador ja LEFT JOIN habitante pa  ON (ja.idjugador = pa.idJugador AND pa.estaMuerto=false AND pa.estaExiliado=false) GROUP BY ja.usuario) q5 ON (ja.usuario=q5.`u5`) INNER JOIN\n" +
                 "\n" +
-                "(SELECT ja.usuario AS `u6`, IFNULL(max(pa.diasVivo),0) AS `Máximo días ciudadano0` FROM jugador ja LEFT JOIN habitante pa  ON (ja.idjugador = pa.idJugador) GROUP BY ja.usuario) q6 ON (ja.usuario=q6.`u6`) INNER JOIN\n" +
+                "(SELECT ja.usuario AS `u6`, IFNULL(max(pa.diasVivo),0) AS `Máximo días ciudadano0` FROM jugador ja LEFT JOIN habitante pa  ON (ja.idjugador = pa.idJugador AND pa.estaMuerto=false AND pa.estaExiliado=false) GROUP BY ja.usuario) q6 ON (ja.usuario=q6.`u6`) INNER JOIN\n" +
                 "\n" +
-                "(SELECT ja.usuario AS `u7`, IFNULL(sum(pa.produccionAlimento),0) AS `Producción alimento total0` FROM jugador ja LEFT JOIN habitante pa  ON (ja.idjugador = pa.idJugador) GROUP BY ja.usuario) q7 ON (ja.usuario=q7.`u7`)\n" +
+                "(SELECT ja.usuario AS `u7`, IFNULL(sum(pa.produccionAlimento),0) AS `Producción alimento total0` FROM jugador ja LEFT JOIN habitante pa  ON (ja.idjugador = pa.idJugador AND pa.estaMuerto=false AND pa.estaExiliado=false) GROUP BY ja.usuario) q7 ON (ja.usuario=q7.`u7`)\n" +
                 "\n" +
                 "order by "+orden+" DESC LIMIT 10";
 

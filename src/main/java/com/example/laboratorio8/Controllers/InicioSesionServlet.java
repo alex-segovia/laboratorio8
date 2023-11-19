@@ -202,6 +202,7 @@ public class InicioSesionServlet extends HttpServlet {
                         Integer edadAux=Integer.parseInt(edad);
                         if(edadAux<12&&validacion){
                             dLN.insertListaNegra(correo);
+                            validacion=false;
                         }
                     }catch (NumberFormatException e){
                         s.setAttribute("edadError","21");
@@ -215,7 +216,6 @@ public class InicioSesionServlet extends HttpServlet {
 
 
                 response.sendRedirect(request.getContextPath());
-                return;
         }
     }
 }

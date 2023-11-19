@@ -61,7 +61,7 @@ public class GuerraServlet extends HttpServlet {
                             if (habitante instanceof Soldado || habitante instanceof Constructor) {
                                 double numeroTotalmenteRandom = new Random().nextDouble();
                                 if (numeroTotalmenteRandom < 0.6) {
-                                    dH.killHabitante(habitante.getIdHabitante(), "Guerra", jugadorDefensor.getDiasDesdeCreacion());
+                                    dH.killHabitante(habitante.getIdHabitante(), "Guerra", jugadorDefensor.getDiasDesdeCreacion(), jugadorActual.getIdJugador());
                                 } else if (numeroTotalmenteRandom < 0.9) {
                                     dG.updateHabitanteSobrevivientePerderMoralDerrota(habitante.getIdHabitante());
                                 } else {
@@ -79,7 +79,7 @@ public class GuerraServlet extends HttpServlet {
                             if (habitante instanceof Soldado) {
                                 double numeroTotalmenteRandom = new Random().nextDouble();
                                 if (numeroTotalmenteRandom < 0.6) {
-                                    dH.killHabitante(habitante.getIdHabitante(), "Guerra", jugadorActual.getDiasDesdeCreacion());
+                                    dH.killHabitante(habitante.getIdHabitante(), "Guerra", jugadorActual.getDiasDesdeCreacion(),jugadorActual.getIdJugador());
                                 } else if (numeroTotalmenteRandom < 0.9) {
                                     dG.updateHabitanteSobrevivientePerderMoralDerrota(habitante.getIdHabitante());
                                 } else {
