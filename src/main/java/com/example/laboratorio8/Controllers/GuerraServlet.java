@@ -58,7 +58,7 @@ public class GuerraServlet extends HttpServlet {
                         dG.updateSoldadosVictoria(jugadorActual.getIdJugador());
                         dG.updateGranjerosVictoriaAtaque(jugadorActual.getIdJugador());
                         for (Habitante habitante : listaHabitantesDefensores) {
-                            if (habitante instanceof Soldado || habitante instanceof Constructor) {
+                            if ((habitante instanceof Soldado || habitante instanceof Constructor)&&!habitante.isEstaMuerto()&&!habitante.isEstaExiliado()) {
                                 double numeroTotalmenteRandom = new Random().nextDouble();
                                 if (numeroTotalmenteRandom < 0.6) {
                                     dH.killHabitante(habitante.getIdHabitante(), "Guerra", jugadorDefensor.getDiasDesdeCreacion(), jugadorActual.getIdJugador());
