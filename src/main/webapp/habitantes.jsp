@@ -464,7 +464,7 @@
                     </div>
                     <div class="col-sm-6" style="margin-top: 5px;">
                         <div class="main-button">
-                            <button type="button"><a class="boton1" style="color: black !important"><b>Cancelar</b></a></button>
+                            <button type="button" style="background: none; color: inherit; border:0" id="cerrarPopupCrear2"><a class="boton1" style="color: black !important"><b>Cancelar</b></a></button>
                         </div>
                     </div>
                 </div>
@@ -511,7 +511,7 @@ for(int i=0;i<listaHabitantes.size();i++){%>
                     </div>
                     <div class="col-sm-6" style="margin-top: 5px;">
                         <div class="main-button">
-                            <button type="button" style="background: none; color: inherit; border:0" ><a id="cerrarPopupEditar2<%=i%>" class="boton1" style="color: black !important"><b>Cancelar</b></a></button>
+                            <button type="button" style="background: none; color: inherit; border:0" id="cerrarPopupEditar2<%=i%>"><a class="boton1" style="color: black !important"><b>Cancelar</b></a></button>
                         </div>
                     </div>
                 </div>
