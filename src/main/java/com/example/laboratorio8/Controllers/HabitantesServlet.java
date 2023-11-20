@@ -18,7 +18,7 @@ public class HabitantesServlet extends HttpServlet {
         response.setContentType("text/html");
         Jugador jugadorActual=(Jugador) request.getSession().getAttribute("jugadorActual");
         if(jugadorActual!=null) {
-            String tipoLista = request.getParameter("mostrar")==null?"Todos":request.getParameter("mostrar");
+            String tipoLista = request.getParameter("mostrar")==null?"Vivos":request.getParameter("mostrar");
             DaoHabitante daoHabitante = new DaoHabitante();
             DaoJugador daoJugador = new DaoJugador();
             if(!tipoLista.equals("Vivos")) {
