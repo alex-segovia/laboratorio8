@@ -80,6 +80,7 @@ public class InicioSesionServlet extends HttpServlet {
                         response.sendRedirect(request.getContextPath());
                     }else{
                         request.getSession().setAttribute("jugadorActual",jugador);
+                        request.getSession().setMaxInactiveInterval(600);
                         if(!dG.guerraHaceUnDia(jugador.getIdJugador())){
                             response.sendRedirect("HabitantesServlet");
                         }else{
@@ -89,7 +90,6 @@ public class InicioSesionServlet extends HttpServlet {
                 }
                 break;
             case "signIn":
-                HttpSession s=request.getSession();
                 String nombre=request.getParameter("nombre");
                 request.setAttribute("nombre",nombre);
                 String usuario=request.getParameter("usuario");

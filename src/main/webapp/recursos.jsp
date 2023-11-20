@@ -189,7 +189,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-6">
-                                                <button class="close-btn">Cancelar</button>
+                                                <button type="button" class="close-btn">Cancelar</button>
                                                 </div>
                                                 <div class="col-6">
                                                 <form id="formPasarHoras" action="<%=request.getContextPath()%>/RecursosServlet?action=pasarHoras" method="post">

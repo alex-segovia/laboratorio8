@@ -486,7 +486,7 @@ String primeraVez=(String) request.getSession().getAttribute("primeraVez");%>
                 </form>
             </div>
             <div class="col-sm-6" style="display: flex;justify-content: center">
-                <button id="cerrarPopupListaJugadores<%=listaJugadoresGuerra.indexOf(j)%>aux">Cancelar</button>
+                <button type="button" id="cerrarPopupListaJugadores<%=listaJugadoresGuerra.indexOf(j)%>aux">Cancelar</button>
             </div>
         </div>
     </div>
