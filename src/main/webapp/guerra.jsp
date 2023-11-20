@@ -339,7 +339,7 @@ String primeraVez=(String) request.getSession().getAttribute("primeraVez");%>
                                         <h2 style="font-size: 300%;color: greenyellow">Victoria</h2>
                                     </div>
                                 </li>
-                                <%}else{
+                                <%}else if((historialGuerras.get(0).getResultado().equals("Victoria atacante")&&historialGuerras.get(0).getJugadorDefensor().getIdJugador()==jugadorActual.getIdJugador())||(historialGuerras.get(0).getResultado().equals("Victoria defensiva")&&historialGuerras.get(0).getJugadorAtacante().getIdJugador()==jugadorActual.getIdJugador())){
                                     if(primeraVez!=null){%>
                                 <script>
                                     document.addEventListener('DOMContentLoaded', function() {
@@ -354,6 +354,15 @@ String primeraVez=(String) request.getSession().getAttribute("primeraVez");%>
                                     </div>
                                     <div class="row text-center" style="margin-top: 20px">
                                         <h2 style="font-size: 300%;color: red">Derrota</h2>
+                                    </div>
+                                </li>
+                                <%}else{%>
+                                <li>
+                                    <div class="row">
+                                        <img src="iconoEmpate.png" style="width: 100%" alt="">
+                                    </div>
+                                    <div class="row text-center" style="margin-top: 20px">
+                                        <h2 style="font-size: 300%;color: red">Empate</h2>
                                     </div>
                                 </li>
                                 <%}%>
@@ -525,11 +534,21 @@ String primeraVez=(String) request.getSession().getAttribute("primeraVez");%>
         <%}%>
         <li>
             <div>
-                <%if(historialGuerras.get(0).getJugadorAtacante().getIdJugador()==jugadorActual.getIdJugador()){%>
+                <%if(historialGuerras.get(0).getJugadorAtacante().getIdJugador()==jugadorActual.getIdJugador()){
+                if(historialGuerras.get(0).getResultado().equals("Victoria atacante")){%>
                 <h3>El último día conseguimos vencer a <span style="color: darkmagenta"><%=historialGuerras.get(0).getJugadorDefensor().getUsuario()%></span></h3>
+                <%}else if(historialGuerras.get(0).getResultado().equals("Victoria defensiva")){%>
+                <h3>El último día fuimos vencidos por <span style="color: darkmagenta"><%=historialGuerras.get(0).getJugadorDefensor().getUsuario()%></span></h3>
                 <%}else{%>
+                <h3>El último día ocurrió un empate con <span style="color: steelblue"><%=historialGuerras.get(0).getJugadorDefensor().getUsuario()%></span></h3>
+                <%}}else{
+                    if(historialGuerras.get(0).getResultado().equals("Victoria atacante")){%>
                 <h3>El último día fuimos vencidos por <span style="color: darkmagenta"><%=historialGuerras.get(0).getJugadorAtacante().getUsuario()%></span></h3>
-                <%}%>
+                <%}else if(historialGuerras.get(0).getResultado().equals("Victoria defensiva")){%>
+                <h3>El último día conseguimos vencer a <span style="color: darkmagenta"><%=historialGuerras.get(0).getJugadorAtacante().getUsuario()%></span></h3>
+                <%}else{%>
+                <h3>El último día ocurrió un empate con <span style="color: steelblue"><%=historialGuerras.get(0).getJugadorAtacante().getUsuario()%></span></h3>%>
+                <%}}%>
             </div>
         </li>
     </ul>
@@ -557,7 +576,8 @@ String primeraVez=(String) request.getSession().getAttribute("primeraVez");%>
         <%}%>
     </div>
     <hr>
-    <%if(jugadorActual.getIdJugador()==g.getJugadorAtacante().getIdJugador()&&g.getResultado().equals("Victoria atacante")){%>
+    <%if(jugadorActual.getIdJugador()==g.getJugadorAtacante().getIdJugador()){
+        if(g.getResultado().equals("Victoria atacante")){%>
     <div class="row">
         <div class="text-center" style="width: 15%">
             <h3><%=g.getDiferenciaFuerzaAtacante()%></h3>
@@ -646,7 +666,7 @@ String primeraVez=(String) request.getSession().getAttribute("primeraVez");%>
             <span>Habitantes fugados <span style="color: red">(-)</span></span>
         </div>
     </div>
-    <%}else if(g.getResultado().equals("Empate")){%>
+    <%}else{%>
     <div class="row">
         <%if(g.getDiferenciaFuerzaAtacante()>0){%>
         <div class="text-center" style="width: 15%">
@@ -821,7 +841,7 @@ String primeraVez=(String) request.getSession().getAttribute("primeraVez");%>
         
 
     </div>
-    <%}else{
+    <%}}else{
         if(g.getResultado().equals("Victoria atacante")){%>
     <div class="row">
         <div class="text-center" style="width: 15%">
