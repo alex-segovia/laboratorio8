@@ -66,7 +66,7 @@ public class GuerraServlet extends HttpServlet {
                             if ((habitante instanceof Soldado || habitante instanceof Constructor)&&!habitante.isEstaMuerto()&&!habitante.isEstaExiliado()) {
                                 double numeroTotalmenteRandom = new Random().nextDouble();
                                 if (numeroTotalmenteRandom < 0.6) {
-                                    dH.killHabitante(habitante.getIdHabitante(), "Guerra", jugadorDefensor.getDiasDesdeCreacion(), jugadorActual.getIdJugador());
+                                    dH.killHabitante(habitante.getIdHabitante(), "Guerra", jugadorDefensor.getDiasDesdeCreacion(), jugadorDefensor.getIdJugador());
                                 } else if (numeroTotalmenteRandom < 0.9) {
                                     dG.updateHabitanteSobrevivientePerderMoralDerrota(habitante.getIdHabitante());
                                 } else {
@@ -101,9 +101,12 @@ public class GuerraServlet extends HttpServlet {
                     }
                     dJ.proceedEndDia(jugadorActual, dH);
                     dJ.proceedEndDia(jugadorDefensor, dH);
+                    jugadorActual=dJ.getJugadorPorId(jugadorActual.getIdJugador());
+                    jugadorDefensor=dJ.getJugadorPorId(jugadorDefensor.getIdJugador());
                     DtoGuerra resultadosDespuesGuerraAtacante=new DtoGuerra(dG.getTotalFuerza(jugadorActual.getIdJugador()),dG.getTotalMoral(jugadorActual.getIdJugador()),dG.getTotalAlimentoAlmacen(jugadorActual.getIdJugador()),dG.getProduccionTotalAlimento(jugadorActual.getIdJugador()),dG.getProduccionTotalMoral(jugadorActual.getIdJugador()),dG.getTotalSoldados(jugadorActual.getIdJugador()),dG.getTotalConstructores(jugadorActual.getIdJugador()),dG.getTotalHabitantes(jugadorActual.getIdJugador()));
                     DtoGuerra resultadosDespuesGuerraDefensor=new DtoGuerra(dG.getTotalFuerza(jugadorDefensor.getIdJugador()),dG.getTotalMoral(jugadorDefensor.getIdJugador()),dG.getTotalAlimentoAlmacen(jugadorDefensor.getIdJugador()),dG.getProduccionTotalAlimento(jugadorDefensor.getIdJugador()),dG.getProduccionTotalMoral(jugadorDefensor.getIdJugador()),dG.getTotalSoldados(jugadorDefensor.getIdJugador()),dG.getTotalConstructores(jugadorDefensor.getIdJugador()),dG.getTotalHabitantes(jugadorDefensor.getIdJugador()));
                     dG.nuevaGuerra(jugadorActual.getIdJugador(),jugadorDefensor.getIdJugador(),resultado,jugadorActual.getDiasDesdeCreacion(),jugadorDefensor.getDiasDesdeCreacion(),resultadosAntesGuerraAtacante,resultadosDespuesGuerraAtacante,resultadosAntesGuerraDefensor,resultadosDespuesGuerraDefensor,habitantesTransferidos,fuerzaTotalAtacante,fuerzaTotalDefensor);
+                    request.getSession().setAttribute("jugadorActual",jugadorActual);
                     response.sendRedirect("GuerraServlet");
                     break;
             }

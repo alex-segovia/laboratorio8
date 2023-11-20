@@ -91,7 +91,7 @@ public class DaoHabitante extends DaoBase{
         ArrayList<Integer> listaIDs = habitantesConMoralMenorACero(idJugador);
         while(listaIDs.size()>0){
             for(int h: listaIDs){
-                killHabitante(h,"Depresión",diaMuerte,idJugador);
+                killHabitante(h,"Tristeza por muerte",diaMuerte,idJugador);
             }
             listaIDs = habitantesConMoralMenorACero(idJugador);
         }
@@ -99,7 +99,7 @@ public class DaoHabitante extends DaoBase{
 
     public ArrayList<Integer> obtenerIdsVivos(int idJugador){
         ArrayList<Integer> listaIDs = new ArrayList<>();
-        String sql = "select idHabitante from habitante where idjugador=? and estaMuerto=false";
+        String sql = "select idHabitante from habitante where idjugador=? and estaMuerto=false and estaExiliado=false";
         try (Connection conn = this.getConection();
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
             pstmt.setInt(1,idJugador);
@@ -231,7 +231,7 @@ public class DaoHabitante extends DaoBase{
     }
 
     public void updateMoral (int idHabitante, Float moral){
-        String sql = "UPDATE habitante SET moral = ? WHERE idHabitante = ?";
+        String sql = "UPDATE habitante SET moral = ? WHERE idHabitante = ? and estaExiliado=false and estaMuerto=false";
 
         try (Connection conn = this.getConection();
             PreparedStatement pstmt = conn.prepareStatement(sql);) {
@@ -589,7 +589,7 @@ public class DaoHabitante extends DaoBase{
         ArrayList<Integer> listaIDs = habitantesConMoralMenorACero(idJugador);
         while(listaIDs.size()>0){
             for(int h: listaIDs){
-                killHabitante(h,"Depresión",diaMuerte,idJugador);
+                killHabitante(h,"Tristeza por exilio",diaMuerte,idJugador);
             }
             listaIDs = habitantesConMoralMenorACero(idJugador);
         }

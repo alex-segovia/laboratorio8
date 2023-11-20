@@ -107,7 +107,7 @@ public class DaoGuerra extends DaoBase{
     }
 
     public void updateSoldadosVictoria(int idJugador){
-        String sql = "update habitante set moral=moral*2,fuerza=fuerza*1.2 where idJugador=? and profesion ='Soldado'";
+        String sql = "update habitante set moral=moral*2,fuerza=fuerza*1.2 where idJugador=? and profesion ='Soldado' and estaMuerto=false and estaExiliado=false";
         try (Connection conn = this.getConection();
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
             pstmt.setInt(1,idJugador);
@@ -170,7 +170,7 @@ public class DaoGuerra extends DaoBase{
     }
 
     public void updateHabitantesPerderMoralDerrotaDefensa(int idJugador){
-        String sql="update habitante set moral=moral*(0.2+rand()*0.6) where idJugador=?";
+        String sql="update habitante set moral=moral*(0.2+rand()*0.6) where idJugador=? and estaExiliado=false and estaMuerto=false";
         try (Connection conn = this.getConection();
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
             pstmt.setInt(1,idJugador);
