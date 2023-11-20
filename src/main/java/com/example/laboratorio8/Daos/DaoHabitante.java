@@ -154,7 +154,25 @@ public class DaoHabitante extends DaoBase{
             throw new RuntimeException(e);
         }
 
-        String sql2 = "UPDATE habitante SET estaMuerto = true, motivoMuerte = ?, diaMuerte = ? WHERE (idJugador = ? AND moral <= 0 AND estaMuerto=false AND estaExiliado=false)";
+        ArrayList<Integer> idsDesesperacion = new ArrayList<>();
+        String sql4 = "select idHabitante from habitante where idjugador=? and moral<=0 and estaMuerto=false";
+        try (Connection conn4 = this.getConection();
+             PreparedStatement pstmt4 = conn4.prepareStatement(sql4);) {
+            pstmt4.setInt(1,idJugador);
+            try(ResultSet rs = pstmt4.executeQuery()){
+                while(rs.next()){
+                    idsDesesperacion.add(rs.getInt(1));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        for(int id : idsDesesperacion){
+            killHabitante(id,motivoMuerte,diaMuerte,idJugador);
+        }
+
+        /*String sql2 = "UPDATE habitante SET estaMuerto = true, motivoMuerte = ?, diaMuerte = ? WHERE (idJugador = ? AND moral <= 0 AND estaMuerto=false AND estaExiliado=false)";
         try (Connection conn2 = this.getConection();
             PreparedStatement pstmt2 = conn2.prepareStatement(sql2);) {
             pstmt2.setString(1,motivoMuerte);
@@ -172,7 +190,7 @@ public class DaoHabitante extends DaoBase{
             pstmt3.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }
+        }*/
     }
 
     public void updateMoralMultiple (int idJugador){
@@ -574,18 +592,23 @@ public class DaoHabitante extends DaoBase{
             PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setInt(1,idHabitante);
             pstmt.executeUpdate();
-            String sql2= "update habitante set moral=moral-? where idHabitante!=? and estaExiliado!=true and estaMuerto!=true";
-            try(Connection conn2 = getConection();
-                PreparedStatement pstmt2 = conn2.prepareStatement(sql2)){
-                pstmt2.setFloat(1,new Random().nextFloat()*(this.obtenerMoralPorId(idHabitante)/2));
-                pstmt2.setInt(2,idHabitante);
-                pstmt2.executeUpdate();
-            }
         }catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
         int idJugador = obtenerIdJugadorPorHabitante(idHabitante);
+
+        String sql2= "update habitante set moral=moral-? where idHabitante!=? and estaExiliado=false and estaMuerto=false and idjugador=?";
+        try(Connection conn2 = getConection();
+            PreparedStatement pstmt2 = conn2.prepareStatement(sql2)){
+            pstmt2.setFloat(1,new Random().nextFloat()*(this.obtenerMoralPorId(idHabitante)/2));
+            pstmt2.setInt(2,idHabitante);
+            pstmt2.setInt(3,idJugador);
+            pstmt2.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         ArrayList<Integer> listaIDs = habitantesConMoralMenorACero(idJugador);
         while(listaIDs.size()>0){
             for(int h: listaIDs){
@@ -614,7 +637,7 @@ public class DaoHabitante extends DaoBase{
 
     public ArrayList<Integer> habitantesConMoralMenorACero(int idJugador){
         ArrayList<Integer> listaMuertos = new ArrayList<>();
-        String sql = "select moral from habitante where moral<0 and idjugador=?";
+        String sql = "select idHabitante from habitante where moral<0 and idjugador=?";
         try(Connection conn = getConection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setInt(1,idJugador);
