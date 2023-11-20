@@ -131,10 +131,17 @@ public class DaoJugador extends DaoBase{
 
         ArrayList<Habitante> listaHabitantes = daoHabitante.getListaHabitantes(jugador.getIdJugador(),2);
         ArrayList<Float> alimentoProduccionVsConsumo = daoHabitante.getAlimentoProduccionVsConsumo(jugador.getIdJugador());
-        float alimentoProducido = alimentoProduccionVsConsumo.get(0);
-        float alimentoAConsumirTotal = alimentoProduccionVsConsumo.get(1);
-        float diferencia = alimentoProducido-alimentoAConsumirTotal;
-
+        float alimentoProducido;
+        float alimentoAConsumirTotal;
+        float diferencia;
+        if(alimentoProduccionVsConsumo.isEmpty()){
+            alimentoProducido = 0;
+            alimentoAConsumirTotal =0;
+        }else{
+            alimentoProducido = alimentoProduccionVsConsumo.get(0);
+            alimentoAConsumirTotal = alimentoProduccionVsConsumo.get(1);
+        }
+        diferencia = alimentoProducido-alimentoAConsumirTotal;
         if(!listaHabitantes.isEmpty()){
             ArrayList<Integer> indicesHabitantes = new ArrayList<>();
 

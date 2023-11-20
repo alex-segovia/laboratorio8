@@ -221,12 +221,12 @@ String primeraVez=(String) request.getSession().getAttribute("primeraVez");%>
                     <a class="logo d-flex align-items-center justify-content-center">
                         <h4 style="color: white">Bienvenido, <div class="animacionUsuario"><%=jugadorActual.getUsuario()%></div></h4>
                     </a>
-                    <ul class="nav">
+                    <ul class="nav" style="display: flex !important;align-items: center !important;">
                         <li><a href="<%=request.getContextPath()%>/HabitantesServlet">Habitantes<img src="assets/images/logoHabitante.jpg" alt=""></a></li>
                         <li><a href="<%=request.getContextPath()%>/RecursosServlet">Recursos<img src="assets/images/logoRecursos.jpg" alt=""></a></li>
                         <li><a href="<%=request.getContextPath()%>/GuerraServlet" class="active">Guerra<img src="assets/images/logoGuerra.jpg" alt=""></a></li>
                         <li><a href="<%=request.getContextPath()%>/LeaderboardServlet">Leaderboard<img src="assets/images/logoLeaderboard.jpg" alt=""></a></li>
-                        <li style="display: flex !important; align-items: center !important; height: 20px !important; margin-top: 13px;"><a href="<%=request.getContextPath()%>?action=logOut"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="16" fill="currentColor" class="bi bi-box-arrow-center text-center" viewBox="0 0 16 16">
+                        <li><a style="height: 47px;display: flex !important; align-items: center !important;" href="<%=request.getContextPath()%>?action=logOut">LogOut<svg style="color: #ec6090;margin-left: 5px" xmlns="http://www.w3.org/2000/svg" width="22" height="16" fill="currentColor" class="bi bi-box-arrow-center text-center" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
                             <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
                         </svg></a></li>
@@ -286,21 +286,22 @@ String primeraVez=(String) request.getSession().getAttribute("primeraVez");%>
                                         <div class="col-lg-6">
                                             <div class="row text-center">
                                                 <%if((g.getResultado().equals("Victoria atacante")&&g.getJugadorAtacante().getIdJugador()==jugadorActual.getIdJugador())||(g.getResultado().equals("Victoria defensiva")&&g.getJugadorDefensor().getIdJugador()==jugadorActual.getIdJugador())){%>
-                                                <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center" style="color: greenyellow">Victoria</span></div>
+                                                <div class="col-4 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center" style="color: greenyellow">Victoria</span></div>
                                                 <%}else if(g.getResultado().equals("Empate")){%>
-                                                <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center" style="color: deepskyblue">Empate</span></div>
+                                                <div class="col-4 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center" style="color: deepskyblue">Empate</span></div>
                                                 <%}else{%>
-                                                <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center" style="color: red">Derrota</span></div>
+                                                <div class="col-4 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center" style="color: red">Derrota</span></div>
                                                 <%}if(g.getJugadorAtacante().getIdJugador()==jugadorActual.getIdJugador()){
                                                 if(jugadorActual.getDiasDesdeCreacion()-g.getDiasRelativosJugadorAtacante()==1){%>
-                                                <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center">Hace 1 día</span></div>
+                                                <div class="col-4 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center">Hace 1 día</span></div>
                                                 <%}else{%>
-                                                <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center">Hace <%=jugadorActual.getDiasDesdeCreacion()-g.getDiasRelativosJugadorAtacante()%> días</span></div>
+                                                <div class="col-4 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center">Hace <%=jugadorActual.getDiasDesdeCreacion()-g.getDiasRelativosJugadorAtacante()%> días</span></div>
                                                 <%}}else{if(jugadorActual.getDiasDesdeCreacion()-g.getDiasRelativosJugadorDefensor()==1){%>
-                                                <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center">Hace 1 día</span></div>
+                                                <div class="col-4 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center">Hace 1 día</span></div>
                                                 <%}else{%>
-                                                <div class="col-6 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center">Hace <%=jugadorActual.getDiasDesdeCreacion()-g.getDiasRelativosJugadorDefensor()%> días</span></div>
+                                                <div class="col-4 d-flex justify-content-center" style="padding-top: 11px"><span class="text-center">Hace <%=jugadorActual.getDiasDesdeCreacion()-g.getDiasRelativosJugadorDefensor()%> días</span></div>
                                                 <%}}%>
+                                                <div class="col-4 d-flex justify-content-center" style="padding-top: 22px"><a style="cursor: pointer" id="mostrarPopupDetalles<%=historialGuerras.indexOf(g)%>" class="text-center">Más detalles</a></div>
                                             </div>
                                         </div>
                                     </div>
@@ -420,6 +421,9 @@ String primeraVez=(String) request.getSession().getAttribute("primeraVez");%>
                                                 </div>
                                                 <%}%>
                                             </div>
+                                            <div class="row">
+                                                <h5 class="text-center">Actualmente llevas <span style="color: steelblue;"><%=jugadorActual.getDiasDesdeCreacion()%></span> días jugando</h5>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -526,6 +530,555 @@ String primeraVez=(String) request.getSession().getAttribute("primeraVez");%>
     </ul>
 </div>
 <%}%>
+<%for(Guerra g:historialGuerras){%>
+<div class="overlay" id="overlayPopupDetalles<%=historialGuerras.indexOf(g)%>"></div>
+<div class="popup" style="max-width: max-content!important;left:25%!important;" id="popupDetalles<%=historialGuerras.indexOf(g)%>">
+    <svg class="cerrarPopup" id="cerrarPopupDetalles<%=historialGuerras.indexOf(g)%>" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M11.4142 10L16.7071 4.70711C17.0976 4.31658 17.0976 3.68342 16.7071 3.29289C16.3166 2.90237 15.6834 2.90237 15.2929 3.29289L10 8.58579L4.70711 3.29289C4.31658 2.90237 3.68342 2.90237 3.29289 3.29289C2.90237 3.68342 2.90237 4.31658 3.29289 4.70711L8.58579 10L3.29289 15.2929C2.90237 15.6834 2.90237 16.3166 3.29289 16.7071C3.68342 17.0976 4.31658 17.0976 4.70711 16.7071L10 11.4142L15.2929 16.7071C15.6834 17.0976 16.3166 17.0976 16.7071 16.7071C17.0976 16.3166 17.0976 15.6834 16.7071 15.2929L11.4142 10Z" fill="black"/>
+    </svg>
+    <div class="container-fluid">
+        <div class="row">
+            <h2 class="text-center" style="font-size: 200%;font-weight: bold">Detalles de la guerra</h2>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <%if(g.getFuerzaTotalJugadorAtacante()>g.getFuerzaTotalJugadorDefensor()){%>
+            <h2 style="display: flex;justify-content: center"><%=g.getJugadorAtacante().getUsuario()%> <span style="color: limegreen; font-size: 120%;margin-left:15px;margin-right:15px;"><%=g.getFuerzaTotalJugadorAtacante()%> (Mayor fuerza)</span> <span style="margin-left:15px;margin-right:15px">VS</span> <span style="color: red;margin-left:15px;margin-right:15px"> <%=g.getFuerzaTotalJugadorDefensor()%> (Menor fuerza) </span><%=g.getJugadorDefensor().getUsuario()%></h2>
+        <%}else if(g.getFuerzaTotalJugadorAtacante()<g.getFuerzaTotalJugadorDefensor()){%>
+            <h2 style="display: flex;justify-content: center"><%=g.getJugadorAtacante().getUsuario()%> <span style="color: red;margin-left:15px;margin-right:15px"><%=g.getFuerzaTotalJugadorAtacante()%> (Menor fuerza)</span> <span style="margin-left:15px;margin-right:15px">VS</span> <span style="color: limegreen;font-size: 120%;margin-left:15px;margin-right:15px"> <%=g.getFuerzaTotalJugadorDefensor()%> (Mayor fuerza) </span><%=g.getJugadorDefensor().getUsuario()%></h2>
+        <%}else{%>
+            <h2 style="display: flex;justify-content: center"><%=g.getJugadorAtacante().getUsuario()%> <span style="color: steelblue;margin-left:15px;margin-right:15px"><%=g.getFuerzaTotalJugadorAtacante()%> (Fuerza)</span> <span style="margin-left:15px;margin-right:15px">VS</span> <span style="color: steelblue;margin-left:15px;margin-right:15px"><%=g.getFuerzaTotalJugadorDefensor()%> (Fuerza) </span><%=g.getJugadorDefensor().getUsuario()%></h2>
+        <%}%>
+    </div>
+    <hr>
+    <%if(jugadorActual.getIdJugador()==g.getJugadorAtacante().getIdJugador()&&g.getResultado().equals("Victoria atacante")){%>
+    <div class="row">
+        <div class="text-center" style="width: 15%">
+            <h3><%=g.getDiferenciaFuerzaAtacante()%></h3>
+            <br>
+            <span>Fuerza <span style="color: green">(+)</span></span>
+        </div>
+        <div class="text-center" style="width: 15%">
+            <h3><%=g.getDiferenciaMoralAtacante()%></h3>
+            <br>
+            <span>Moral <span style="color: green">(+)</span></span>
+        </div>
+        <div class="text-center" style="width: 15%">
+            <h3><%=g.getDiferenciaAlimentoTotalAtacante()%></h3>
+            <br>
+            <span>Alimento <span style="color: green">(+)</span></span>
+        </div>
+        <div class="text-center" style="width: 27.5%">
+            <h3><%=g.getDiferenciaProduccionAlimentoTotalAtacante()%></h3>
+            <br>
+            <span>P. de alimento <span style="color: green">(+)</span></span>
+        </div>
+        <div class="text-center" style="width: 27.5%">
+            <h3><%=g.getDiferenciaProduccionMoralTotalAtacante()%></h3>
+            <br>
+            <span>P. de moral <span style="color: green">(+)</span></span>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="text-center" style="width: 22.5%">
+            <h3><%=g.getDiferenciaCantidadSoldadosAtacante()%></h3>
+            <span>Soldados <span style="color: green">(+)</span></span>
+        </div>
+        <div class="text-center" style="width: 22.5%">
+            <h3><%=g.getDiferenciaCantidadConstructoresAtacante()%></h3>
+            <span>Constructores <span style="color: green">(+)</span></span>
+        </div>
+        <div class="text-center" style="width: 22.5%">
+            <h3><%=g.getDiferenciaCantidadHabitantesAtacante()%></h3>
+            <span>Habitantes <span style="color: green">(+)</span></span>
+        </div>
+        <div class="text-center" style="width: 32.5%">
+            <h3><%=g.getDiferenciaCantidadHabitantesAtacante()%></h3>
+            <span>Habitantes fugados <span style="color: green">(+)</span></span>
+        </div>
+    </div>
+    <%}else if(g.getResultado().equals("Victoria defensiva")){%>
+    <div class="row">
+        <div class="text-center" style="width: 15%">
+            <h3><%=g.getDiferenciaFuerzaAtacante()%></h3>
+            <span>Fuerza <span style="color: red">(-)</span></span>
+        </div>
+        <div class="text-center" style="width: 15%">
+            <h3><%=g.getDiferenciaMoralAtacante()%></h3>
+            <span>Moral <span style="color: red">(-)</span></span>
+        </div>
+        <div class="text-center" style="width: 15%">
+            <h3><%=g.getDiferenciaAlimentoTotalAtacante()%></h3>
+            <span>Alimento <span style="color: red">(-)</span></span>
+        </div>
+        <div class="text-center" style="width: 27.5%">
+            <h3><%=g.getDiferenciaProduccionAlimentoTotalAtacante()%></h3>
+            <span>P. de alimento <span style="color: red">(-)</span></span>
+        </div>
+        <div class="text-center" style="width: 27.5%">
+            <h3><%=g.getDiferenciaProduccionMoralTotalAtacante()%></h3>
+            <span>P. de moral <span style="color: red">(-)</span></span>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="text-center" style="width: 22.5%">
+            <h3><%=g.getDiferenciaCantidadSoldadosAtacante()%></h3>
+            <span>Soldados <span style="color: red">(-)</span></span>
+        </div>
+        <div class="text-center" style="width: 22.5%">
+            <h3><%=g.getDiferenciaCantidadConstructoresAtacante()%></h3>
+            <span>Constructores <span style="color: red">(-)</span></span>
+        </div>
+        <div class="text-center" style="width: 22.5%">
+            <h3><%=g.getDiferenciaCantidadHabitantesAtacante()%></h3>
+            <span>Habitantes <span style="color: red">(-)</span></span>
+        </div>
+        <div class="text-center" style="width: 32.5%">
+            <h3><%=g.getDiferenciaCantidadHabitantesAtacante()%></h3>
+            <span>Habitantes fugados <span style="color: red">(-)</span></span>
+        </div>
+    </div>
+    <%}else if(g.getResultado().equals("Empate")){%>
+    <div class="row">
+        <%if(g.getDiferenciaFuerzaAtacante()>0){%>
+        <div class="text-center" style="width: 15%">
+            <h3><%=g.getDiferenciaFuerzaAtacante()%></h3>
+            <span>Fuerza <span style="color: green">(+)</span></span>
+        </div>
+        <%}else if(g.getDiferenciaFuerzaAtacante()<0){%>
+        <div class="text-center" style="width: 15%">
+            <h3><%=g.getDiferenciaFuerzaAtacante()%></h3>
+            <span>Fuerza <span style="color: red">(-)</span></span>
+        </div>
+        <%}else{%>
+        <div class="text-center" style="width: 15%">
+            <h3>0</h3>
+            <span>Fuerza <span style="color: steelblue">(+-)</span></span>
+        </div>
+        <%}%>
+        
+        
+        <%if(g.getDiferenciaMoralAtacante()>0){%>
+        <div class="text-center" style="width: 15%">
+            <h3><%=g.getDiferenciaMoralAtacante()%></h3>
+            <span>Moral <span style="color: green">(+)</span></span>
+        </div>
+        <%}else if(g.getDiferenciaMoralAtacante()<0){%>
+        <div class="text-center" style="width: 15%">
+            <h3><%=g.getDiferenciaMoralAtacante()%></h3>
+            <span>Moral <span style="color: red">(-)</span></span>
+        </div>
+        <%}else{%>
+        <div class="text-center" style="width: 15%">
+            <h3>0</h3>
+            <span>Moral <span style="color: steelblue">(+-)</span></span>
+        </div>
+        <%}%>
+        
+        
+        <%if(g.getDiferenciaAlimentoTotalAtacante()>0){%>
+        <div class="text-center" style="width: 15%">
+            <h3><%=g.getDiferenciaAlimentoTotalAtacante()%></h3>
+            <span>Alimento <span style="color: green">(+)</span></span>
+        </div>
+        <%}else if(g.getDiferenciaAlimentoTotalAtacante()<0){%>
+        <div class="text-center" style="width: 15%">
+            <h3><%=g.getDiferenciaAlimentoTotalAtacante()%></h3>
+            <span>Alimento <span style="color: red">(-)</span></span>
+        </div>
+        <%}else{%>
+        <div class="text-center" style="width: 15%">
+            <h3>0</h3>
+            <span>Alimento <span style="color: steelblue">(+-)</span></span>
+        </div>
+        <%}%>
+
+
+
+        <%if(g.getDiferenciaProduccionAlimentoTotalAtacante()>0){%>
+        <div class="text-center" style="width: 27.5%">
+            <h3><%=g.getDiferenciaProduccionAlimentoTotalAtacante()%></h3>
+            <span>P. de alimento <span style="color: green">(+)</span></span>
+        </div>
+        <%}else if(g.getDiferenciaProduccionAlimentoTotalAtacante()<0){%>
+        <div class="text-center" style="width: 27.5%">
+            <h3><%=g.getDiferenciaProduccionAlimentoTotalAtacante()%></h3>
+            <span>P. de alimento <span style="color: red">(-)</span></span>
+        </div>
+        <%}else{%>
+        <div class="text-center" style="width: 27.5%">
+            <h3>0</h3>
+            <span>P. de alimento <span style="color: steelblue">(+-)</span></span>
+        </div>
+        <%}%>
+
+
+
+        <%if(g.getDiferenciaProduccionMoralTotalAtacante()>0){%>
+        <div class="text-center" style="width: 27.5%">
+            <h3><%=g.getDiferenciaProduccionMoralTotalAtacante()%></h3>
+            <span>P. de moral <span style="color: green">(+)</span></span>
+        </div>
+        <%}else if(g.getDiferenciaProduccionMoralTotalAtacante()<0){%>
+        <div class="text-center" style="width: 27.5%">
+            <h3><%=g.getDiferenciaProduccionMoralTotalAtacante()%></h3>
+            <span>P. de moral <span style="color: red">(-)</span></span>
+        </div>
+        <%}else{%>
+        <div class="text-center" style="width: 27.5%">
+            <h3>0</h3>
+            <span>P. de moral <span style="color: steelblue">(+-)</span></span>
+        </div>
+        <%}%>
+        
+        
+    </div>
+    <br>
+    <div class="row">
+        <%if(g.getDiferenciaCantidadSoldadosAtacante()>0){%>
+        <div class="text-center" style="width: 22.5%">
+            <h3><%=g.getDiferenciaCantidadSoldadosAtacante()%></h3>
+            <span>Soldados <span style="color: green">(+)</span></span>
+        </div>
+        <%}else if(g.getDiferenciaCantidadSoldadosAtacante()<0){%>
+        <div class="text-center" style="width: 22.5%">
+            <h3><%=g.getDiferenciaCantidadSoldadosAtacante()%></h3>
+            <span>Soldados <span style="color: red">(-)</span></span>
+        </div>
+        <%}else{%>
+        <div class="text-center" style="width: 22.5%">
+            <h3>0</h3>
+            <span>Soldados <span style="color: steelblue">(+-)</span></span>
+        </div>
+        <%}%>
+
+        
+
+        <%if(g.getDiferenciaCantidadConstructoresAtacante()>0){%>
+        <div class="text-center" style="width: 22.5%">
+            <h3><%=g.getDiferenciaCantidadConstructoresAtacante()%></h3>
+            <span>Constructores <span style="color: green">(+)</span></span>
+        </div>
+        <%}else if(g.getDiferenciaCantidadConstructoresAtacante()<0){%>
+        <div class="text-center" style="width: 22.5%">
+            <h3><%=g.getDiferenciaCantidadConstructoresAtacante()%></h3>
+            <span>Constructores <span style="color: red">(-)</span></span>
+        </div>
+        <%}else{%>
+        <div class="text-center" style="width: 22.5%">
+            <h3>0</h3>
+            <span>Constructores <span style="color: steelblue">(+-)</span></span>
+        </div>
+        <%}%>
+
+
+        
+        <%if(g.getDiferenciaCantidadHabitantesAtacante()>0){%>
+        <div class="text-center" style="width: 22.5%">
+            <h3><%=g.getDiferenciaCantidadHabitantesAtacante()%></h3>
+            <span>Habitantes <span style="color: green">(+)</span></span>
+        </div>
+        <%}else if(g.getDiferenciaCantidadHabitantesAtacante()<0){%>
+        <div class="text-center" style="width: 22.5%">
+            <h3><%=g.getDiferenciaCantidadHabitantesAtacante()%></h3>
+            <span>Habitantes <span style="color: red">(-)</span></span>
+        </div>
+        <%}else{%>
+        <div class="text-center" style="width: 22.5%">
+            <h3>0</h3>
+            <span>Habitantes <span style="color: steelblue">(+-)</span></span>
+        </div>
+        <%}%>
+
+
+        
+        <%if(g.getHabitantesTransferidos()>0){%>
+        <div class="text-center" style="width: 32.5%">
+            <h3><%=g.getDiferenciaCantidadHabitantesAtacante()%></h3>
+            <span>Habitantes fugados <span style="color: green">(+)</span></span>
+        </div>
+        <%}else if(g.getHabitantesTransferidos()<0){%>
+        <div class="text-center" style="width: 32.5%">
+            <h3><%=g.getDiferenciaCantidadHabitantesAtacante()%></h3>
+            <span>Habitantes fugados <span style="color: red">(-)</span></span>
+        </div>
+        <%}else{%>
+        <div class="text-center" style="width: 32.5%">
+            <h3>0</h3>
+            <span>Habitantes fugados <span style="color: steelblue">(+-)</span></span>
+        </div>
+        <%}%>
+        
+        
+        
+
+    </div>
+    <%}else{
+        if(g.getResultado().equals("Victoria atacante")){%>
+    <div class="row">
+        <div class="text-center" style="width: 15%">
+            <h3><%=g.getDiferenciaFuerzaDefensor()%></h3>
+            <span>Fuerza <span style="color: green">(+)</span></span>
+        </div>
+        <div class="text-center" style="width: 15%">
+            <h3><%=g.getDiferenciaMoralDefensor()%></h3>
+            <span>Moral <span style="color: green">(+)</span></span>
+        </div>
+        <div class="text-center" style="width: 15%">
+            <h3><%=g.getDiferenciaAlimentoTotalDefensor()%></h3>
+            <span>Alimento <span style="color: green">(+)</span></span>
+        </div>
+        <div class="text-center" style="width: 27.5%">
+            <h3><%=g.getDiferenciaProduccionAlimentoTotalDefensor()%></h3>
+            <span>P. de alimento <span style="color: green">(+)</span></span>
+        </div>
+        <div class="text-center" style="width: 27.5%">
+            <h3><%=g.getDiferenciaProduccionMoralTotalDefensor()%></h3>
+            <span>P. de moral <span style="color: green">(+)</span></span>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="text-center" style="width: 22.5%">
+            <h3><%=g.getDiferenciaCantidadSoldadosDefensor()%></h3>
+            <span>Soldados <span style="color: green">(+)</span></span>
+        </div>
+        <div class="text-center" style="width: 22.5%">
+            <h3><%=g.getDiferenciaCantidadConstructoresDefensor()%></h3>
+            <span>Constructores <span style="color: green">(+)</span></span>
+        </div>
+        <div class="text-center" style="width: 22.5%">
+            <h3><%=g.getDiferenciaCantidadHabitantesDefensor()%></h3>
+            <span>Habitantes <span style="color: green">(+)</span></span>
+        </div>
+        <div class="text-center" style="width: 32.5%">
+            <h3><%=g.getDiferenciaCantidadHabitantesDefensor()%></h3>
+            <span>Habitantes fugados <span style="color: green">(+)</span></span>
+        </div>
+    </div>
+    <%}else if(g.getResultado().equals("Victoria defensiva")){%>
+    <div class="row">
+        <div class="text-center" style="width: 15%">
+            <h3><%=g.getDiferenciaFuerzaDefensor()%></h3>
+            <span>Fuerza <span style="color: red">(-)</span></span>
+        </div>
+        <div class="text-center" style="width: 15%">
+            <h3><%=g.getDiferenciaMoralDefensor()%></h3>
+            <span>Moral <span style="color: red">(-)</span></span>
+        </div>
+        <div class="text-center" style="width: 15%">
+            <h3><%=g.getDiferenciaAlimentoTotalDefensor()%></h3>
+            <span>Alimento <span style="color: red">(-)</span></span>
+        </div>
+        <div class="text-center" style="width: 27.5%">
+            <h3><%=g.getDiferenciaProduccionAlimentoTotalDefensor()%></h3>
+            <span>P. de alimento <span style="color: red">(-)</span></span>
+        </div>
+        <div class="text-center" style="width: 27.5%">
+            <h3><%=g.getDiferenciaProduccionMoralTotalDefensor()%></h3>
+            <span>P. de moral <span style="color: red">(-)</span></span>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="text-center" style="width: 22.5%">
+            <h3><%=g.getDiferenciaCantidadSoldadosDefensor()%></h3>
+            <span>Soldados <span style="color: red">(-)</span></span>
+        </div>
+        <div class="text-center" style="width: 22.5%">
+            <h3><%=g.getDiferenciaCantidadConstructoresDefensor()%></h3>
+            <span>Constructores <span style="color: red">(-)</span></span>
+        </div>
+        <div class="text-center" style="width: 22.5%">
+            <h3><%=g.getDiferenciaCantidadHabitantesDefensor()%></h3>
+            <span>Habitantes <span style="color: red">(-)</span></span>
+        </div>
+        <div class="text-center" style="width: 32.5%">
+            <h3><%=g.getDiferenciaCantidadHabitantesDefensor()%></h3>
+            <span>Habitantes fugados <span style="color: red">(-)</span></span>
+        </div>
+    </div>
+    <%}else{%>
+    <div class="row">
+        <%if(g.getDiferenciaFuerzaDefensor()>0){%>
+        <div class="text-center" style="width: 15%">
+            <h3><%=g.getDiferenciaFuerzaDefensor()%></h3>
+            <span>Fuerza <span style="color: green">(+)</span></span>
+        </div>
+        <%}else if(g.getDiferenciaFuerzaDefensor()<0){%>
+        <div class="text-center" style="width: 15%">
+            <h3><%=g.getDiferenciaFuerzaDefensor()%></h3>
+            <span>Fuerza <span style="color: red">(-)</span></span>
+        </div>
+        <%}else{%>
+        <div class="text-center" style="width: 15%">
+            <h3>0</h3>
+            <span>Fuerza <span style="color: steelblue">(+-)</span></span>
+        </div>
+        <%}%>
+
+
+        <%if(g.getDiferenciaMoralDefensor()>0){%>
+        <div class="text-center" style="width: 15%">
+            <h3><%=g.getDiferenciaMoralDefensor()%></h3>
+            <span>Moral <span style="color: green">(+)</span></span>
+        </div>
+        <%}else if(g.getDiferenciaMoralDefensor()<0){%>
+        <div class="text-center" style="width: 15%">
+            <h3><%=g.getDiferenciaMoralDefensor()%></h3>
+            <span>Moral <span style="color: red">(-)</span></span>
+        </div>
+        <%}else{%>
+        <div class="text-center" style="width: 15%">
+            <h3>0</h3>
+            <span>Moral <span style="color: steelblue">(+-)</span></span>
+        </div>
+        <%}%>
+
+
+        <%if(g.getDiferenciaAlimentoTotalDefensor()>0){%>
+        <div class="text-center" style="width: 15%">
+            <h3><%=g.getDiferenciaAlimentoTotalDefensor()%></h3>
+            <span>Alimento <span style="color: green">(+)</span></span>
+        </div>
+        <%}else if(g.getDiferenciaAlimentoTotalDefensor()<0){%>
+        <div class="text-center" style="width: 15%">
+            <h3><%=g.getDiferenciaAlimentoTotalDefensor()%></h3>
+            <span>Alimento <span style="color: red">(-)</span></span>
+        </div>
+        <%}else{%>
+        <div class="text-center" style="width: 15%">
+            <h3>0</h3>
+            <span>Alimento <span style="color: steelblue">(+-)</span></span>
+        </div>
+        <%}%>
+
+
+
+        <%if(g.getDiferenciaProduccionAlimentoTotalDefensor()>0){%>
+        <div class="text-center" style="width: 27.5%">
+            <h3><%=g.getDiferenciaProduccionAlimentoTotalDefensor()%></h3>
+            <span>P. de alimento <span style="color: green">(+)</span></span>
+        </div>
+        <%}else if(g.getDiferenciaProduccionAlimentoTotalDefensor()<0){%>
+        <div class="text-center" style="width: 27.5%">
+            <h3><%=g.getDiferenciaProduccionAlimentoTotalDefensor()%></h3>
+            <span>P. de alimento <span style="color: red">(-)</span></span>
+        </div>
+        <%}else{%>
+        <div class="text-center" style="width: 27.5%">
+            <h3>0</h3>
+            <span>P. de alimento <span style="color: steelblue">(+-)</span></span>
+        </div>
+        <%}%>
+
+
+
+        <%if(g.getDiferenciaProduccionMoralTotalDefensor()>0){%>
+        <div class="text-center" style="width: 27.5%">
+            <h3><%=g.getDiferenciaProduccionMoralTotalDefensor()%></h3>
+            <span>P. de moral <span style="color: green">(+)</span></span>
+        </div>
+        <%}else if(g.getDiferenciaProduccionMoralTotalDefensor()<0){%>
+        <div class="text-center" style="width: 27.5%">
+            <h3><%=g.getDiferenciaProduccionMoralTotalDefensor()%></h3>
+            <span>P. de moral <span style="color: red">(-)</span></span>
+        </div>
+        <%}else{%>
+        <div class="text-center" style="width: 27.5%">
+            <h3>0</h3>
+            <span>P. de moral <span style="color: steelblue">(+-)</span></span>
+        </div>
+        <%}%>
+
+
+    </div>
+    <br>
+    <div class="row">
+        <%if(g.getDiferenciaCantidadSoldadosDefensor()>0){%>
+        <div class="text-center" style="width: 22.5%">
+            <h3><%=g.getDiferenciaCantidadSoldadosDefensor()%></h3>
+            <span>Soldados <span style="color: green">(+)</span></span>
+        </div>
+        <%}else if(g.getDiferenciaCantidadSoldadosDefensor()<0){%>
+        <div class="text-center" style="width: 22.5%">
+            <h3><%=g.getDiferenciaCantidadSoldadosDefensor()%></h3>
+            <span>Soldados <span style="color: red">(-)</span></span>
+        </div>
+        <%}else{%>
+        <div class="text-center" style="width: 22.5%">
+            <h3>0</h3>
+            <span>Soldados <span style="color: steelblue">(+-)</span></span>
+        </div>
+        <%}%>
+
+
+
+        <%if(g.getDiferenciaCantidadConstructoresDefensor()>0){%>
+        <div class="text-center" style="width: 22.5%">
+            <h3><%=g.getDiferenciaCantidadConstructoresDefensor()%></h3>
+            <span>Constructores <span style="color: green">(+)</span></span>
+        </div>
+        <%}else if(g.getDiferenciaCantidadConstructoresDefensor()<0){%>
+        <div class="text-center" style="width: 22.5%">
+            <h3><%=g.getDiferenciaCantidadConstructoresDefensor()%></h3>
+            <span>Constructores <span style="color: red">(-)</span></span>
+        </div>
+        <%}else{%>
+        <div class="text-center" style="width: 22.5%">
+            <h3>0</h3>
+            <span>Constructores <span style="color: steelblue">(+-)</span></span>
+        </div>
+        <%}%>
+
+
+
+        <%if(g.getDiferenciaCantidadHabitantesDefensor()>0){%>
+        <div class="text-center" style="width: 22.5%">
+            <h3><%=g.getDiferenciaCantidadHabitantesDefensor()%></h3>
+            <span>Habitantes <span style="color: green">(+)</span></span>
+        </div>
+        <%}else if(g.getDiferenciaCantidadHabitantesDefensor()<0){%>
+        <div class="text-center" style="width: 22.5%">
+            <h3><%=g.getDiferenciaCantidadHabitantesDefensor()%></h3>
+            <span>Habitantes <span style="color: red">(-)</span></span>
+        </div>
+        <%}else{%>
+        <div class="text-center" style="width: 22.5%">
+            <h3>0</h3>
+            <span>Habitantes <span style="color: steelblue">(+-)</span></span>
+        </div>
+        <%}%>
+
+
+
+        <%if(g.getHabitantesTransferidos()>0){%>
+        <div class="text-center" style="width: 32.5%">
+            <h3><%=g.getDiferenciaCantidadHabitantesDefensor()%></h3>
+            <span>Habitantes fugados<span style="color: green">(+)</span></span>
+        </div>
+        <%}else if(g.getHabitantesTransferidos()<0){%>
+        <div class="text-center" style="width: 32.5%">
+            <h3><%=g.getDiferenciaCantidadHabitantesDefensor()%></h3>
+            <span>Habitantes fugados<span style="color: red">(-)</span></span>
+        </div>
+        <%}else{%>
+        <div class="text-center" style="width: 32.5%">
+            <h3>0</h3>
+            <span>Habitantes fugados<span style="color: steelblue">(+-)</span></span>
+        </div>
+        <%}%>
+
+
+
+
+    </div>
+    <%}}%>
+</div>
+<%}%>
 <script>
     function popupFunc(popupId,abrirId,cerrarClass,overlayId){
         let showPopup=document.getElementById(abrirId);
@@ -573,6 +1126,9 @@ String primeraVez=(String) request.getSession().getAttribute("primeraVez");%>
     <%if(guerraHaceUnDia&&primeraVez!=null){
     request.getSession().removeAttribute("primeraVez");%>
         popupFunc('popupUltimaGuerra','auxa',['cerrarPopupUltimaGuerra'],'overlayUltimaGuerra');
+    <%}%>
+    <%for(int i=0;i<historialGuerras.size();i++){%>
+    popupFunc('popupDetalles<%=i%>','mostrarPopupDetalles<%=i%>',['cerrarPopupDetalles<%=i%>'],'overlayPopupDetalles<%=i%>');
     <%}%>
 </script>
 

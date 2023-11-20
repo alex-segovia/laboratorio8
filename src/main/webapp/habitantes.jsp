@@ -22,7 +22,8 @@
     <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <%Jugador jugadorActual = (Jugador) request.getSession().getAttribute("jugadorActual");%>
-    <%String tipoLista = (String) request.getAttribute("tipoLista");%>
+    <%String tipoLista = (String) request.getAttribute("tipoLista");
+        String alertaMaxReclutar=(String) request.getSession().getAttribute("alertaMaxReclutar");%>
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="assets/css/fontawesome.css">
     <link rel="stylesheet" href="assets/css/templatemo-cyborg-gamingHabitante.css">
@@ -123,7 +124,8 @@
             box-shadow: 0 0 5px rgba(255, 0, 255, 0.5); /* Sombra al estar enfocado en tono magenta con transparencia */
         }
         .overlay {
-            display: none;
+            opacity: 0;
+            pointer-events: none;
             position: fixed;
             top: 0;
             left: 0;
@@ -135,16 +137,64 @@
 
         /* Estilo para el contenido del popup */
         .popup {
-            display: none;
+            opacity: 0;
+            pointer-events: none;
             position: fixed;
-            top: 50%;
-            left: 50%;
+            top: 25%;
+            left: 37.5%;
             border-radius: 20px;
-            transform: translate(-50%, -50%);
             background-color: rgba(225, 29, 109,0.8);
             padding-top: 20px;
             z-index: 10001;
-            box-shadow: 5px 20px 50px #000
+            box-shadow: 5px 20px 50px #000;
+            transition: all 0.3s ease;
+        }
+        .popupAux{
+            padding: 30px 20px;
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #fff;
+        }
+        .popup i {
+            font-size: 70px;
+            color: #4070f4;
+        }
+        .popup h2 {
+            margin-top: 20px;
+            font-size: 25px;
+            font-weight: 500;
+            color: #333;
+        }
+        .popup h3 {
+            font-size: 16px;
+            font-weight: 400;
+            color: #333;
+            text-align: center;
+        }
+        .popup .buttons {
+            margin-top: 25px;
+        }
+        .popup button {
+            font-size: 14px;
+            padding: 6px 12px;
+            margin: 0 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            color: #fff;
+            background-color: #e75e8d;
+            display: inline-block;
+            border-radius: 25px;
+            font-weight: 400;
+            text-transform: capitalize;
+            letter-spacing: 0.5px;
+            transition: all .3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .popup button:hover {
+            background-color: #fff;
+            color: #e75e8d;
         }
         /* Estilo para el botón de cerrar */
         .cerrarPopup {
@@ -229,12 +279,12 @@
                     <a class="logo d-flex align-items-center justify-content-center">
                         <h4 style="color: white">Bienvenido, <div class="animacionUsuario"><%=jugadorActual.getUsuario()%></div></h4>
                     </a>
-                    <ul class="nav">
+                    <ul class="nav" style="display: flex !important;align-items: center !important;">
                         <li><a href="<%=request.getContextPath()%>/HabitantesServlet" class="active">Habitantes<img src="assets/images/logoHabitante.jpg" alt=""></a></li>
                         <li><a href="<%=request.getContextPath()%>/RecursosServlet">Recursos<img src="assets/images/logoRecursos.jpg" alt=""></a></li>
                         <li><a href="<%=request.getContextPath()%>/GuerraServlet">Guerra<img src="assets/images/logoGuerra.jpg" alt=""></a></li>
                         <li><a href="<%=request.getContextPath()%>/LeaderboardServlet">Leaderboard<img src="assets/images/logoLeaderboard.jpg" alt=""></a></li>
-                        <li style="display: flex !important; align-items: center !important; height: 20px !important; margin-top: 13px;"><a href="<%=request.getContextPath()%>?action=logOut"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="16" fill="currentColor" class="bi bi-box-arrow-center text-center" viewBox="0 0 16 16">
+                        <li><a style="height: 47px;display: flex !important; align-items: center !important;" href="<%=request.getContextPath()%>?action=logOut">LogOut<svg style="color: #ec6090;margin-left: 5px" xmlns="http://www.w3.org/2000/svg" width="22" height="16" fill="currentColor" class="bi bi-box-arrow-center text-center" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
                             <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
                         </svg></a></li>
@@ -466,6 +516,38 @@ for(int i=0;i<listaHabitantes.size();i++){%>
     </div>
 </div>
 <%}}%>
+
+
+<%if(alertaMaxReclutar!=null){%>
+<div id="auxa"></div>
+<div class="overlay" style="opacity: 1;pointer-events: auto" id="overlayAlerta"></div>
+<div class="popup popupAux" style="opacity: 1;pointer-events: auto;left: 40%;top: 32.5%" id="popupAlerta">
+    <svg class="cerrarPopup" id="cerrarPopupAlerta" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M11.4142 10L16.7071 4.70711C17.0976 4.31658 17.0976 3.68342 16.7071 3.29289C16.3166 2.90237 15.6834 2.90237 15.2929 3.29289L10 8.58579L4.70711 3.29289C4.31658 2.90237 3.68342 2.90237 3.29289 3.29289C2.90237 3.68342 2.90237 4.31658 3.29289 4.70711L8.58579 10L3.29289 15.2929C2.90237 15.6834 2.90237 16.3166 3.29289 16.7071C3.68342 17.0976 4.31658 17.0976 4.70711 16.7071L10 11.4142L15.2929 16.7071C15.6834 17.0976 16.3166 17.0976 16.7071 16.7071C17.0976 16.3166 17.0976 15.6834 16.7071 15.2929L11.4142 10Z" fill="black"/>
+    </svg>
+    <i class="fa-solid fa-triangle-exclamation" style="color: #ec6090;"></i>
+    <h2>Alerta</h2>
+    <div class="mt-3 mb-3">
+        <h3>No puedes reclutar a este tipo de habitante por hoy (las horas totales superan las 24)</h3>
+    </div>
+</div>
+<%}%>
+
+<%if(request.getSession().getAttribute("alertaNombreLargo")!=null){%>
+<div id="auxa2"></div>
+<div class="overlay" style="opacity: 1;pointer-events: auto" id="overlayAlertaNombreLargo"></div>
+<div class="popup popupAux" style="opacity: 1;pointer-events: auto;left: 37.5%;top: 32.5%" id="popupAlertaNombreLargo">
+    <svg class="cerrarPopup" id="cerrarPopupAlertaNombreLargo" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M11.4142 10L16.7071 4.70711C17.0976 4.31658 17.0976 3.68342 16.7071 3.29289C16.3166 2.90237 15.6834 2.90237 15.2929 3.29289L10 8.58579L4.70711 3.29289C4.31658 2.90237 3.68342 2.90237 3.29289 3.29289C2.90237 3.68342 2.90237 4.31658 3.29289 4.70711L8.58579 10L3.29289 15.2929C2.90237 15.6834 2.90237 16.3166 3.29289 16.7071C3.68342 17.0976 4.31658 17.0976 4.70711 16.7071L10 11.4142L15.2929 16.7071C15.6834 17.0976 16.3166 17.0976 16.7071 16.7071C17.0976 16.3166 17.0976 15.6834 16.7071 15.2929L11.4142 10Z" fill="black"/>
+    </svg>
+    <i class="fa-solid fa-triangle-exclamation" style="color: #ec6090;"></i>
+    <h2>Alerta</h2>
+    <div class="mt-3 mb-3">
+        <h3>El nombre del jugador es muy largo (máximo 10 carácteres)</h3>
+    </div>
+</div>
+<%}%>
+
 <footer>
     <div class="container">
         <div class="row">
@@ -478,19 +560,24 @@ for(int i=0;i<listaHabitantes.size();i++){%>
 
 <script>
     function popupFunc(popupId,abrirId,cerrarClass,overlayId){
-        const showPopup=document.getElementById(abrirId);
-        const overlay=document.getElementById(overlayId);
-        const popup=document.getElementById(popupId);
+        let showPopup=document.getElementById(abrirId);
+        let overlay=document.getElementById(overlayId);
+        let popup=document.getElementById(popupId);
         const mostrarPopup = () => {
-            overlay.style.display = 'block';
-            popup.style.display = 'block';
-            // Desactivar el scroll
+            overlay.style.opacity='1';
+            overlay.style.pointerEvents='auto';
+            popup.style.opacity='1';
+            popup.style.pointerEvents='auto';
             document.body.style.overflow = 'hidden';
+            popup.style.transform= "scale(1.2)";
         };
         showPopup.addEventListener('click', mostrarPopup);
         const cerrarPopup = () => {
-            overlay.style.display = 'none';
-            popup.style.display = 'none';
+            overlay.style.opacity='0';
+            overlay.style.pointerEvents='none';
+            popup.style.opacity='0';
+            popup.style.pointerEvents='none'
+            popup.style.transform= "scale(1)";
             document.body.style.overflow = 'auto';
 
         };
@@ -541,6 +628,12 @@ for(int i=0;i<listaHabitantes.size();i++){%>
     //Validar en edición
     verificarInput('nombreHabitanteEditar<%=i%>','cerrarPopupEditar1<%=i%>')
     <%}}}%>
+    <%if(alertaMaxReclutar!=null){%>
+    popupFunc('popupAlerta','auxa',['cerrarPopupAlerta'],'overlayAlerta');
+    <%request.getSession().removeAttribute("alertaMaxReclutar");}%>
+    <%if(request.getSession().getAttribute("alertaNombreLargo")!=null){%>
+    popupFunc('popupAlertaNombreLargo','auxa2',['cerrarPopupAlertaNombreLargo'],'overlayAlertaNombreLargo');
+    <%request.getSession().removeAttribute("alertaNombreLargo");}%>
 </script>
 
 

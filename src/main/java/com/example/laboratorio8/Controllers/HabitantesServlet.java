@@ -47,9 +47,13 @@ public class HabitantesServlet extends HttpServlet {
             switch (action) {
                 case "crear":
                     String nombreHabitante = request.getParameter("nombreHabitante");
-                    if (nombreHabitante.length() > 10 || jugadorActual.getHorasDia() > 23) {
+                    if (nombreHabitante.length() > 10){
+                        request.getSession().setAttribute("alertaNombreLargo","1");
                         response.sendRedirect("HabitantesServlet");
-                    } else {
+                    }else if(jugadorActual.getHorasDia() > 23){
+                        request.getSession().setAttribute("alertaMaxReclutar","1");
+                        response.sendRedirect("HabitantesServlet");
+                    }else {
                         String generoHabitante = request.getParameter("generoHabitante");
                         String profesionHabitante = request.getParameter("profesionHabitante");
                         int horasAdd = profesionHabitante.equals("Ninguna")?2:8;
@@ -62,6 +66,7 @@ public class HabitantesServlet extends HttpServlet {
                 case "editar":
                     String nombreNuevo = request.getParameter("nombreNuevoHabitante");
                     if (nombreNuevo.length() > 10) {
+                        request.getSession().setAttribute("alertaNombreLargo","1");
                         response.sendRedirect("HabitantesServlet");
                     } else {
                         int idHabitante = Integer.parseInt(request.getParameter("idHabitante"));

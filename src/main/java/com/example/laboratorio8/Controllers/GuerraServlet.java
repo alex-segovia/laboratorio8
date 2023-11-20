@@ -7,6 +7,7 @@ import com.example.laboratorio8.Beans.Soldado;
 import com.example.laboratorio8.Daos.DaoGuerra;
 import com.example.laboratorio8.Daos.DaoHabitante;
 import com.example.laboratorio8.Daos.DaoJugador;
+import com.example.laboratorio8.Dtos.DtoGuerra;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -49,11 +50,15 @@ public class GuerraServlet extends HttpServlet {
             switch (action) {
                 case "declararGuerra":
                     Jugador jugadorDefensor = dJ.getJugadorPorId(Integer.parseInt(request.getParameter("idJugadorDefensor")));
+                    DtoGuerra resultadosAntesGuerraAtacante=new DtoGuerra(dG.getTotalFuerza(jugadorActual.getIdJugador()),dG.getTotalMoral(jugadorActual.getIdJugador()),dG.getTotalAlimentoAlmacen(jugadorActual.getIdJugador()),dG.getProduccionTotalAlimento(jugadorActual.getIdJugador()),dG.getProduccionTotalMoral(jugadorActual.getIdJugador()),dG.getTotalSoldados(jugadorActual.getIdJugador()),dG.getTotalConstructores(jugadorActual.getIdJugador()),dG.getTotalHabitantes(jugadorActual.getIdJugador()));
+                    DtoGuerra resultadosAntesGuerraDefensor=new DtoGuerra(dG.getTotalFuerza(jugadorDefensor.getIdJugador()),dG.getTotalMoral(jugadorDefensor.getIdJugador()),dG.getTotalAlimentoAlmacen(jugadorDefensor.getIdJugador()),dG.getProduccionTotalAlimento(jugadorDefensor.getIdJugador()),dG.getProduccionTotalMoral(jugadorDefensor.getIdJugador()),dG.getTotalSoldados(jugadorDefensor.getIdJugador()),dG.getTotalConstructores(jugadorDefensor.getIdJugador()),dG.getTotalHabitantes(jugadorDefensor.getIdJugador()));
                     dJ.proceedEndDia(jugadorActual, dH);
                     float fuerzaTotalAtacante = dG.getSumaFuerzaPorProfesion(jugadorActual.getIdJugador(), "Soldado");
                     float fuerzaTotalDefensor = dG.getSumaFuerzaPorProfesion(jugadorDefensor.getIdJugador(), "Soldado") + dG.getSumaFuerzaPorProfesion(jugadorDefensor.getIdJugador(), "Constructor");
                     ArrayList<Habitante> listaHabitantesAtacantes = dH.listarHabitantes(jugadorActual.getIdJugador());
                     ArrayList<Habitante> listaHabitantesDefensores = dH.listarHabitantes(jugadorDefensor.getIdJugador());
+                    int habitantesTransferidos=0;
+                    String resultado="";
                     if (fuerzaTotalAtacante > fuerzaTotalDefensor) {
                         dG.updateSoldadosVictoria(jugadorActual.getIdJugador());
                         dG.updateGranjerosVictoriaAtaque(jugadorActual.getIdJugador());
@@ -66,12 +71,13 @@ public class GuerraServlet extends HttpServlet {
                                     dG.updateHabitanteSobrevivientePerderMoralDerrota(habitante.getIdHabitante());
                                 } else {
                                     dG.updateTransferirHabitante(habitante.getIdHabitante(), jugadorActual.getIdJugador());
+                                    habitantesTransferidos++;
                                 }
                             }
                         }
                         dG.updateHabitantesPerderMoralDerrotaDefensa(jugadorDefensor.getIdJugador());
                         dG.aumentarProduccionVictoriaAtaque(jugadorActual.getIdJugador(), jugadorDefensor.getIdJugador());
-                        dG.nuevaGuerra(jugadorActual.getIdJugador(),jugadorDefensor.getIdJugador(),"Victoria atacante",jugadorActual.getDiasDesdeCreacion(),jugadorDefensor.getDiasDesdeCreacion());
+                        resultado="Victoria atacante";
                     } else if (fuerzaTotalAtacante < fuerzaTotalDefensor) {
                         dG.updateSoldadosVictoria(jugadorDefensor.getIdJugador());
                         dG.updateHabitantesVictoriaDefensa(jugadorDefensor.getIdJugador());
@@ -84,16 +90,20 @@ public class GuerraServlet extends HttpServlet {
                                     dG.updateHabitanteSobrevivientePerderMoralDerrota(habitante.getIdHabitante());
                                 } else {
                                     dG.updateTransferirHabitante(habitante.getIdHabitante(), jugadorDefensor.getIdJugador());
+                                    habitantesTransferidos++;
                                 }
                             }
                         }
+                        resultado="Victoria defensiva";
                         dG.updateHabitantesPerderMoralDerrotaDefensa(jugadorActual.getIdJugador());
-                        dG.nuevaGuerra(jugadorActual.getIdJugador(),jugadorDefensor.getIdJugador(),"Victoria defensiva",jugadorActual.getDiasDesdeCreacion(),jugadorDefensor.getDiasDesdeCreacion());
                     }else{
-                        dG.nuevaGuerra(jugadorActual.getIdJugador(),jugadorDefensor.getIdJugador(),"Empate",jugadorActual.getDiasDesdeCreacion(),jugadorDefensor.getDiasDesdeCreacion());
+                        resultado="Empate";
                     }
                     dJ.proceedEndDia(jugadorActual, dH);
                     dJ.proceedEndDia(jugadorDefensor, dH);
+                    DtoGuerra resultadosDespuesGuerraAtacante=new DtoGuerra(dG.getTotalFuerza(jugadorActual.getIdJugador()),dG.getTotalMoral(jugadorActual.getIdJugador()),dG.getTotalAlimentoAlmacen(jugadorActual.getIdJugador()),dG.getProduccionTotalAlimento(jugadorActual.getIdJugador()),dG.getProduccionTotalMoral(jugadorActual.getIdJugador()),dG.getTotalSoldados(jugadorActual.getIdJugador()),dG.getTotalConstructores(jugadorActual.getIdJugador()),dG.getTotalHabitantes(jugadorActual.getIdJugador()));
+                    DtoGuerra resultadosDespuesGuerraDefensor=new DtoGuerra(dG.getTotalFuerza(jugadorDefensor.getIdJugador()),dG.getTotalMoral(jugadorDefensor.getIdJugador()),dG.getTotalAlimentoAlmacen(jugadorDefensor.getIdJugador()),dG.getProduccionTotalAlimento(jugadorDefensor.getIdJugador()),dG.getProduccionTotalMoral(jugadorDefensor.getIdJugador()),dG.getTotalSoldados(jugadorDefensor.getIdJugador()),dG.getTotalConstructores(jugadorDefensor.getIdJugador()),dG.getTotalHabitantes(jugadorDefensor.getIdJugador()));
+                    dG.nuevaGuerra(jugadorActual.getIdJugador(),jugadorDefensor.getIdJugador(),resultado,jugadorActual.getDiasDesdeCreacion(),jugadorDefensor.getDiasDesdeCreacion(),resultadosAntesGuerraAtacante,resultadosDespuesGuerraAtacante,resultadosAntesGuerraDefensor,resultadosDespuesGuerraDefensor,habitantesTransferidos,fuerzaTotalAtacante,fuerzaTotalDefensor);
                     response.sendRedirect("GuerraServlet");
                     break;
             }
