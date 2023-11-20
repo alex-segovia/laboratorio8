@@ -215,6 +215,7 @@
 </head>
 <body>
 
+<!-- ***** Preloader Start ***** -->
 <div class="page-loader">
     <div class="page-loader-body">
         <div class="preloader-wrapper big active">
@@ -265,8 +266,6 @@
         </div>
     </div>
 </div>
-<!-- ***** Preloader Start ***** -->
-
 <!-- ***** Preloader End ***** -->
 
 <!-- ***** Header Area Start ***** -->
@@ -306,7 +305,7 @@
             <div class="page-content">
 
                 <!-- ***** Banner Start ***** -->
-                <div class="main-banner">
+                <div class="main-banner" style="background-image: url(assets/images/banner2.png) !important;">
                     <div class="row">
                         <div class="col-lg-7">
                             <div class="header-text">
@@ -323,11 +322,16 @@
                 <!-- ***** Banner End ***** -->
 
                 <%if(request.getAttribute("listaHabitantes")!=null){
-                if(((ArrayList<Habitante>) request.getAttribute("listaHabitantes")).isEmpty()){%>
+                if(((ArrayList<Habitante>) request.getAttribute("listaHabitantes")).isEmpty()){
+                if(tipoLista.equals("Todos")){%>
                 <div class ="row mt-5 text-center">
                     <p style="color: #ec6090 !important; font-size: 24px">Tu civilización está vacía. Recluta a tu primer habitante!</p>
                 </div>
                 <%}else{%>
+                <div class ="row mt-5 text-center">
+                    <p style="color: #ec6090 !important; font-size: 24px">Toda tu civilización murió. No te desanimes, vuelve a hacerla crecer y vuelve a buscar oponentes!</p>
+                </div>
+                <%}}else{%>
                 <!-- ***** Gaming Library Start ***** -->
                 <div class="gaming-library">
                     <div class="col-lg-12">

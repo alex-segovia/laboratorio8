@@ -269,6 +269,11 @@ String primeraVez=(String) request.getSession().getAttribute("primeraVez");%>
                             <div class="heading-section">
                                 <h4>Historial de <em>Guerras</em></h4>
                             </div>
+                            <%if(historialGuerras.isEmpty()){%>
+                            <div class ="row mt-5 text-center">
+                                <p style="color: #ec6090 !important; font-size: 24px; position: relative; top: 120px">No has participado en ninguna guerra. Desafía a tu primer oponente y guía a tu civilización a la grandeza!</p>
+                            </div>
+                            <%}else{%>
                             <ul class="overflow-auto overflow-x-hidden" style="max-height: 410px">
                                 <%for(Guerra g:historialGuerras){%>
                                 <li style="width: 95%">
@@ -306,7 +311,7 @@ String primeraVez=(String) request.getSession().getAttribute("primeraVez");%>
                                         </div>
                                     </div>
                                 </li>
-                                <%}%>
+                                <%}}%>
                             </ul>
                         </div>
                     </div>
